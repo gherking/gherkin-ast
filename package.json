@@ -1,0 +1,29 @@
+{
+  "name": "gherkin-ast",
+  "version": "0.0.1",
+  "description": "JS model for Gherkin feature files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szikszail/gherkin-ast.git"
+  },
+  "keywords": [
+    "Gherkin",
+    "Feature",
+    "Scenario",
+    "Scenario",
+    "Outline",
+    "Background",
+    "Step",
+    "Examples"
+  ],
+  "author": "Laszlo Szikszai <sziklaszlo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/szikszail/gherkin-ast/issues"
+  },
+  "homepage": "https://github.com/szikszail/gherkin-ast#readme"
+}
