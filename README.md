@@ -34,7 +34,7 @@ Model of a complete Gherkin document, i.e. feature file.
 #### Methods
 
   * `new GherkinDocument() : GherkinDocument` - Creates a new instance.
-  * `{GherkinDocument}.toString({AssemblerConfig} [options]) : string` - Converts the document to string, i.e. formats it.
+  * `{GherkinDocument}.toString({FormatConfig} [options]) : string` - Converts the document to string, i.e. formats it.
   * `{GherkinDocument}.clone() : GherkinDocument` - Clones the document.
   * `GherkinDocumnet.parse({Object} object) : GherkinDocument` - Parses the given [GherkinDocument object](/test/data/base.ast.json#2) to a `GherkinDocument`.
 
@@ -61,7 +61,7 @@ Feature: Hello world
 #### Methods
 
  * `new Feature(keyword, name, description, language) : Feature` - Creates a new `Feature` object, with the given values.
- * `{Feature}.toString({AssemblerConfig}) : string` - Converts the feature to string, i.e. formats it.
+ * `{Feature}.toString({FormatConfig}) : string` - Converts the feature to string, i.e. formats it.
  * `{Feature}.clone() : Feature` - Clones the feature.
  * `Feature.parse({Object} object) : Feature` - Parses the given [Feature object](/test/data/base.ast.json#4) to a `Feature`.
 
@@ -91,7 +91,7 @@ Background: Some background steps
  * `new Background(keyword, name, description) : Background` - Creates a new `Background` object, with the given values.
  * `{Background}.useNormalStepKeywords()` - Sets the keywords of all step to normal keywords, i.e. `Given`, `When`, `Then`.
  * `{Background}.useReadableStepKeywords()` - Sets the keywords of steps to more readable ones, if applicable, i.e. replaces multiple normal keywords with `And` keyword.
- * `{Background}.toString({AssemblerConfig}) : string` - Converts the background to string, i.e. formats it.
+ * `{Background}.toString({FormatConfig}) : string` - Converts the background to string, i.e. formats it.
  * `{Background}.clone() : Background` - Clones the background.
  * `Background.parse({Object} object) : Background` - Parses the given [Background object](/test/data/base.ast.json#33) to a `Background`.
 
@@ -121,7 +121,7 @@ Description of the scenario
  * `new Scenario(keyword, name, description) : Scenario` - Creates a new `Scenario` object, with the given values.
  * `{Scenario}.useNormalStepKeywords()` - Sets the keywords of all step to normal keywords, i.e. `Given`, `When`, `Then`.
  * `{Scenario}.useReadableStepKeywords()` - Sets the keywords of steps to more readable ones, if applicable, i.e. replaces multiple normal keywords with `And` keyword.
- * `{Scenario}.toString({AssemblerConfig}) : string` - Converts the scenario to string, i.e. formats it.
+ * `{Scenario}.toString({FormatConfig}) : string` - Converts the scenario to string, i.e. formats it.
  * `{Scenario}.clone() : Scenario` - Clones the scenario.
  * `Scenario.parse({Object} object) : Scenario` - Parses the given [Scenario object](/test/data/base.ast.json#98) to a `Scenario`.
 
@@ -159,7 +159,7 @@ Scenario Outline: Name of outline <key>
  * `new ScenarioOutline(keyword, name, description) : ScenarioOutline` - Creates a new `ScenarioOutline` object, with the given values.
  * `{ScenarioOutline}.useNormalStepKeywords()` - Sets the keywords of all step to normal keywords, i.e. `Given`, `When`, `Then`.
  * `{ScenarioOutline}.useReadableStepKeywords()` - Sets the keywords of steps to more readable ones, if applicable, i.e. replaces multiple normal keywords with `And` keyword.
- * `{ScenarioOutline}.toString({AssemblerConfig}) : string` - Converts the scenario outline to string, i.e. formats it.
+ * `{ScenarioOutline}.toString({FormatConfig}) : string` - Converts the scenario outline to string, i.e. formats it.
  * `{ScenarioOutline}.clone() : ScenarioOutline` - Clones the scenario outline.
  * `ScenarioOutline.parse({Object} object) : ScenarioOutline` - Parses the given [ScenarioOutline object](/test/data/base.ast.json#343) to a `ScenarioOutline`.
  
@@ -185,7 +185,7 @@ Model of a Gherkin Scenario outline Examples table.
 #### Methods
 
  * `new Examples(keyword, name, description) : Examples` - Creates a new `Examples` object, with the given values.
- * `{Examples}.toString({AssemblerConfig}) : string` - Converts the examples table to string, i.e. formats it.
+ * `{Examples}.toString({FormatConfig}) : string` - Converts the examples table to string, i.e. formats it.
  * `{Examples}.clone() : Examples` - Clones the examples table.
  * `Examples.parse({Object} object) : Examples` - Parses the given [Examples object](/test/data/base.ast.json#426) to an `Examples`.
 
@@ -207,7 +207,7 @@ And this is a given step too
 #### Methods
 
  * `new Step(keyword, text) : Step` - Creates a new `Step` object, with the given values.
- * `{Step}.toString({AssemblerConfig}) : string` - Converts the step to string, i.e. formats it.
+ * `{Step}.toString({FormatConfig}) : string` - Converts the step to string, i.e. formats it.
  * `{Step}.clone() : Step` - Clones the step.
  * `Step.parse({Object} object) : Step` - Parses the given [Step object](/test/data/base.ast.json#43) to a `Step`.
 
@@ -251,7 +251,7 @@ And this is a when step with doc string
 #### Methods
 
  * `new DocString(value) : DocString` - Creates a new `DocString` object, with the given values.
- * `{DocString}.toString({AssemblerConfig}) : string` - Converts the docString to string, i.e. formats it.
+ * `{DocString}.toString({FormatConfig}) : string` - Converts the docString to string, i.e. formats it.
  * `{DocString}.clone() : DocString` - Clones the docString.
  * `DocString.parse({Object} object) : DocString` - Parses the given [DocString object](/test/data/base.ast.json#314) to a `DocString`.
 
@@ -273,7 +273,7 @@ And this is a when step with data table too
 #### Methods
 
  * `new DataTable(rows) : DataTable` - Creates a new `DataTable` object, with the given values.
- * `{DataTable}.toString({AssemblerConfig}) : string` - Converts the data table to string, i.e. formats it.
+ * `{DataTable}.toString({FormatConfig}) : string` - Converts the data table to string, i.e. formats it.
  * `{DataTable}.clone() : DataTable` - Clones the data table.
  * `DataTable.parse({Object} object) : DataTable` - Parses the given [DataTable object](/test/data/base.ast.json#221) to a `DataTable`.
 
@@ -295,7 +295,7 @@ And this is a when step with data table too
 #### Methods
 
  * `new TableRow(cells) : TableRow` - Creates a new `TableRow` object, with the given values.
- * `{TableRow}.toString({AssemblerConfig}) : string` - Converts the table row to string, i.e. formats it.
+ * `{TableRow}.toString({FormatConfig}) : string` - Converts the table row to string, i.e. formats it.
  * `{TableRow}.clone() : TableRow` - Clones the table row.
  * `TableRow.parse({Object} object) : TableRow` - Parses the given [TableRow object](/test/data/base.ast.json#228) to a `TableRow`.
 
@@ -320,3 +320,15 @@ And this is a when step with data table too
  * `{TableCell}.toString() : string` - Converts the table cell to string, i.e. formats it.
  * `{TableCell}.clone() : TableCell` - Clones the table cell.
  * `TableCell.parse({Object} object) : TableCell` - Parses the given [TableCell object](/test/data/base.ast.json#235) to a `TableCell`.
+ 
+### `FormatConfig`
+
+By passing an `FormatConfig` object to format method (or other Ast type methods where it's applicable) it can be set, how feature file text is rendered.
+
+| Option | Description | Default |
+|:-------|:------------|:--------|
+| `oneTagPerLine` | Should tags rendered separately, one by line? | `false`, i.e. all tag of a scenario, feature, etc will be rendered in the same line |
+| `separateStepGroups` | Should step groups (when-then) be separated? | `false` |
+| `compact` | Should empty lines be skipped, removed from the result? | `false`, i.e. there will be empty lines in appropriate places |
+| `lineBreak` | The line break character(s). | `\n`, i.e. it uses Unix line break, to set Windows style, set `\r\n` |
+| `indentation` | The indentation character(s). | `'  '`, i.e. it uses two space character to add indentation where it's appropriate | 

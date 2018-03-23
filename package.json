@@ -1,6 +1,6 @@
 {
   "name": "gherkin-ast",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JS model for Gherkin feature files",
   "main": "lib/index.js",
   "scripts": {
