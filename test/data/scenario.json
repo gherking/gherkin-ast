@@ -1,0 +1,68 @@
+{
+  "type": "Scenario",
+  "keyword": "Scenario",
+  "name": "this is a scenario",
+  "description": "this  is a good\n  scenario",
+  "tags": [
+    {
+      "type": "Tag",
+      "name": "@tag1"
+    },
+    {
+      "type": "Tag",
+      "name": "@tag2"
+    }
+  ],
+  "steps": [
+    {
+      "type": "Step",
+      "keyword": "Given ",
+      "text": "this is a given step"
+    },
+    {
+      "type": "Step",
+      "keyword": "When ",
+      "text": "this is a when step with docString",
+      "argument": {
+        "type": "DocString",
+        "content": "Hello\nWorld"
+      }
+    },
+    {
+      "type": "Step",
+      "keyword": "But ",
+      "text": "this should not be a when step but with dataTable",
+      "argument": {
+        "type": "DataTable",
+        "rows": [
+          {
+            "type": "TableRow",
+            "cells": [
+              {
+                "type": "TableCell",
+                "value": "A1"
+              },
+              {
+                "type": "TableCell",
+                "value": "B1"
+              }
+            ]
+          },
+          {
+            "type": "TableRow",
+            "cells": [
+              {
+                "type": "TableCell",
+                "value": "A2"
+              },
+              {
+                "type": "TableCell",
+                "value": "B2"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

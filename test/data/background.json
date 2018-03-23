@@ -1,0 +1,13 @@
+{
+  "type": "Background",
+  "keyword": "Background",
+  "name": "this is a background",
+  "description": "this  is a good\n  background",
+  "steps": [
+    {
+      "type": "Step",
+      "keyword": "Given ",
+      "text": "this is a given step"
+    }
+  ]
+}

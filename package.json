@@ -2,10 +2,13 @@
   "name": "gherkin-ast",
   "version": "0.0.1",
   "description": "JS model for Gherkin feature files",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test/*.spec.js ./test/ast/*.spec.js",
+    "coverage": "istanbul cover --include-all-sources ./node_modules/mocha/bin/_mocha --root ./lib -- ./test/*.spec.js ./test/ast/*.spec.js",
+    "travis": "istanbul cover --include-all-sources ./node_modules/mocha/bin/_mocha --root ./lib --report lcovonly -- ./test/*.spec.js ./test/ast/*.spec.js -R spec && cat ./coverage/lcov.info | node ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
+  "preferGlobal": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/szikszail/gherkin-ast.git"
@@ -25,5 +28,23 @@
   "bugs": {
     "url": "https://github.com/szikszail/gherkin-ast/issues"
   },
-  "homepage": "https://github.com/szikszail/gherkin-ast#readme"
+  "engines": {
+    "node": ">=6.0.0",
+    "npm": ">=3.0.0"
+  },
+  "homepage": "https://github.com/szikszail/gherkin-ast#readme",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "coveralls": "^3.0.0",
+    "deep-copy": "^1.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.1.0"
+  },
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "colors": "^1.1.2",
+    "gherkin": "^5.0.1",
+    "proxyquire": "^1.8.0",
+    "split-lines": "^1.1.0"
+  }
 }
