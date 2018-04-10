@@ -121,6 +121,7 @@ Description of the scenario
  * `new Scenario(keyword, name, description) : Scenario` - Creates a new `Scenario` object, with the given values.
  * `{Scenario}.useNormalStepKeywords()` - Sets the keywords of all step to normal keywords, i.e. `Given`, `When`, `Then`.
  * `{Scenario}.useReadableStepKeywords()` - Sets the keywords of steps to more readable ones, if applicable, i.e. replaces multiple normal keywords with `And` keyword.
+ * `{Scenario}.replace(key, value)` - Replaces the given string (key) with the given value in the name, description and steps of the scenario.
  * `{Scenario}.toString({FormatConfig}) : string` - Converts the scenario to string, i.e. formats it.
  * `{Scenario}.clone() : Scenario` - Clones the scenario.
  * `Scenario.parse({Object} object) : Scenario` - Parses the given [Scenario object](/test/data/base.ast.json#98) to a `Scenario`.
@@ -159,6 +160,7 @@ Scenario Outline: Name of outline <key>
  * `new ScenarioOutline(keyword, name, description) : ScenarioOutline` - Creates a new `ScenarioOutline` object, with the given values.
  * `{ScenarioOutline}.useNormalStepKeywords()` - Sets the keywords of all step to normal keywords, i.e. `Given`, `When`, `Then`.
  * `{ScenarioOutline}.useReadableStepKeywords()` - Sets the keywords of steps to more readable ones, if applicable, i.e. replaces multiple normal keywords with `And` keyword.
+ * `{ScenarioOutline}.toScenario({number} columnToAddAsTag) : Array<Scenario>` - Converts the given `ScenaioOutline` to `Scenario`s, as it would be expanded in run-time. It also adds a tag to the scenarios, which format is `@<nameOfColumn>(<valueOfColumn>)`, where the `columnToAddAsTag`th column of each examples used.
  * `{ScenarioOutline}.toString({FormatConfig}) : string` - Converts the scenario outline to string, i.e. formats it.
  * `{ScenarioOutline}.clone() : ScenarioOutline` - Clones the scenario outline.
  * `ScenarioOutline.parse({Object} object) : ScenarioOutline` - Parses the given [ScenarioOutline object](/test/data/base.ast.json#343) to a `ScenarioOutline`.
@@ -207,6 +209,7 @@ And this is a given step too
 #### Methods
 
  * `new Step(keyword, text) : Step` - Creates a new `Step` object, with the given values.
+ * `{Step}.replace(key, value)` - Replaces the given string (key) with the given value in the text of the step.
  * `{Step}.toString({FormatConfig}) : string` - Converts the step to string, i.e. formats it.
  * `{Step}.clone() : Step` - Clones the step.
  * `Step.parse({Object} object) : Step` - Parses the given [Step object](/test/data/base.ast.json#43) to a `Step`.
@@ -225,7 +228,7 @@ Model of a Gherkin tag (annotation).
 
 #### Methods
 
- * `new Tag(value) : Tag` - Creates a new `Tag` object, with the given values.
+ * `new Tag(value) : Tag` - Creates a new `Tag` object, with the given values. The `value` will be processed and white spaces will be replaced.
  * `{Tag}.toString() : string` - Converts the tag to string, i.e. formats it.
  * `{Tag}.clone() : Tag` - Clones the tag.
  * `Tag.parse({Object} object) : Tag` - Parses the given [Tag object](/test/data/base.ast.json#7) to a `Tag`.
@@ -251,13 +254,14 @@ And this is a when step with doc string
 #### Methods
 
  * `new DocString(value) : DocString` - Creates a new `DocString` object, with the given values.
+ * `{DocString}.replace(key, value)` - Replaces the given string (key) with the given value in the content of the DocString.
  * `{DocString}.toString({FormatConfig}) : string` - Converts the docString to string, i.e. formats it.
  * `{DocString}.clone() : DocString` - Clones the docString.
  * `DocString.parse({Object} object) : DocString` - Parses the given [DocString object](/test/data/base.ast.json#314) to a `DocString`.
 
 ### `DataTable`
 
-Model of a Gherkin DocString step argument.
+Model of a Gherkin DataTable step argument.
 
 ```gherkin
 And this is a when step with data table too
@@ -273,6 +277,7 @@ And this is a when step with data table too
 #### Methods
 
  * `new DataTable(rows) : DataTable` - Creates a new `DataTable` object, with the given values.
+ * `{DataTable}.replace(key, value)` - Replaces the given string (key) with the given value in the cells of the data table.
  * `{DataTable}.toString({FormatConfig}) : string` - Converts the data table to string, i.e. formats it.
  * `{DataTable}.clone() : DataTable` - Clones the data table.
  * `DataTable.parse({Object} object) : DataTable` - Parses the given [DataTable object](/test/data/base.ast.json#221) to a `DataTable`.
@@ -295,6 +300,7 @@ And this is a when step with data table too
 #### Methods
 
  * `new TableRow(cells) : TableRow` - Creates a new `TableRow` object, with the given values.
+ * `{TableRow}.replace(key, value)` - Replaces the given string (key) with the given value in the cells of the table row.
  * `{TableRow}.toString({FormatConfig}) : string` - Converts the table row to string, i.e. formats it.
  * `{TableRow}.clone() : TableRow` - Clones the table row.
  * `TableRow.parse({Object} object) : TableRow` - Parses the given [TableRow object](/test/data/base.ast.json#228) to a `TableRow`.
@@ -317,6 +323,7 @@ And this is a when step with data table too
 #### Methods
 
  * `new TableCell(value) : TableCell` - Creates a new `TableCell` object, with the given values.
+ * `{TableCell}.replace(key, value)` - Replaces the given string (key) with the given value in the value of the table cell.
  * `{TableCell}.toString() : string` - Converts the table cell to string, i.e. formats it.
  * `{TableCell}.clone() : TableCell` - Clones the table cell.
  * `TableCell.parse({Object} object) : TableCell` - Parses the given [TableCell object](/test/data/base.ast.json#235) to a `TableCell`.

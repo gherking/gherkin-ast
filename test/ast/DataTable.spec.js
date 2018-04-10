@@ -59,4 +59,19 @@ describe('Ast.DataTable', () => {
         expect(table).to.not.equal(cloned);
         expect(table).to.eql(cloned);
     });
+
+    it('should have method to replace string', () => {
+        const table = new DataTable([
+            new TableRow([
+                new TableCell('<type>1,1'),
+                new TableCell('<type>1,2')
+            ]),
+            new TableRow([
+                new TableCell('<type>2,1'),
+                new TableCell('<type>2,2')
+            ])
+        ]);
+        table.replace('<type>', 'cell')
+        expect(table.toString()).to.equal('| cell1,1 | cell1,2 |\n| cell2,1 | cell2,2 |');
+    });
 });

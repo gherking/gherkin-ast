@@ -79,4 +79,10 @@ describe('Ast.Step', () => {
         expect(step).to.not.equal(cloned);
         expect(step).to.eql(cloned);
     });
+
+    it('should have method to replace string', () => {
+        const step = new Step('When ', 'this is a <type> step');
+        step.replace('<type>', 'when');
+        expect(step.text).to.equal('this is a when step');
+    });
 });

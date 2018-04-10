@@ -34,4 +34,10 @@ describe('Ast.DocString', () => {
         expect(docString).to.not.equal(cloned);
         expect(docString).to.eql(cloned);
     });
+
+    it('should have method to replace string', () => {
+        const docString = new DocString('Hello <type>\n<type> World');
+        docString.replace('<type>', 'good');
+        expect(docString.content).to.equal('Hello good\ngood World');
+    });
 });

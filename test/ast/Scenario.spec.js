@@ -61,4 +61,15 @@ describe('Ast.Scenario', () => {
         expect(scenario).to.not.equal(cloned);
         expect(scenario).to.eql(cloned);
     });
+
+    it('should have method to replace all key with value', () => {
+        const scenario = new Scenario('Scenario', 'this is a <type> scenario', 'this is a really <type> scenario');
+        scenario.steps.push(new Step('When', 'this is a <type> step and also <type>'));
+
+        scenario.replace('<type>', 'good');
+
+        expect(scenario.name).to.equal('this is a good scenario');
+        expect(scenario.description).to.equal('this is a really good scenario');
+        expect(scenario.steps[0].text).to.equal('this is a good step and also good');
+    });
 });
