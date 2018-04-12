@@ -34,4 +34,10 @@ describe('Ast.TableCell', () => {
         expect(cell).to.not.equal(cloned);
         expect(cell).to.eql(cloned);
     });
+
+    it('should have method to replace string', () => {
+        const cell = new TableCell('Nice <type> cell');
+        cell.replace('<type>', 'good');
+        expect(cell.value).to.equal('Nice good cell');
+    });
 });

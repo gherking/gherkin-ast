@@ -59,4 +59,13 @@ describe('Ast.TableRow', () => {
         expect(row).to.not.equal(cloned);
         expect(row).to.eql(cloned);
     });
+
+    it('should have method to replace string', () => {
+        const row = new TableRow([
+            new TableCell('<type>1'),
+            new TableCell('<type>2')
+        ]);
+        row.replace('<type>', 'cell');
+        expect(row.toString()).to.equal('| cell1 | cell2 |');
+    });
 });
