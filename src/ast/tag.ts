@@ -28,6 +28,6 @@ export class Tag {
     }
 }
 
-export const tag = (name: string, value: string): Tag => {
+export const tag = (name: string, value?: string): Tag => {
     return new Tag(value ? `${name}(${value})` : name);
 }
