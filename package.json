@@ -1,14 +1,21 @@
 {
   "name": "gherkin-ast",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "JS model for Gherkin feature files",
-  "main": "lib/index.js",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "test": "mocha ./test/*.spec.js ./test/ast/*.spec.js",
-    "coverage": "istanbul cover --include-all-sources ./node_modules/mocha/bin/_mocha --root ./lib -- ./test/*.spec.js ./test/ast/*.spec.js",
-    "travis": "istanbul cover --include-all-sources ./node_modules/mocha/bin/_mocha --root ./lib --report lcovonly -- ./test/*.spec.js ./test/ast/*.spec.js -R spec && cat ./coverage/lcov.info | node ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "tsc:watch": "tsc -w",
+    "build": "npm run clean && npm run compile && npm run copyToDist && npm test -- --coverage && npm run typedoc",
+    "buildUpdate": "npm run compile && npm run copyToDist && npm run postbuild",
+    "copyToDist": "copyfiles -f *.txt *.md package.json dist",
+    "typedoc": "typedoc --exclude **/bin/**/*.ts --exclude **/cli.ts --out ./dist/docs/api ./src",
+    "clean": "rimraf ./dist",
+    "test": "cross-env JEST_JUNIT_OUTPUT=./dist/test/reports/junit.xml jest",
+    "tslint": "tslint -c tslint.json ./src/**/*.ts ./tests/**/*.ts",
+    "compile": "tsc && npm run tslint",
+    "publish": "npm run build && npm public ./dist"
   },
-  "preferGlobal": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/szikszail/gherkin-ast.git"
@@ -25,26 +32,68 @@
   ],
   "author": "Laszlo Szikszai <sziklaszlo@gmail.com>",
   "license": "MIT",
+  "files": [
+    "*.js",
+    "*.d.ts",
+    "*.js.map"
+  ],
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "bugs": {
     "url": "https://github.com/szikszail/gherkin-ast/issues"
   },
-  "engines": {
-    "node": ">=6.0.0",
-    "npm": ">=3.0.0"
-  },
   "homepage": "https://github.com/szikszail/gherkin-ast#readme",
   "devDependencies": {
-    "chai": "^4.1.0",
-    "coveralls": "^3.0.0",
-    "deep-copy": "^1.2.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^4.1.0"
+    "@types/jest": "^24.0.11",
+    "@types/node": "^11.11.3",
+    "copyfiles": "^2.1.0",
+    "cross-env": "^5.2.0",
+    "jest": "^24.5.0",
+    "jest-junit": "^6.3.0",
+    "rimraf": "^2.6.3",
+    "stream-to-string": "^1.2.0",
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.14.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3333"
   },
   "dependencies": {
-    "cli-table": "^0.3.1",
-    "colors": "^1.1.2",
-    "gherkin": "^5.0.1",
-    "proxyquire": "^1.8.0",
-    "split-lines": "^1.1.0"
+    "cli-table3": "^0.5.1",
+    "colors": "^1.3.3",
+    "date-x": "^0.3.0",
+    "gherkin": "^6.0.15",
+    "require-it": "^2.0.0",
+    "split-lines": "^2.0.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "dist"
+    ],
+    "reporters": [
+      "jest-junit"
+    ],
+    "coverageDirectory": "./dist/test/coverage",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 85,
+        "functions": 85,
+        "lines": 85,
+        "statements": 85
+      }
+    },
+    "verbose": true
   }
 }

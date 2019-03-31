@@ -1,0 +1,36 @@
+{
+    "extends": "tslint:recommended",
+    "defaultSeverity": "error",
+    "rules": {
+      "interface-name": [
+        true,
+        "never-prefix"
+      ],
+      "object-literal-sort-keys": false,
+      "max-classes-per-file": false,
+      "no-any": true,
+      "no-var-requires": false,
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "no-consecutive-blank-lines": [
+        true,
+        2
+      ],
+      "whitespace": [
+        true,
+        "check-branch",
+        "check-operator",
+        "check-decl",
+        "check-module",
+        "check-type",
+        "check-preblock"
+      ]
+    }
+  }

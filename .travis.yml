@@ -2,9 +2,10 @@ language: node_js
 node_js:
 - 6
 - 8
+- 10
 git:
   depth: 3
 script:
-- npm run-script travis
+- npm run build
 notifications:
   email: false
