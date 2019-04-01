@@ -11,7 +11,7 @@
     "copyToDist": "copyfiles -f *.txt *.md package.json dist",
     "typedoc": "typedoc --exclude **/bin/**/*.ts --exclude **/cli.ts --out ./dist/docs/api ./src",
     "clean": "rimraf ./dist",
-    "test": "jest --verbose --coverage",
+    "test": "jest --coverage",
     "tslint": "tslint -c tslint.json ./src/**/*.ts ./tests/**/*.ts",
     "compile": "tsc && npm run tslint",
     "publish": "npm run build && npm public ./dist"
@@ -75,9 +75,6 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "dist"
-    ],
-    "reporters": [
-      "jest-junit"
     ],
     "coverageDirectory": "./coverage",
     "collectCoverageFrom": ["./src/**/*.ts"],
