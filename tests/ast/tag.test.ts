@@ -1,4 +1,4 @@
-import { Tag, tag } from "../../src";
+import { Tag, tag, removeDuplicateTags } from "../../src";
 import { GherkinTag } from "../../src/gherkinObject";
 import * as common from "../../src/common";
 
@@ -51,5 +51,20 @@ describe("tag", () => {
 
     test("should create simple tag", () => {
         expect(tag("name").name).toEqual("name");
+    });
+});
+
+describe("removeDuplicateTags", () => {
+    test("should remove duplicate tags", () => {
+        expect(removeDuplicateTags([
+            new Tag("A"),
+            new Tag("B"),
+            new Tag("A"),
+            new Tag("C"),
+        ])).toEqual([
+            new Tag("A"),
+            new Tag("B"),
+            new Tag("C"),
+        ]);
     });
 });

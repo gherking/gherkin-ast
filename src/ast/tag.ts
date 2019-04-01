@@ -1,3 +1,5 @@
+// @ts-ignore
+import ObjectSet = require("object-set-type");
 import { safeString, replaceAll } from '../common';
 import { GherkinTag } from '../gherkinObject';
 
@@ -30,4 +32,8 @@ export class Tag {
 
 export const tag = (name: string, value?: string): Tag => {
     return new Tag(value ? `${name}(${value})` : name);
+}
+
+export const removeDuplicateTags = (tags: Tag[]): Tag[] => {
+    return Array.from(new ObjectSet(tags)) as Tag[];
 }

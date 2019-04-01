@@ -1,5 +1,5 @@
 import { Element } from './element';
-import { Tag, tag } from "./tag";
+import { Tag, tag, removeDuplicateTags } from "./tag";
 import { Examples } from './examples';
 import { Scenario } from "./scenario";
 import { GherkinScenario, GherkinStep, GherkinTag, GherkinExamples } from '../gherkinObject';
@@ -40,11 +40,11 @@ export class ScenarioOutline extends Element {
             const n: number = Math.max(0, Math.min(examples.header.cells.length - 1, columnToAddAsTag));
             examples.body.forEach((row: TableRow): void => {
                 const scenario: Scenario = new Scenario("Scenario", this.name, this.description);
-                scenario.tags = [
+                scenario.tags = removeDuplicateTags([
                     ...cloneArray<Tag>(this.tags),
                     ...cloneArray<Tag>(examples.tags),
                     tag(examples.header.cells[n].value, row.cells[n].value),
-                ];
+                ]);
                 scenario.steps = cloneArray<Step>(this.steps);
                 examples.header.cells.forEach((cell: TableCell, i: number): void => {
                     scenario.replace(`<${cell.value}>`, row.cells[i].value);
