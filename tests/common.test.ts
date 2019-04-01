@@ -1,14 +1,22 @@
-import { safeString, normalizeString, replaceAll } from "../src";
+import { safeString, normalizeString, replaceAll, cloneArray } from "../src";
 
 describe("safeString", () => {
     test("should remove white spaces", () => {
         expect(safeString(" Hello\tWorld     !!!")).toEqual("_Hello_World_____!!!");
+    });
+
+    test("should handle empty arguments", () => {
+        expect(safeString()).toEqual("");
     });
 });
 
 describe("normalizeString", () => {
     test("should trim lines", () => {
         expect(normalizeString("  line1  \n  line2  \n    \n  line3")).toEqual("line1\nline2\n\nline3");
+    });
+
+    test("should handle empty arguments", () => {
+        expect(normalizeString()).toEqual("");
     });
 });
 
@@ -18,5 +26,30 @@ describe("replaceAll", () => {
     });
     test("should replace all string", () => {
         expect(replaceAll("Hello World!", "o", "X")).toEqual("HellX WXrld!");
+    });
+});
+
+describe("cloneArray", () => {
+    class C {
+        constructor(public mock: Function = jest.fn()) { }
+        public clone(): C {
+            this.mock();
+            return this;
+        }
+    };
+
+    test("should handle if not array passed", () => {
+        expect(cloneArray<C>(null)).toEqual([]);
+    });
+
+    test("should clone full array", () => {
+        const elements: C[] = [
+            new C(), new C(), new C(),
+        ];
+        const cloned: C[] = cloneArray<C>(elements);
+        for (const i in cloned) {
+            expect(cloned[i]).toBe(elements[i]);
+            expect(elements[i].mock).toHaveBeenCalled();
+        }
     });
 });
