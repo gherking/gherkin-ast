@@ -1,4 +1,4 @@
-import { safeString, normalizeString, replaceAll, cloneArray } from "../src";
+import { safeString, normalizeString, replaceAll, cloneArray, replaceArray } from "../src";
 
 describe("safeString", () => {
     test("should remove white spaces", () => {
@@ -28,6 +28,23 @@ describe("replaceAll", () => {
         expect(replaceAll("Hello World!", "o", "X")).toEqual("HellX WXrld!");
     });
 });
+
+describe("replaceArray", () => {
+    class R {
+        constructor(public mock: Function = jest.fn()) { }
+        public replace(key: RegExp | string, value: string): void {
+            this.mock(key, value);
+        }
+    }
+
+    test("should replace in full array", () => {
+        const elements: R[] = [new R(), new R(), new R()];
+        replaceArray<R>(elements, "K", "V");
+        for (const e of elements) {
+            expect(e.mock).toHaveBeenCalledWith("K", "V");
+        }
+    });
+})
 
 describe("cloneArray", () => {
     class C {

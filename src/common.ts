@@ -24,7 +24,7 @@ interface Replacable {
     replace(key: RegExp | string, value: string): void;
 }
 export const replaceArray = <T extends Replacable>(array: T[], key: RegExp | string, value: string): void => {
-    array && array.forEach((e: T): void => {
+    Array.isArray(array) && array.forEach((e: T): void => {
         e.replace(key, value);
     });
 };
