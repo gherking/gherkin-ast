@@ -12,8 +12,8 @@ describe("Tag", () => {
         const tagA: Tag = new Tag("A");
         const tagB: Tag = tagA.clone();
 
-        expect(tagA).not.toStrictEqual(tagB);
         expect(tagA.name).toEqual(tagB.name);
+        expect(tagA).not.toBe(tagB);
     });
 
     test("should have toString", () => {
