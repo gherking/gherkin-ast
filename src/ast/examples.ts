@@ -34,16 +34,16 @@ export class Examples {
     }
 
     public static parse(obj?: GherkinExamples): Examples {
-        if (!obj || !obj.tableBody) {
+        if (!obj || !Array.isArray(obj.tableBody)) {
             throw new TypeError("The given obj is not an Examples!");
         }
         const examples: Examples = new Examples(obj.keyword, obj.name);
         if (Array.isArray(obj.tags)) {
             examples.tags = obj.tags.map((tag: GherkinTag): Tag => Tag.parse(tag));
+        } else {
+            examples.tags = [];
         }
-        if (Array.isArray(obj.tableBody)) {
-            examples.body = obj.tableBody.map((row: GherkinTableRow): TableRow => TableRow.parse(row));
-        }
+        examples.body = obj.tableBody.map((row: GherkinTableRow): TableRow => TableRow.parse(row));
         if (obj.tableHeader) {
             examples.header = TableRow.parse(obj.tableHeader);
         }

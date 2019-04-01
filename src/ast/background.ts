@@ -18,6 +18,8 @@ export class Background extends Element {
         const background: Background = new Background(keyword, name, description);
         if (Array.isArray(steps)) {
             background.steps = steps.map((step: GherkinStep): Step => Step.parse(step));
+        } else {
+            background.steps = [];
         }
         return background;
     }

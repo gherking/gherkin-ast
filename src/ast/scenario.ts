@@ -34,9 +34,13 @@ export class Scenario extends Element {
         const scenario: Scenario = new Scenario(keyword, name, description);
         if (Array.isArray(steps)) {
             scenario.steps = steps.map((step: GherkinStep): Step => Step.parse(step));
+        } else {
+            scenario.steps = [];
         }
         if (Array.isArray(tags)) {
             scenario.tags = tags.map((tag: GherkinTag): Tag => Tag.parse(tag));
+        } else {
+            scenario.tags = [];
         }
         return scenario;
     }

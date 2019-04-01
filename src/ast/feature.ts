@@ -5,7 +5,7 @@ import { Scenario } from './scenario';
 import { ScenarioOutline } from "./scenarioOutline";
 import { Tag } from "./tag";
 import { normalizeString, replaceAll, cloneArray, replaceArray } from '../common';
-//TODO: Laci
+
 export class Feature {
     public language: string;
     public keyword: string;
@@ -41,25 +41,25 @@ export class Feature {
     }
 
     public static parse(obj?: GherkinFeature): Feature {
-        if (!obj || !obj.children) {
+        if (!obj || !Array.isArray(obj.children)) {
             throw new TypeError("The given object is not a Feature!");
         }
         const { keyword, language, description, children, name, tags } = obj;
         const feature: Feature = new Feature(keyword, name, description, language);
         if (Array.isArray(tags)) {
             feature.tags = tags.map((tag: GherkinTag): Tag => Tag.parse(tag));
+        } else {
+            feature.tags = [];
         }
-        if (Array.isArray(children)) {
-            feature.elements = children.map((child: GherkinBackground | GherkinScenario): Element => {
-                if ((child as GherkinBackground).background) {
-                    return Background.parse(child as GherkinBackground);
-                }
-                if ((child as GherkinScenario).scenario.examples) {
-                    return ScenarioOutline.parse(child as GherkinScenario);
-                }
-                return Scenario.parse(child as GherkinScenario);
-            });
-        }
+        feature.elements = children.map((child: GherkinBackground | GherkinScenario): Element => {
+            if ((child as GherkinBackground).background) {
+                return Background.parse(child as GherkinBackground);
+            }
+            if ((child as GherkinScenario).scenario.examples) {
+                return ScenarioOutline.parse(child as GherkinScenario);
+            }
+            return Scenario.parse(child as GherkinScenario);
+        });
         return feature;
     }
 }
