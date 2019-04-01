@@ -2,7 +2,7 @@ import { DataTable } from './dataTable';
 import { DocString } from './docString';
 import { normalizeString, replaceAll } from '../common';
 import { GherkinStep } from '../gherkinObject';
-
+//TODO: Laci
 export type Argument = DataTable | DocString;
 
 export class Step {

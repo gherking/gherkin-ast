@@ -1,6 +1,6 @@
 import { Feature } from './feature';
 import { GherkinDocument } from '../gherkinObject';
-
+//TODO: Juci
 export class Document {
     public uri: string;
     public feature: Feature;

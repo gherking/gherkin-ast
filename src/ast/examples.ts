@@ -2,7 +2,7 @@ import { Tag } from './tag';
 import { TableRow } from './tableRow';
 import { normalizeString, replaceAll, cloneArray, replaceArray } from '../common';
 import { GherkinExamples, GherkinTag, GherkinTableRow } from '../gherkinObject';
-
+//TODO: Sandor
 export class Examples {
     public keyword: string;
     public name: string;

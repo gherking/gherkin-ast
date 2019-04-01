@@ -17,14 +17,12 @@ export class TableRow {
         replaceArray<TableCell>(this.cells, key, value);
     }
 
-    public static parse(obj: GherkinTableRow): TableRow {
-        if (!obj || !obj.cells) {
+    public static parse(obj?: GherkinTableRow): TableRow {
+        if (!obj || !Array.isArray(obj.cells)) {
             throw new TypeError("The given object is not a TableRow!");
         }
         const row: TableRow = new TableRow();
-        if (Array.isArray(obj.cells)) {
-            row.cells = obj.cells.map((cell: GherkinTableCell): TableCell => TableCell.parse(cell));
-        }
+        row.cells = obj.cells.map((cell: GherkinTableCell): TableCell => TableCell.parse(cell));
         return row;
     }
 }

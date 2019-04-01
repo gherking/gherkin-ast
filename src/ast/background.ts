@@ -2,7 +2,7 @@ import { Element } from "./element";
 import { GherkinBackground, GherkinStep } from "../gherkinObject";
 import { Step } from "./step";
 import { cloneArray } from '../common';
-
+//TODO:Sandor
 export class Background extends Element {
     public clone(): Background {
         const background: Background = new Background(this.keyword, this.name, this.description);

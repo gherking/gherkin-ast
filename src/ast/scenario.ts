@@ -3,7 +3,7 @@ import { Tag } from './tag';
 import { Step } from "./step";
 import { GherkinScenario, GherkinStep, GherkinTag } from '../gherkinObject';
 import { replaceArray, cloneArray } from '../common';
-
+//TODO: Sandor
 export class Scenario extends Element {
     public tags: Tag[];
 

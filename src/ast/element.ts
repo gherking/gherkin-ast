@@ -1,6 +1,6 @@
 import { Step } from './step';
 import { normalizeString, replaceAll, replaceArray } from '../common';
-
+//TODO: Juci
 export const REPEAT_STEP_KEYWORDS: string[] = ["And", "But", "*"];
 
 export class Element {

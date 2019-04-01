@@ -7,7 +7,7 @@ import { Step } from './step';
 import { TableRow } from './tableRow';
 import { cloneArray, replaceArray } from '../common';
 import { TableCell } from './tableCell';
-
+//TODO: Laci
 export class ScenarioOutline extends Element {
     public tags: Tag[];
     public examples: Examples[];

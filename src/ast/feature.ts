@@ -5,7 +5,7 @@ import { Scenario } from './scenario';
 import { ScenarioOutline } from "./scenarioOutline";
 import { Tag } from "./tag";
 import { normalizeString, replaceAll, cloneArray, replaceArray } from '../common';
-
+//TODO: Laci
 export class Feature {
     public language: string;
     public keyword: string;
