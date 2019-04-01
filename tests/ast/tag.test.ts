@@ -1,5 +1,6 @@
 import { Tag, tag } from "../../src";
 import { GherkinTag } from "../../src/gherkinObject";
+import * as common from "../../src/common";
 
 describe("Tag", () => {
     test("should create model of a tag", () => {
@@ -23,8 +24,9 @@ describe("Tag", () => {
 
     test("should have method to replace value", () => {
         const tag: Tag = new Tag("tag");
+        jest.spyOn(common, "replaceAll");
         tag.replace("a", "e");
-        expect(tag.name).toEqual("teg");
+        expect(common.replaceAll).toHaveBeenCalledWith("tag", "a", "e");
     });
 
     describe("parse", () => {
