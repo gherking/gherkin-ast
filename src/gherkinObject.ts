@@ -22,7 +22,7 @@ export interface GherkinBackground {
         name: string;
         description: string;
         steps: GherkinStep[];
-    }
+    };
 }
 
 export interface GherkinScenario {
@@ -34,7 +34,7 @@ export interface GherkinScenario {
         description: string;
         steps: GherkinStep[];
         examples?: GherkinExamples[];
-    }
+    };
 }
 
 export interface GherkinLocation {

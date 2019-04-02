@@ -1,9 +1,27 @@
-import { Tag } from './tag';
-import { TableRow } from './tableRow';
-import { normalizeString, replaceAll, cloneArray, replaceArray } from '../common';
-import { GherkinExamples, GherkinTag, GherkinTableRow } from '../gherkinObject';
-//TODO: Sandor
+import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common";
+import { GherkinExamples } from "../gherkinObject";
+import { TableRow } from "./tableRow";
+import { Tag } from "./tag";
+
+// TODO: Sandor
 export class Examples {
+    public static parse(obj?: GherkinExamples): Examples {
+        if (!obj || !Array.isArray(obj.tableBody)) {
+            throw new TypeError("The given obj is not an Examples!");
+        }
+        const examples: Examples = new Examples(obj.keyword, obj.name);
+        if (Array.isArray(obj.tags)) {
+            examples.tags = obj.tags.map(Tag.parse);
+        } else {
+            examples.tags = [];
+        }
+        examples.body = obj.tableBody.map(TableRow.parse);
+        if (obj.tableHeader) {
+            examples.header = TableRow.parse(obj.tableHeader);
+        }
+        return examples;
+    }
+
     public keyword: string;
     public name: string;
     public tags: Tag[];
@@ -31,22 +49,5 @@ export class Examples {
         replaceArray<Tag>(this.tags, key, value);
         replaceArray<TableRow>(this.body, key, value);
         this.header && this.header.replace(key, value);
-    }
-
-    public static parse(obj?: GherkinExamples): Examples {
-        if (!obj || !Array.isArray(obj.tableBody)) {
-            throw new TypeError("The given obj is not an Examples!");
-        }
-        const examples: Examples = new Examples(obj.keyword, obj.name);
-        if (Array.isArray(obj.tags)) {
-            examples.tags = obj.tags.map((tag: GherkinTag): Tag => Tag.parse(tag));
-        } else {
-            examples.tags = [];
-        }
-        examples.body = obj.tableBody.map((row: GherkinTableRow): TableRow => TableRow.parse(row));
-        if (obj.tableHeader) {
-            examples.header = TableRow.parse(obj.tableHeader);
-        }
-        return examples;
     }
 }

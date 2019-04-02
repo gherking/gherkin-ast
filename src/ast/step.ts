@@ -1,11 +1,27 @@
-import { DataTable } from './dataTable';
-import { DocString } from './docString';
-import { normalizeString, replaceAll } from '../common';
-import { GherkinStep } from '../gherkinObject';
-//TODO: Laci
+import { normalizeString, replaceAll } from "../common";
+import { GherkinStep } from "../gherkinObject";
+import { DataTable } from "./dataTable";
+import { DocString } from "./docString";
+
 export type Argument = DataTable | DocString;
 
+// TODO: Laci
 export class Step {
+    public static parse(obj: GherkinStep): Step {
+        if (!obj || !obj.text) {
+            throw new Error("The given object is not a Step!");
+        }
+        const { keyword, text, dataTable, docString } = obj;
+        const step: Step = new Step(keyword, text);
+        if (dataTable) {
+            step.dataTable = DataTable.parse(dataTable);
+        }
+        if (docString) {
+            step.docString = DocString.parse(docString);
+        }
+        return step;
+    }
+
     public keyword: string;
     public text: string;
     public dataTable: DataTable;
@@ -29,20 +45,5 @@ export class Step {
         this.text = replaceAll(this.text, key, value);
         this.dataTable && this.dataTable.replace(key, value);
         this.docString && this.docString.replace(key, value);
-    }
-
-    public static parse(obj: GherkinStep): Step {
-        if (!obj || !obj.text) {
-            throw new Error("The given object is not a Step!");
-        }
-        const { keyword, text, dataTable, docString } = obj;
-        const step: Step = new Step(keyword, text);
-        if (dataTable) {
-            step.dataTable = DataTable.parse(dataTable);
-        }
-        if (docString) {
-            step.docString = DocString.parse(docString);
-        }
-        return step;
     }
 }

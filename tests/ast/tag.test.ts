@@ -1,12 +1,12 @@
-import { Tag, tag, removeDuplicateTags } from "../../src";
-import { GherkinTag } from "../../src/gherkinObject";
+import { removeDuplicateTags, Tag, tag } from "../../src";
 import * as common from "../../src/common";
+import { GherkinTag } from "../../src/gherkinObject";
 
 describe("Tag", () => {
     test("should create model of a tag", () => {
-        const tag: Tag = new Tag("name");
-        expect(tag).toBeDefined();
-        expect(tag.name).toEqual("name");
+        const t: Tag = new Tag("name");
+        expect(t).toBeDefined();
+        expect(t.name).toEqual("name");
     });
 
     test("should have method to clone it", () => {
@@ -18,14 +18,14 @@ describe("Tag", () => {
     });
 
     test("should have toString", () => {
-        const tag: Tag = new Tag("tag");
-        expect(tag.toString()).toEqual("@tag");
+        const t: Tag = new Tag("tag");
+        expect(t.toString()).toEqual("@tag");
     });
 
     test("should have method to replace value", () => {
-        const tag: Tag = new Tag("tag");
+        const t: Tag = new Tag("tag");
         jest.spyOn(common, "replaceAll");
-        tag.replace("a", "e");
+        t.replace("a", "e");
         expect(common.replaceAll).toHaveBeenCalledWith("tag", "a", "e");
     });
 
@@ -35,11 +35,11 @@ describe("Tag", () => {
         });
 
         test("should parse GherkinTag", () => {
-            const tag: Tag = Tag.parse({
+            const t: Tag = Tag.parse({
                 location: { column: 1, line: 1 },
                 name: "tag",
             });
-            expect(tag.name).toEqual("tag");
+            expect(t.name).toEqual("tag");
         });
     });
 });

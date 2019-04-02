@@ -1,4 +1,4 @@
-import { Feature, Tag, Background, Scenario, ScenarioOutline } from "../../src";
+import { Background, Feature, Scenario, ScenarioOutline, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinFeature, GherkinTag } from "../../src/gherkinObject";
 
@@ -97,7 +97,7 @@ describe("Feature", () => {
                 name: "N",
                 language: "HU",
                 tags: [
-                    {name: "TAG"} as GherkinTag,
+                    { name: "TAG" } as GherkinTag,
                 ],
             } as GherkinFeature;
             jest.spyOn(Tag, "parse");
@@ -105,7 +105,7 @@ describe("Feature", () => {
             expect(feature).toBeDefined();
             expect(feature.tags).toHaveLength(1);
             expect(Tag.parse).toHaveBeenCalledTimes(1);
-            expect(Tag.parse).toHaveBeenCalledWith(obj.tags[0]);
+            expect(Tag.parse).toHaveBeenCalledWith(obj.tags[0], expect.any(Number), expect.any(Array));
         });
 
         test("should parse GherkinBackground children", () => {
@@ -116,8 +116,8 @@ describe("Feature", () => {
                             name: "N",
                             keyword: "B",
                             description: "D",
-                        }
-                    }
+                        },
+                    },
                 ],
                 description: "D",
                 keyword: "F",
@@ -141,8 +141,8 @@ describe("Feature", () => {
                             name: "N",
                             keyword: "B",
                             description: "D",
-                        }
-                    }
+                        },
+                    },
                 ],
                 description: "D",
                 keyword: "F",
@@ -167,8 +167,8 @@ describe("Feature", () => {
                             keyword: "B",
                             description: "D",
                             examples: [],
-                        }
-                    }
+                        },
+                    },
                 ],
                 description: "D",
                 keyword: "F",

@@ -1,4 +1,4 @@
-import { TableCell } from "../../src"
+import { TableCell } from "../../src";
 import { GherkinTableCell } from "../../src/gherkinObject";
 
 describe("TableCell", () => {
@@ -50,5 +50,5 @@ describe("TableCell", () => {
             expect(cell).toBeDefined();
             expect(cell.value).toEqual("Cell");
         });
-    })
+    });
 });

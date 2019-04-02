@@ -1,7 +1,14 @@
-import { replaceAll, normalizeString } from '../common';
-import { GherkinDocString } from '../gherkinObject';
+import { normalizeString, replaceAll } from "../common";
+import { GherkinDocString } from "../gherkinObject";
 
 export class DocString {
+    public static parse(obj: GherkinDocString): DocString {
+        if (!obj || !obj.content) {
+            throw new TypeError("The given object is not a DocString!");
+        }
+        return new DocString(obj.content, obj.delimiter);
+    }
+
     public content: string;
     public delimiter: string;
 
@@ -16,12 +23,5 @@ export class DocString {
 
     public replace(key: RegExp | string, value: string): void {
         this.content = replaceAll(this.content, key, value);
-    }
-
-    public static parse(obj: GherkinDocString): DocString {
-        if (!obj || !obj.content) {
-            throw new TypeError("The given object is not a DocString!");
-        }
-        return new DocString(obj.content, obj.delimiter);
     }
 }

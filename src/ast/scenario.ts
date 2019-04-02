@@ -1,10 +1,30 @@
-import { Element } from './element';
-import { Tag } from './tag';
+import { cloneArray, replaceArray } from "../common";
+import { GherkinScenario } from "../gherkinObject";
+import { Element } from "./element";
 import { Step } from "./step";
-import { GherkinScenario, GherkinStep, GherkinTag } from '../gherkinObject';
-import { replaceArray, cloneArray } from '../common';
-//TODO: Sandor
+import { Tag } from "./tag";
+
+// TODO: Sandor
 export class Scenario extends Element {
+    public static parse(obj?: GherkinScenario): Scenario {
+        if (!obj || !obj.scenario || obj.scenario.examples) {
+            throw new TypeError("The given object is not a Scenario!");
+        }
+        const { description, keyword, name, steps, tags } = obj.scenario;
+        const scenario: Scenario = new Scenario(keyword, name, description);
+        if (Array.isArray(steps)) {
+            scenario.steps = steps.map(Step.parse);
+        } else {
+            scenario.steps = [];
+        }
+        if (Array.isArray(tags)) {
+            scenario.tags = tags.map(Tag.parse);
+        } else {
+            scenario.tags = [];
+        }
+        return scenario;
+    }
+
     public tags: Tag[];
 
     constructor(keyword: string, name: string, description: string) {
@@ -23,25 +43,6 @@ export class Scenario extends Element {
         );
         scenario.steps = cloneArray<Step>(this.steps);
         scenario.tags = cloneArray<Tag>(this.tags);
-        return scenario;
-    }
-
-    public static parse(obj?: GherkinScenario): Scenario {
-        if (!obj || !obj.scenario || obj.scenario.examples) {
-            throw new TypeError("The given object is not a Scenario!");
-        }
-        const { description, keyword, name, steps, tags } = obj.scenario;
-        const scenario: Scenario = new Scenario(keyword, name, description);
-        if (Array.isArray(steps)) {
-            scenario.steps = steps.map((step: GherkinStep): Step => Step.parse(step));
-        } else {
-            scenario.steps = [];
-        }
-        if (Array.isArray(tags)) {
-            scenario.tags = tags.map((tag: GherkinTag): Tag => Tag.parse(tag));
-        } else {
-            scenario.tags = [];
-        }
         return scenario;
     }
 }

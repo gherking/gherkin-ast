@@ -18,7 +18,7 @@ interface Clonable<T> {
 }
 export const cloneArray = <T extends Clonable<T>>(array: T[]): T[] => {
     return Array.isArray(array) ? array.map((e: T): T => (e as Clonable<T>).clone()) : [];
-}
+};
 
 interface Replacable {
     replace(key: RegExp | string, value: string): void;

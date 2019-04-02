@@ -1,16 +1,16 @@
-import {DocString} from "../../src"
+import { DocString } from "../../src";
 import * as common from "../../src/common";
-import {GherkinDocString} from "../../src/gherkinObject";
+import { GherkinDocString } from "../../src/gherkinObject";
 
 describe("DocString", () => {
     test("should create a model of docString", () => {
         // Given
         // When
-        const string: DocString = new DocString("String", "\"\"\"");
+        const s: DocString = new DocString("String", "\"\"\"");
         // Then
-        expect(string).toBeDefined();
-        expect(string.content).toEqual("String");
-        expect(string.delimiter).toEqual( "\"\"\"");
+        expect(s).toBeDefined();
+        expect(s.content).toEqual("String");
+        expect(s.delimiter).toEqual("\"\"\"");
     });
 
     test("should have a method to clone docString", () => {
@@ -26,13 +26,14 @@ describe("DocString", () => {
 
     test("should have a method to replace content", () => {
         // Given
-        const string: DocString = new DocString("String");
+        const s: DocString = new DocString("String");
         jest.spyOn(common, "replaceAll");
         // When
-        string.replace("a", "b");
+        s.replace("a", "b");
         // Then
         expect(common.replaceAll).toHaveBeenCalled();
     });
+
     describe("parse", () => {
         test("should throw error if not docString is passed", () => {
             // Given
@@ -48,11 +49,10 @@ describe("DocString", () => {
                 content: "String",
             } as GherkinDocString;
             // When
-            const string: DocString = DocString.parse(obj);
+            const s: DocString = DocString.parse(obj);
             // Then
-            expect(string).toBeDefined();
-            expect(string.content).toEqual("String");
+            expect(s).toBeDefined();
+            expect(s.content).toEqual("String");
         });
-    })
-
+    });
 });

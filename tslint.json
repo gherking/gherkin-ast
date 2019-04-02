@@ -10,8 +10,13 @@
       "max-classes-per-file": false,
       "no-any": true,
       "no-var-requires": false,
+      "no-unused-expression": [
+        true,
+        "allow-fast-null-checks"
+      ],
+      "no-for-in-array": false,
       "no-console": [
-        "error",
+        true,
         {
           "allow": [
             "warn",

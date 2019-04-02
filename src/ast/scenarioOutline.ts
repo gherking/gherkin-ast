@@ -1,14 +1,37 @@
-import { Element } from './element';
-import { Tag, tag, removeDuplicateTags } from "./tag";
-import { Examples } from './examples';
+import { cloneArray, replaceArray } from "../common";
+import { GherkinScenario } from "../gherkinObject";
+import { Element } from "./element";
+import { Examples } from "./examples";
 import { Scenario } from "./scenario";
-import { GherkinScenario, GherkinStep, GherkinTag, GherkinExamples } from '../gherkinObject';
-import { Step } from './step';
-import { TableRow } from './tableRow';
-import { cloneArray, replaceArray } from '../common';
-import { TableCell } from './tableCell';
-//TODO: Laci
+import { Step } from "./step";
+import { TableCell } from "./tableCell";
+import { TableRow } from "./tableRow";
+import { removeDuplicateTags, Tag, tag } from "./tag";
+
+// TODO: Laci
 export class ScenarioOutline extends Element {
+    public static parse(obj?: GherkinScenario): ScenarioOutline {
+        if (!obj || !obj.scenario || !Array.isArray(obj.scenario.examples)) {
+            throw new TypeError("The given object is not a Scenario Outline!");
+        }
+        const { description, examples, keyword, name, steps, tags } = obj.scenario;
+        const scenarioOutline: ScenarioOutline = new ScenarioOutline(
+            keyword, name, description,
+        );
+        if (Array.isArray(steps)) {
+            scenarioOutline.steps = steps.map(Step.parse);
+        } else {
+            scenarioOutline.steps = [];
+        }
+        if (Array.isArray(tags)) {
+            scenarioOutline.tags = tags.map(Tag.parse);
+        } else {
+            scenarioOutline.tags = [];
+        }
+        scenarioOutline.examples = examples.map(Examples.parse);
+        return scenarioOutline;
+    }
+
     public tags: Tag[];
     public examples: Examples[];
 
@@ -53,27 +76,5 @@ export class ScenarioOutline extends Element {
             });
         });
         return scenarios;
-    }
-
-    public static parse(obj?: GherkinScenario): ScenarioOutline {
-        if (!obj || !obj.scenario || !Array.isArray(obj.scenario.examples)) {
-            throw new TypeError("The given object is not a Scenario Outline!");
-        }
-        const { description, examples, keyword, name, steps, tags } = obj.scenario;
-        const scenarioOutline: ScenarioOutline = new ScenarioOutline(
-            keyword, name, description,
-        );
-        if (Array.isArray(steps)) {
-            scenarioOutline.steps = steps.map((step: GherkinStep): Step => Step.parse(step));
-        } else {
-            scenarioOutline.steps = [];
-        }
-        if (Array.isArray(tags)) {
-            scenarioOutline.tags = tags.map((tag: GherkinTag): Tag => Tag.parse(tag));
-        } else {
-            scenarioOutline.tags = [];
-        }
-        scenarioOutline.examples = examples.map((examples: GherkinExamples): Examples => Examples.parse(examples));
-        return scenarioOutline;
     }
 }

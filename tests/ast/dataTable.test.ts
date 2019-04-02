@@ -63,7 +63,7 @@ describe("DataTable", () => {
                 rows: [
                     {
                         cells: [],
-                    } as GherkinTableRow
+                    } as GherkinTableRow,
                 ],
             } as GherkinDataTable;
             // When
@@ -73,5 +73,5 @@ describe("DataTable", () => {
             expect(table.rows).toHaveLength(1);
             expect(TableRow.parse).toHaveBeenCalledTimes(1);
         });
-    })
-})
+    });
+});

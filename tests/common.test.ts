@@ -1,4 +1,4 @@
-import { safeString, normalizeString, replaceAll, cloneArray, replaceArray } from "../src";
+import { cloneArray, normalizeString, replaceAll, replaceArray, safeString } from "../src";
 
 describe("safeString", () => {
     test("should remove white spaces", () => {
@@ -31,7 +31,8 @@ describe("replaceAll", () => {
 
 describe("replaceArray", () => {
     class R {
-        constructor(public mock: Function = jest.fn()) { }
+        constructor(public mock: (key: RegExp | string, value: string) => void = jest.fn()) { }
+
         public replace(key: RegExp | string, value: string): void {
             this.mock(key, value);
         }
@@ -44,16 +45,17 @@ describe("replaceArray", () => {
             expect(e.mock).toHaveBeenCalledWith("K", "V");
         }
     });
-})
+});
 
 describe("cloneArray", () => {
     class C {
-        constructor(public mock: Function = jest.fn()) { }
+        constructor(public mock: () => void = jest.fn()) { }
+
         public clone(): C {
             this.mock();
             return this;
         }
-    };
+    }
 
     test("should handle if not array passed", () => {
         expect(cloneArray<C>(null)).toEqual([]);
@@ -64,9 +66,9 @@ describe("cloneArray", () => {
             new C(), new C(), new C(),
         ];
         const cloned: C[] = cloneArray<C>(elements);
-        for (const i in cloned) {
-            expect(cloned[i]).toBe(elements[i]);
+        cloned.forEach((c: C, i: number): void => {
+            expect(c).toBe(elements[i]);
             expect(elements[i].mock).toHaveBeenCalled();
-        }
+        });
     });
 });

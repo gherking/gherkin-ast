@@ -1,95 +1,53 @@
 describe("ScenarioOutline", () => {
     describe("constructor", () => {
-        test("should create model of a Scenario Outline", () => {
+        test.todo("should create model of a Scenario Outline");
 
-        });
+        test.todo("should extend Element");
 
-        test("should extend Element", () => {
+        test.todo("should initialize tags");
 
-        });
-
-        test("should initialize tags", () => {
-
-        });
-
-        test("should initialize examples", () => {
-
-        });
+        test.todo("should initialize examples");
     });
 
     describe("replace", () => {
-        test("should replace based data", () => {
+        test.todo("should replace based data");
 
-        });
+        test.todo("should replace in tags");
 
-        test("should replace in tags", () => {
-
-        });
-
-        test("should replae in examples", () => {
-
-        });
+        test.todo("should replae in examples");
     });
 
     describe("clone", () => {
-        test("should clone basic data", () => {
+        test.todo("should clone basic data");
 
-        });
+        test.todo("should clone tags");
 
-        test("should clone tags", () => {
+        test.todo("should clone steps");
 
-        });
-
-        test("should clone steps", () => {
-
-        });
-
-        test("should clone examples", () => {
-
-        });
+        test.todo("should clone examples");
     });
 
     describe("parse", () => {
-        test("should throw error if not GherkinScenario as Outline passed", () => {
+        test.todo("should throw error if not GherkinScenario as Outline passed");
 
-        });
+        test.todo("should parse basic data");
 
-        test("should parse basic data", () => {
+        test.todo("should parse steps");
 
-        });
+        test.todo("should parse tags");
 
-        test("should parse steps", () => {
-
-        });
-
-        test("should parse tags", () => {
-
-        });
-
-        test("should parse examples", () => {
-
-        });
+        test.todo("should parse examples");
     });
 
     describe("toScenario", () => {
-        test("should parse as many scenario as examples rows", () => {
+        test.todo("should parse as many scenario as examples rows");
 
-        });
+        test.todo("should add given column to tags");
 
-        test("should add given column to tags", () => {
+        test.todo("should add Feature examples tags to Scenario");
 
-        });
+        test.todo("should clone steps");
 
-        test("should add Feature examples tags to Scenario", () => {
-
-        });
-
-        test("should clone steps", () => {
-
-        });
-
-        test("should replace header items with actual value", () => {
-
-        });
+        test.todo("should replace header items with actual value");
     });
 });
