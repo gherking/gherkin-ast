@@ -5,7 +5,6 @@ import { DocString } from "./docString";
 
 export type Argument = DataTable | DocString;
 
-// TODO: Laci
 export class Step {
     public static parse(obj: GherkinStep): Step {
         if (!obj || !obj.text) {
