@@ -8,7 +8,6 @@ import { TableCell } from "./tableCell";
 import { TableRow } from "./tableRow";
 import { removeDuplicateTags, Tag, tag } from "./tag";
 
-// TODO: Laci
 export class ScenarioOutline extends Element {
     public static parse(obj?: GherkinScenario): ScenarioOutline {
         if (!obj || !obj.scenario || !Array.isArray(obj.scenario.examples)) {

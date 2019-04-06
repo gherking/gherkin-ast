@@ -63,3 +63,4 @@ typings/
 dist
 coverage
 junit.xml
+.vscode
