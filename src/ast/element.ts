@@ -3,7 +3,6 @@ import { Step } from "./step";
 
 export const REPEAT_STEP_KEYWORDS: string[] = ["And", "But", "*"];
 
-// TODO: Juci
 export class Element {
     public keyword: string;
     public name: string;
