@@ -1,7 +1,6 @@
 import { GherkinDocument } from "../gherkinObject";
 import { Feature } from "./feature";
 
-// TODO: Juci
 export class Document {
     public static parse(obj?: GherkinDocument) {
         if (!obj || !obj.gherkinDocument) {
