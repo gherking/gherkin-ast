@@ -51,6 +51,7 @@ describe("Element", () => {
     test("should make keywords readable", () => {
         // Given
         const e: Element = new Element("String1", "String2", "String3");
+        jest.spyOn(e, "useNormalStepKeywords");
         e.steps.push(
             new Step("Given", "1"),
             new Step("When", "2"),
@@ -60,7 +61,7 @@ describe("Element", () => {
         // When
         e.useReadableStepKeywords();
         // Then
-        //TODO: Check if useNormalStepKeywords is called?
+        expect(e.useNormalStepKeywords).toHaveBeenCalled();
         expect(e.steps.map(step => step.keyword)).toEqual(["Given","When","And","Then","And"]);
     });
 });

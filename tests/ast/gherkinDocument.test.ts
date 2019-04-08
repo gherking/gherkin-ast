@@ -45,6 +45,7 @@ describe("Document", () => {
 
     test("should parse GherkinDocument", () => {
         // Given
+        jest.spyOn(Feature, "parse").mockReturnValue(new Feature("S1","S2","S3"));
         // When
         const d: Document = Document.parse({
             gherkinDocument: {
@@ -54,5 +55,7 @@ describe("Document", () => {
         });
         // Then
         expect(d.uri).toEqual("string");
+        expect(Feature.parse).toHaveBeenCalledWith({});
+        expect(d.feature).toEqual(new Feature("S1","S2","S3"));
     });
 });
