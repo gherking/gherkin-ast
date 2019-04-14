@@ -5,6 +5,16 @@ import {GherkinDocument, GherkinFeature} from "../../src/gherkinObject";
 
 describe("Document", () => {
 
+    test("should create gherkinDocument", () => {
+        // Given
+        // When
+        const d = new Document("String");
+        // Then
+        expect(d).toBeDefined();
+        expect(d.uri).toEqual("String");
+        expect(d.feature).toEqual(null);
+    });
+
     test("should clone gherkinDocument without feature", () => {
         // Given
         const d: Document = new Document("String1");
@@ -23,6 +33,7 @@ describe("Document", () => {
         // Then
         expect(clone).toEqual(d);
         expect(clone.feature).toEqual(d.feature);
+        expect(clone.feature).not.toBe(d.feature);
     });
 
     test("should replace feature of document", () => {
@@ -45,7 +56,7 @@ describe("Document", () => {
 
     test("should parse GherkinDocument", () => {
         // Given
-        jest.spyOn(Feature, "parse").mockReturnValue(new Feature("S1","S2","S3"));
+        jest.spyOn(Feature, "parse").mockReturnValue(new Feature("S1", "S2", "S3"));
         // When
         const d: Document = Document.parse({
             gherkinDocument: {
@@ -56,6 +67,6 @@ describe("Document", () => {
         // Then
         expect(d.uri).toEqual("string");
         expect(Feature.parse).toHaveBeenCalledWith({});
-        expect(d.feature).toEqual(new Feature("S1","S2","S3"));
+        expect(d.feature).toEqual(new Feature("S1", "S2", "S3"));
     });
 });
