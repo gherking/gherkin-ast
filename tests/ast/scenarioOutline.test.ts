@@ -6,6 +6,7 @@ describe("ScenarioOutline", () => {
     let outline: ScenarioOutline;
 
     beforeEach(() => {
+        jest.restoreAllMocks();
         outline = new ScenarioOutline(
             "Keyword", "Name", "Description",
         );
@@ -221,7 +222,7 @@ describe("ScenarioOutline", () => {
 
         test("should replace header items with actual value", () => {
             expect(scenarios[0].name).toEqual("Name A1 B1");
-            expect(scenarios[0].name).toEqual("Name A2 B2");
+            expect(scenarios[1].name).toEqual("Name A2 B2");
         });
     });
 });
