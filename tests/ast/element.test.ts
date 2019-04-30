@@ -1,6 +1,6 @@
-import {Element} from "../../src";
+import { Element } from "../../src";
+import { Step } from "../../src/ast/step";
 import * as common from "../../src/common";
-import {Step} from "../../src/ast/step";
 
 describe("Element", () => {
     test("should create a model of element", () => {
@@ -45,7 +45,7 @@ describe("Element", () => {
         // When
         e.useNormalStepKeywords();
         // Then
-        expect(e.steps.map(step => step.keyword)).toEqual(["Given","When","When","Then","Then"]);
+        expect(e.steps.map((step: Step): string => step.keyword)).toEqual(["Given", "When", "When", "Then", "Then"]);
     });
 
     test("should make keywords readable", () => {
@@ -62,6 +62,6 @@ describe("Element", () => {
         e.useReadableStepKeywords();
         // Then
         expect(e.useNormalStepKeywords).toHaveBeenCalled();
-        expect(e.steps.map(step => step.keyword)).toEqual(["Given","When","And","Then","And"]);
+        expect(e.steps.map((step: Step): string => step.keyword)).toEqual(["Given", "When", "And", "Then", "And"]);
     });
 });

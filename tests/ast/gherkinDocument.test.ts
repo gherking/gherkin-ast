@@ -1,7 +1,7 @@
-import {Document} from "../../src";
-import {Feature} from "../../src/ast/feature";
+import { Document } from "../../src";
+import { Feature } from "../../src/ast/feature";
 import * as common from "../../src/common";
-import {GherkinDocument, GherkinFeature} from "../../src/gherkinObject";
+import { GherkinDocument, GherkinFeature } from "../../src/gherkinObject";
 
 describe("Document", () => {
 
@@ -61,8 +61,8 @@ describe("Document", () => {
         const d: Document = Document.parse({
             gherkinDocument: {
                 uri: "string",
-                feature: {} as GherkinFeature
-            }
+                feature: {} as GherkinFeature,
+            },
         });
         // Then
         expect(d.uri).toEqual("string");
