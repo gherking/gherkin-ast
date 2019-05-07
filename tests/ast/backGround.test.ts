@@ -1,5 +1,5 @@
-import { Background } from "../../src";
-import { GherkinBackground } from "../../src/gherkinObject";
+import { Background, Step } from "../../src";
+import { GherkinBackground, GherkinStep } from "../../src/gherkinObject";
 
 describe("Background", () => {
     test("should create model of a Background", () => {
@@ -38,7 +38,29 @@ describe("Background", () => {
                 background: {
                     keyword: "Bkeeyword",
                     name: "Bname",
-                    steps: [],
+                    description: "BDescription",
+                    steps: [{} as GherkinStep],
+                },
+            } as GherkinBackground;
+            // When
+            jest.spyOn(Step, "parse").mockReturnValue({} as Step);
+            const bg: Background = Background.parse(obj);
+            // Then
+            expect(Step.parse).toHaveBeenCalledWith({}, 0, [{}]);
+            expect(bg).toBeDefined();
+            expect(bg.keyword).toEqual("Bkeeyword");
+            expect(bg.name).toEqual("Bname");
+        
+        });
+
+        test("should parse GherkinBackground without steps", () => {
+
+            // Given
+            const obj: GherkinBackground = {
+                background: {
+                    keyword: "Bkeeyword",
+                    name: "Bname",
+                    description: "BDescription",
                 },
             } as GherkinBackground;
             // When
@@ -47,6 +69,7 @@ describe("Background", () => {
             expect(bg).toBeDefined();
             expect(bg.keyword).toEqual("Bkeeyword");
             expect(bg.name).toEqual("Bname");
+            expect(bg.steps).toEqual([]);
         });
     });
 });
