@@ -1,4 +1,4 @@
-import { Element, Scenario, Step, Tag } from "../../src";
+import {Element, Scenario, Step, Tag} from "../../src";
 import * as common from "../../src/common";
 import {GherkinScenario, GherkinStep, GherkinTag} from "../../src/gherkinObject";
 
@@ -32,7 +32,7 @@ describe("Scenario", () => {
     describe("replace", () => {
         beforeEach(() => {
             jest.spyOn(common, "replaceArray").mockReturnValue();
-            scenario.tags = [{ name: "T1" } as Tag];
+            scenario.tags = [{name: "T1"} as Tag];
             scenario.replace("e", "X");
         });
 
@@ -42,7 +42,7 @@ describe("Scenario", () => {
         });
 
         test("should replace in tags", () => {
-            expect(common.replaceArray).toHaveBeenCalledWith([{ name: "T1" }], "e", "X");
+            expect(common.replaceArray).toHaveBeenCalledWith([{name: "T1"}], "e", "X");
         });
 
     });
@@ -89,13 +89,12 @@ describe("Scenario", () => {
                     keyword: "Keyword",
                     name: "Name",
                     description: "Description",
-                    examples: []
                 },
             } as GherkinScenario;
         });
 
         test("should throw error if not GherkinScenario as scenario passed", () => {
-            expect(() => Scenario.parse({ scenario: {} } as GherkinScenario)).toThrow();
+            expect(() => Scenario.parse({scenario: {examples:[]}} as GherkinScenario)).toThrow();
         });
 
         test("should parse basic data", () => {
@@ -113,7 +112,7 @@ describe("Scenario", () => {
         });
 
         test("should parse steps", () => {
-            obj.scenario.steps = [{ keyword: "K", text: "T" } as GherkinStep];
+            obj.scenario.steps = [{keyword: "K", text: "T"} as GherkinStep];
             const parsed: Scenario = Scenario.parse(obj);
             expect(parsed).toBeDefined();
             expect(Step.parse).toHaveBeenCalledWith(obj.scenario.steps[0], 0, obj.scenario.steps);
@@ -121,7 +120,7 @@ describe("Scenario", () => {
         });
 
         test("should parse tags", () => {
-            obj.scenario.tags = [{ name: "N" } as GherkinTag];
+            obj.scenario.tags = [{name: "N"} as GherkinTag];
             const parsed: Scenario = Scenario.parse(obj);
             expect(parsed).toBeDefined();
             expect(Tag.parse).toHaveBeenCalledWith(obj.scenario.tags[0], 0, obj.scenario.tags);

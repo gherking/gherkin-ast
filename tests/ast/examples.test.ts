@@ -13,9 +13,15 @@ describe("Examples", () => {
         example = new Examples(
             "Keyword", "Name",
         );
+        example.tags = [new Tag("@tag")];
+        example.header = new TableRow([new TableCell("Header")]);
+        example.body = [new TableRow([new TableCell("Body")])];
     });
     describe("constructor", () => {
         test("should create model of a Scenario example", () => {
+            example = new Examples(
+                "Keyword", "Name",
+            );
 
             expect(example).toBeDefined();
             expect(example.keyword).toEqual("Keyword");
@@ -30,11 +36,6 @@ describe("Examples", () => {
 
         beforeEach(() => {
             jest.spyOn(common, "cloneArray");
-            example.keyword = "Keyword";
-            example.name = "Name";
-            example.tags = [new Tag("@tag")];
-            example.header = new TableRow([new TableCell("Header")]);
-            example.body = [new TableRow([new TableCell("Body")])];
             clonedExample = example.clone();
         });
 
@@ -45,6 +46,8 @@ describe("Examples", () => {
             expect(clonedExample.header).toEqual(example.header);
             expect(clonedExample).not.toBe(example);
         });
+
+        //should clone header
 
         test("should clone tags", () => {
             expect(common.cloneArray).toHaveBeenCalledWith(example.tags);
@@ -62,13 +65,6 @@ describe("Examples", () => {
     describe("replace", () => {
         beforeEach(() => {
             jest.spyOn(common, "replaceArray").mockReturnValue();
-            /*example.tags = [{ name: "T1" } as Tag];
-            example.header = {
-                cells: [{
-                    value: "Cell"
-                } as TableCell]
-            } as TableRow;*/
-            //example.replace("e", "X");
         });
 
         test("should replace based data", () => {
@@ -77,36 +73,18 @@ describe("Examples", () => {
         });
 
         test("should replace in body", () => {
-            example.body = [
-                {
-                    cells: [
-                        {
-                            value: "Cell"
-                        } as TableCell
-                    ]
-                } as TableRow
-            ];
             example.replace("e", "X");
-            expect(common.replaceArray).toHaveBeenCalledWith([{cells: [{value: "Cell"}]}], "e", "X");
+            expect(common.replaceArray).toHaveBeenCalledWith([{cells: [{value: "Body"}]}], "e", "X");
         });
 
         test("should replace in tags", () => {
-            example.tags = [{
-                name: "T1"
-            } as Tag];
             example.replace("e", "X");
-            expect(common.replaceArray).toHaveBeenCalledWith([{ name: "T1" }], "e", "X");
+            expect(common.replaceArray).toHaveBeenCalledWith([{name: "@tag"}], "e", "X");
         });
 
         test("should replace in header", () => {
-            example.header = {
-                cells: [{
-                    value: "Cell"
-                } as TableCell]
-            } as TableRow;
             jest.spyOn(example.header, "replace").mockReturnValue();
             example.replace("e", "X");
-            //expect(common.replaceArray).toHaveBeenCalledWith([{value: "Cell"}], "e", "X");
             expect(example.header.replace).toHaveBeenCalledWith("e", "X")
         });
     });
@@ -121,6 +99,7 @@ describe("Examples", () => {
                 name: "Name",
                 keyword: "Keyword",
                 tableBody: [],
+                tableHeader: null,
                 location: {
                     line: 1,
                     column: 2
@@ -149,7 +128,7 @@ describe("Examples", () => {
         });
 
         test("should parse tags", () => {
-            obj.tags = [{ name: "N" } as GherkinTag];
+            obj.tags = [{name: "N"} as GherkinTag];
             const parsed: Examples = Examples.parse(obj);
             expect(parsed).toBeDefined();
             expect(Tag.parse).toHaveBeenCalledWith(obj.tags[0], 0, obj.tags);
@@ -161,7 +140,7 @@ describe("Examples", () => {
             const parsed: Examples = Examples.parse(obj);
             expect(parsed).toBeDefined();
             expect(TableRow.parse).toHaveBeenCalledWith(obj.tableHeader);
-            expect(parsed.header).toEqual({cells:[new TableCell("Cell")]});
+            expect(parsed.header).toEqual({cells: [new TableCell("Cell")]});
         });
     });
 });
