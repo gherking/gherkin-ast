@@ -3,7 +3,6 @@ import { GherkinExamples } from "../gherkinObject";
 import { TableRow } from "./tableRow";
 import { Tag } from "./tag";
 
-// TODO: Sandor
 export class Examples {
     public static parse(obj?: GherkinExamples): Examples {
         if (!obj || !Array.isArray(obj.tableBody)) {

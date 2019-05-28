@@ -4,10 +4,9 @@ import { Element } from "./element";
 import { Step } from "./step";
 import { Tag } from "./tag";
 
-// TODO: Sandor
 export class Scenario extends Element {
     public static parse(obj?: GherkinScenario): Scenario {
-        if (!obj || !obj.scenario || obj.scenario.examples) {
+        if (!obj || !obj.scenario || !obj.scenario.examples) {
             throw new TypeError("The given object is not a Scenario!");
         }
         const { description, keyword, name, steps, tags } = obj.scenario;

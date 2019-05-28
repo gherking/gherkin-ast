@@ -49,7 +49,7 @@ describe("ScenarioOutline", () => {
             expect(common.replaceArray).toHaveBeenCalledWith([{ name: "T1" }], "e", "X");
         });
 
-        test("should replae in examples", () => {
+        test("should replace in examples", () => {
             expect(common.replaceArray).toHaveBeenCalledWith([], "e", "X");
         });
     });
