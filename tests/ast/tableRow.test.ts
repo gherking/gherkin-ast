@@ -1,6 +1,6 @@
 import { TableCell } from "../../src";
 import { TableRow } from "../../src";
-import { GherkinTableCell } from "../../src/gherkinObject";
+import { GherkinTableCell, GherkinTableRow } from "../../src/gherkinObject";
 
 describe("TableRow", () => {
     test("should create model of a TableRow", () => {
@@ -24,32 +24,36 @@ describe("TableRow", () => {
 
     test("should have method to replace value", () => {
         // Given
-        const cell: TableCell = new TableCell("Hello World!");
+        const row: TableRow = new TableRow([new TableCell("Hello World!")]);
         // When
-        cell.replace("o", "X");
+        row.replace("o", "X");
         // Then
-        expect(cell.value).toEqual("HellX WXrld!");
+        expect(row.cells[0].value).toEqual("HellX WXrld!");
     });
 
     describe("parse", () => {
-        test("should throw error if not GherkinTableCell is passed", () => {
+        test("should throw error if not GherkinTableRow is passed", () => {
             // Given
-            const obj: GherkinTableCell = {} as GherkinTableCell;
+            const obj: GherkinTableRow = {} as GherkinTableRow;
             // When
             // Then
-            expect(() => TableCell.parse(obj)).toThrow();
+            expect(() => TableRow.parse(obj)).toThrow();
         });
 
-        test("should parse GherkinTableCell", () => {
+        test("should parse GherkinTableRow", () => {
             // Given
-            const obj: GherkinTableCell = {
-                value: "Cell",
-            } as GherkinTableCell;
+            const obj: GherkinTableRow = {
+                cells: [
+                    {
+                        value: "Cell",
+                    } as GherkinTableCell,
+                ],
+            } as GherkinTableRow;
             // When
-            const cell: TableCell = TableCell.parse(obj);
+            const row: TableRow = TableRow.parse(obj);
             // Then
-            expect(cell).toBeDefined();
-            expect(cell.value).toEqual("Cell");
+            expect(row).toBeDefined();
+            expect(row.cells[0].value).toEqual("Cell");
         });
     });
 });

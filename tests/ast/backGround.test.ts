@@ -50,7 +50,6 @@ describe("Background", () => {
             expect(bg).toBeDefined();
             expect(bg.keyword).toEqual("Bkeeyword");
             expect(bg.name).toEqual("Bname");
-        
         });
 
         test("should parse GherkinBackground without steps", () => {

@@ -1,6 +1,6 @@
-import {Element, Scenario, Step, Tag} from "../../src";
+import { Element, Scenario, Step, Tag } from "../../src";
 import * as common from "../../src/common";
-import {GherkinScenario, GherkinStep, GherkinTag} from "../../src/gherkinObject";
+import { GherkinScenario, GherkinStep, GherkinTag } from "../../src/gherkinObject";
 
 describe("Scenario", () => {
     let scenario: Scenario;
@@ -94,7 +94,7 @@ describe("Scenario", () => {
         });
 
         test("should throw error if not GherkinScenario as scenario passed", () => {
-            expect(() => Scenario.parse({scenario: {examples:[]}} as GherkinScenario)).toThrow();
+            expect(() => Scenario.parse({scenario: {examples: []}} as GherkinScenario)).toThrow();
         });
 
         test("should parse basic data", () => {

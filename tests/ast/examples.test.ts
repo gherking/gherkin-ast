@@ -1,9 +1,9 @@
-import {Examples} from "../../src/ast/examples";
+import { Examples } from "../../src";
+import { TableCell } from "../../src";
+import { TableRow } from "../../src";
+import { Tag } from "../../src";
 import * as common from "../../src/common";
-import {Tag} from "../../src/ast/tag";
-import {TableRow} from "../../src/ast/tableRow";
-import {TableCell} from "../../src/ast/tableCell";
-import {GherkinExamples, GherkinTableRow, GherkinTag} from "../../src/gherkinObject";
+import { GherkinExamples, GherkinTableRow, GherkinTag } from "../../src/gherkinObject";
 
 describe("Examples", () => {
     let example: Examples;
@@ -43,11 +43,14 @@ describe("Examples", () => {
             expect(clonedExample).toBeDefined();
             expect(clonedExample.keyword).toEqual("Keyword");
             expect(clonedExample.name).toEqual("Name");
-            expect(clonedExample.header).toEqual(example.header);
             expect(clonedExample).not.toBe(example);
         });
 
-        //should clone header
+        test("should clone header", () => {
+            expect(common.cloneArray).toHaveBeenCalledWith(example.header.cells);
+            expect(clonedExample.header).toEqual(example.header);
+            expect(clonedExample.header).not.toBe(example.header);
+        });
 
         test("should clone tags", () => {
             expect(common.cloneArray).toHaveBeenCalledWith(example.tags);
@@ -85,7 +88,7 @@ describe("Examples", () => {
         test("should replace in header", () => {
             jest.spyOn(example.header, "replace").mockReturnValue();
             example.replace("e", "X");
-            expect(example.header.replace).toHaveBeenCalledWith("e", "X")
+            expect(example.header.replace).toHaveBeenCalledWith("e", "X");
         });
     });
 
@@ -102,8 +105,8 @@ describe("Examples", () => {
                 tableHeader: null,
                 location: {
                     line: 1,
-                    column: 2
-                }
+                    column: 2,
+                },
             } as GherkinExamples;
         });
 

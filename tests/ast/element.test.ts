@@ -1,5 +1,5 @@
 import { Element } from "../../src";
-import { Step } from "../../src/ast/step";
+import { Step } from "../../src";
 import * as common from "../../src/common";
 
 describe("Element", () => {
