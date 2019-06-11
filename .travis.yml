@@ -14,4 +14,4 @@ deploy:
   keep-history: true # By default, Travis uses push --force and wipes out commit history
   verbose: true
   on:
-    branch: feature/typescript
+    branch: master
