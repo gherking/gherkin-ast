@@ -1,0 +1,50 @@
+{
+  "name": "gherkin-ast",
+  "version": "1.1.0",
+  "description": "JS model for Gherkin feature files",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha ./test/*.spec.js ./test/ast/*.spec.js",
+    "coverage": "istanbul cover --include-all-sources ./node_modules/mocha/bin/_mocha --root ./lib -- ./test/*.spec.js ./test/ast/*.spec.js",
+    "travis": "istanbul cover --include-all-sources ./node_modules/mocha/bin/_mocha --root ./lib --report lcovonly -- ./test/*.spec.js ./test/ast/*.spec.js -R spec && cat ./coverage/lcov.info | node ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+  },
+  "preferGlobal": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szikszail/gherkin-ast.git"
+  },
+  "keywords": [
+    "Gherkin",
+    "Feature",
+    "Scenario",
+    "Scenario",
+    "Outline",
+    "Background",
+    "Step",
+    "Examples"
+  ],
+  "author": "Laszlo Szikszai <sziklaszlo@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/szikszail/gherkin-ast/issues"
+  },
+  "engines": {
+    "node": ">=6.0.0",
+    "npm": ">=3.0.0"
+  },
+  "homepage": "https://github.com/szikszail/gherkin-ast#readme",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "coveralls": "^3.0.0",
+    "deep-copy": "^1.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.1.0"
+  },
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "colors": "^1.1.2",
+    "gherkin": "^5.0.1",
+    "proxyquire": "^1.8.0",
+    "split-lines": "^1.1.0"
+  }
+}
