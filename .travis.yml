@@ -1,11 +1,17 @@
 language: node_js
 node_js:
-- 6
-- 8
-- 10
-git:
-  depth: 3
+  - "lts/*"
 script:
-- npm run build
+  - npm run build
 notifications:
   email: false
+deploy:
+  provider: pages
+  local_dir: docs
+  skip-cleanup: true
+  target-branch: master # Commit to master instead of gh-pages
+  github-token: $GH_TOKEN
+  keep-history: true # By default, Travis uses push --force and wipes out commit history
+  verbose: true
+  on:
+    branch: master
