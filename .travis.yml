@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "lts/*"
 script:
-  - npm run-script travis
+  - npm run coverage
 notifications:
   email: false
 deploy:
