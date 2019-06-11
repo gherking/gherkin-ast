@@ -1,0 +1,496 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>gherkin-ast</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">gherkin-ast</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> gherkin-ast</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="gherkin-ast">gherkin-ast</h1>
+				<p><a href="https://travis-ci.org/szikszail/gherkin-ast"><img src="https://travis-ci.org/szikszail/gherkin-ast.svg?branch=master" alt="Build Status"></a> <a href="https://david-dm.org/szikszail/gherkin-ast"><img src="https://david-dm.org/szikszail/gherkin-ast.svg" alt="dependency Status"></a> <a href="https://david-dm.org/szikszail/gherkin-ast#info=devDependencies"><img src="https://david-dm.org/szikszail/gherkin-ast/dev-status.svg" alt="devDependency Status"></a> <a href="https://coveralls.io/github/szikszail/gherkin-ast?branch=master"><img src="https://coveralls.io/repos/github/szikszail/gherkin-ast/badge.svg?branch=master" alt="Coverage Status"></a></p>
+				<p>JS model for Gherkin feature files</p>
+				<h2 id="ast">AST</h2>
+				<p>The API provides types to be able to handle different parts of Gherkin feature files.</p>
+				<pre><code class="language-javascript"><span class="hljs-meta">'use strict'</span>;
+<span class="hljs-keyword">const</span> AST = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gherkin-ast'</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.keys(AST));
+<span class="hljs-comment">// Background,...,Feature,GherkinDocument,...,Tag</span></code></pre>
+				<pre><code class="language-javascript"><span class="hljs-meta">'use strict'</span>;
+<span class="hljs-keyword">const</span> {Feature, Scenario} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'gherkin-ast'</span>);
+<span class="hljs-keyword">const</span> feature = <span class="hljs-keyword">new</span> Feature(<span class="hljs-string">'Feature'</span>, <span class="hljs-string">'Displaying documents'</span>);
+feature.elements.push(<span class="hljs-keyword">new</span> Scenario(<span class="hljs-string">'Scenario'</span>, <span class="hljs-string">'Opening a document'</span>));
+<span class="hljs-comment">// ...</span></code></pre>
+				<h3 id="gherkindocument"><code>GherkinDocument</code></h3>
+				<p>Model of a complete Gherkin document, i.e. feature file.</p>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{Feature} feature</code> - The feature which this document contains.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new GherkinDocument() : GherkinDocument</code> - Creates a new instance.</li>
+					<li><code>{GherkinDocument}.toString({FormatConfig} [options]) : string</code> - Converts the document to string, i.e. formats it.</li>
+					<li><code>{GherkinDocument}.clone() : GherkinDocument</code> - Clones the document.</li>
+					<li><code>GherkinDocumnet.parse({Object} object) : GherkinDocument</code> - Parses the given <a href="/test/data/base.ast.json#2">GherkinDocument object</a> to a <code>GherkinDocument</code>.</li>
+				</ul>
+				<h3 id="feature"><code>Feature</code></h3>
+				<p>Model of a Gherkin feature.</p>
+				<pre><code class="language-gherkin"><span class="hljs-keyword">Feature</span>: Hello world
+  As a smo
+  I want to do smth
+  So that I am smth</code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{string} keyword</code> - The keyword of the feature, e.g. <code>&quot;Feature&quot;</code>.</li>
+					<li><code>{string} name</code> - The name of the feature, e.g. <code>&quot;Hello world&quot;</code>.</li>
+					<li><code>{string} description</code> - The description of the feature, e.g. <code>&quot;As a smo\nI want to do smth\nSo that I am smth&quot;</code>.</li>
+					<li><code>{string} language</code> - Tne of the supported <a href="https://github.com/cucumber/cucumber/wiki/Spoken-languages">Gherkin language</a>, default: <code>&quot;en&quot;</code>.</li>
+					<li><code>{Array&lt;Tag&gt;} tags</code> - Tags of the feature.</li>
+					<li><code>{Array&lt;Background|Scenario|ScenarioOutline&gt;} elements</code> - The elements of the feature, i.e. scenario, background or scenario outline.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new Feature(keyword, name, description, language) : Feature</code> - Creates a new <code>Feature</code> object, with the given values.</li>
+					<li><code>{Feature}.toString({FormatConfig}) : string</code> - Converts the feature to string, i.e. formats it.</li>
+					<li><code>{Feature}.clone() : Feature</code> - Clones the feature.</li>
+					<li><code>Feature.parse({Object} object) : Feature</code> - Parses the given <a href="/test/data/base.ast.json#4">Feature object</a> to a <code>Feature</code>.</li>
+				</ul>
+				<h3 id="background"><code>Background</code></h3>
+				<p>Model of a Gherkin Background scenario.</p>
+				<pre><code class="language-gherkin"><span class="hljs-keyword">Background</span>: Some background steps
+  <span class="hljs-keyword">Given</span> this is a given step
+  <span class="hljs-keyword">And</span> this is a given step too
+  <span class="hljs-keyword">When</span> this is a when step
+  <span class="hljs-keyword">And</span> this is a when step too
+  <span class="hljs-keyword">Then</span> it should be a then step
+  <span class="hljs-keyword">And</span> it should be a then step too</code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{string} keyword</code> - The keyword of the background, e.g. <code>&quot;Background&quot;</code>.</li>
+					<li><code>{string} name</code> - The name of the background, e.g. <code>&quot;Some background steps&quot;</code>.</li>
+					<li><code>{string} description</code> - The description of the background.</li>
+					<li><code>{Array&lt;Step&gt;} steps</code> - The steps of the background.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new Background(keyword, name, description) : Background</code> - Creates a new <code>Background</code> object, with the given values.</li>
+					<li><code>{Background}.useNormalStepKeywords()</code> - Sets the keywords of all step to normal keywords, i.e. <code>Given</code>, <code>When</code>, <code>Then</code>.</li>
+					<li><code>{Background}.useReadableStepKeywords()</code> - Sets the keywords of steps to more readable ones, if applicable, i.e. replaces multiple normal keywords with <code>And</code> keyword.</li>
+					<li><code>{Background}.toString({FormatConfig}) : string</code> - Converts the background to string, i.e. formats it.</li>
+					<li><code>{Background}.clone() : Background</code> - Clones the background.</li>
+					<li><code>Background.parse({Object} object) : Background</code> - Parses the given <a href="/test/data/base.ast.json#33">Background object</a> to a <code>Background</code>.</li>
+				</ul>
+				<h3 id="scenario"><code>Scenario</code></h3>
+				<p>Model of a Gherkin scenario.</p>
+				<pre><code class="language-gherkin"><span class="hljs-meta">@tag2</span> <span class="hljs-meta">@tag3</span>
+<span class="hljs-keyword">Scenario</span>: Name of scenario
+Description of the scenario
+
+  <span class="hljs-keyword">Given</span> this is a given step
+  <span class="hljs-keyword">And</span> this is a given step too</code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{string} keyword</code> - The keyword of the scenario, e.g. <code>&quot;Scenario&quot;</code>.</li>
+					<li><code>{string} name</code> - The name of the scenario, e.g. <code>&quot;Name of scenario&quot;</code>.</li>
+					<li><code>{string} description</code> - The description of the scenario, e.g. <code>&quot;Description of the scenario&quot;</code>.</li>
+					<li><code>{Array&lt;Step&gt;} steps</code> - The steps of the scenario.</li>
+					<li><code>{Array&lt;Tag&gt;} tags</code> - Tags of the scenario.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new Scenario(keyword, name, description) : Scenario</code> - Creates a new <code>Scenario</code> object, with the given values.</li>
+					<li><code>{Scenario}.useNormalStepKeywords()</code> - Sets the keywords of all step to normal keywords, i.e. <code>Given</code>, <code>When</code>, <code>Then</code>.</li>
+					<li><code>{Scenario}.useReadableStepKeywords()</code> - Sets the keywords of steps to more readable ones, if applicable, i.e. replaces multiple normal keywords with <code>And</code> keyword.</li>
+					<li><code>{Scenario}.replace(key, value)</code> - Replaces the given string (key) with the given value in the name, description and steps of the scenario.</li>
+					<li><code>{Scenario}.toString({FormatConfig}) : string</code> - Converts the scenario to string, i.e. formats it.</li>
+					<li><code>{Scenario}.clone() : Scenario</code> - Clones the scenario.</li>
+					<li><code>Scenario.parse({Object} object) : Scenario</code> - Parses the given <a href="/test/data/base.ast.json#98">Scenario object</a> to a <code>Scenario</code>.</li>
+				</ul>
+				<h3 id="scenariooutline"><code>ScenarioOutline</code></h3>
+				<p>Model of a Gherkin Scenario outline.</p>
+				<pre><code class="language-gherkin"><span class="hljs-meta">@tag2</span> <span class="hljs-meta">@tag(3)</span>
+<span class="hljs-keyword">Scenario</span> <span class="hljs-keyword">Outline</span>: Name of outline <span class="hljs-variable">&lt;key&gt;</span>
+  <span class="hljs-keyword">Given</span> this is a given step
+  <span class="hljs-keyword">And</span> this is a given step too
+  <span class="hljs-keyword">When</span> this is a when step <span class="hljs-variable">&lt;key&gt;</span>
+  <span class="hljs-keyword">And</span> this is a when step too
+  <span class="hljs-keyword">Then</span> it should be a then step
+  <span class="hljs-keyword">And</span> it should be a then step too
+
+<span class="hljs-meta">@tagE1</span>
+  <span class="hljs-keyword">Examples</span>: First examples
+    |<span class="hljs-string"> key    </span>|
+    |<span class="hljs-string"> value1 </span>|</code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{string} keyword</code> - The keyword of the scenario outline, e.g. <code>&quot;Scenario Outline&quot;</code>.</li>
+					<li><code>{string} name</code> - The name of the scenario outline, e.g. <code>&quot;Name of outline &lt;key&gt;&quot;</code>.</li>
+					<li><code>{string} description</code> - The description of the scenario outline.</li>
+					<li><code>{Array&lt;Step&gt;} steps</code> - The steps of the scenario outline.</li>
+					<li><code>{Array&lt;Tag&gt;} tags</code> - Tags of the scenario outline.</li>
+					<li><code>{Array&lt;Examples&gt;} examples</code> - Examples of the scenario outline.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new ScenarioOutline(keyword, name, description) : ScenarioOutline</code> - Creates a new <code>ScenarioOutline</code> object, with the given values.</li>
+					<li><code>{ScenarioOutline}.useNormalStepKeywords()</code> - Sets the keywords of all step to normal keywords, i.e. <code>Given</code>, <code>When</code>, <code>Then</code>.</li>
+					<li><code>{ScenarioOutline}.useReadableStepKeywords()</code> - Sets the keywords of steps to more readable ones, if applicable, i.e. replaces multiple normal keywords with <code>And</code> keyword.</li>
+					<li><code>{ScenarioOutline}.toScenario({number} columnToAddAsTag) : Array&lt;Scenario&gt;</code> - Converts the given <code>ScenaioOutline</code> to <code>Scenario</code>s, as it would be expanded in run-time. It also adds a tag to the scenarios, which format is <code>@&lt;nameOfColumn&gt;(&lt;valueOfColumn&gt;)</code>, where the <code>columnToAddAsTag</code>th column of each examples used.</li>
+					<li><code>{ScenarioOutline}.toString({FormatConfig}) : string</code> - Converts the scenario outline to string, i.e. formats it.</li>
+					<li><code>{ScenarioOutline}.clone() : ScenarioOutline</code> - Clones the scenario outline.</li>
+					<li><code>ScenarioOutline.parse({Object} object) : ScenarioOutline</code> - Parses the given <a href="/test/data/base.ast.json#343">ScenarioOutline object</a> to a <code>ScenarioOutline</code>.</li>
+				</ul>
+				<h3 id="examples"><code>Examples</code></h3>
+				<p>Model of a Gherkin Scenario outline Examples table.</p>
+				<pre><code class="language-gherkin"><span class="hljs-meta">@tagE1</span>
+  <span class="hljs-keyword">Examples</span>: First examples
+    |<span class="hljs-string"> key    </span>|
+    |<span class="hljs-string"> value1 </span>|</code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{string} keyword</code> - The keyword of the examples table, e.g. <code>&quot;Examples&quot;</code>.</li>
+					<li><code>{string} name</code> - The name of the examples table, e.g. <code>&quot;First examples&quot;</code>.</li>
+					<li><code>{Array&lt;Tag&gt;} tags</code> - Tags of the examples table.</li>
+					<li><code>{TableRow} header</code> - The header row of the examples table, with column name(s).</li>
+					<li><code>{Array&lt;TableRow&gt;} body</code> - The data rows of the examples table.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new Examples(keyword, name, description) : Examples</code> - Creates a new <code>Examples</code> object, with the given values.</li>
+					<li><code>{Examples}.toString({FormatConfig}) : string</code> - Converts the examples table to string, i.e. formats it.</li>
+					<li><code>{Examples}.clone() : Examples</code> - Clones the examples table.</li>
+					<li><code>Examples.parse({Object} object) : Examples</code> - Parses the given <a href="/test/data/base.ast.json#426">Examples object</a> to an <code>Examples</code>.</li>
+				</ul>
+				<h3 id="step"><code>Step</code></h3>
+				<p>Model of a Gherkin step.</p>
+				<pre><code class="language-gherkin"><span class="hljs-keyword">Given</span> this is a given step
+<span class="hljs-keyword">And</span> this is a given step too</code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{string} keyword</code> - The keyword of the step, e.g. <code>&quot;Given&quot;</code>.</li>
+					<li><code>{string} text</code> - The text of the step, e.g. <code>&quot;this is a given step&quot;</code>.</li>
+					<li><code>{DocString|DataTable} argument</code> - The argument of the step if there is any. It could be a <code>DocString</code> or a <code>DataTable</code>.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new Step(keyword, text) : Step</code> - Creates a new <code>Step</code> object, with the given values.</li>
+					<li><code>{Step}.replace(key, value)</code> - Replaces the given string (key) with the given value in the text of the step.</li>
+					<li><code>{Step}.toString({FormatConfig}) : string</code> - Converts the step to string, i.e. formats it.</li>
+					<li><code>{Step}.clone() : Step</code> - Clones the step.</li>
+					<li><code>Step.parse({Object} object) : Step</code> - Parses the given <a href="/test/data/base.ast.json#43">Step object</a> to a <code>Step</code>.</li>
+				</ul>
+				<h3 id="tag"><code>Tag</code></h3>
+				<p>Model of a Gherkin tag (annotation).</p>
+				<pre><code class="language-gherkin"><span class="hljs-meta">@tag(1)</span></code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{string} value</code> - The tag itself, e.g. <code>&quot;@tag(1)&quot;</code>.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new Tag(value) : Tag</code> - Creates a new <code>Tag</code> object, with the given values. The <code>value</code> will be processed and white spaces will be replaced.</li>
+					<li><code>{Tag}.toString() : string</code> - Converts the tag to string, i.e. formats it.</li>
+					<li><code>{Tag}.clone() : Tag</code> - Clones the tag.</li>
+					<li><code>Tag.parse({Object} object) : Tag</code> - Parses the given <a href="/test/data/base.ast.json#7">Tag object</a> to a <code>Tag</code>.</li>
+				</ul>
+				<h3 id="docstring"><code>DocString</code></h3>
+				<p>Model of a Gherkin DocString step argument.</p>
+				<pre><code class="language-gherkin"><span class="hljs-keyword">And</span> this is a when step with doc string
+  <span class="hljs-string">"""
+  Hello world
+  Hello World
+  hello World
+  hello world
+  """</span></code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{string} content</code> - The content of the docString, e.g. <code>&quot;Hello world\nHello World...&quot;</code>.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new DocString(value) : DocString</code> - Creates a new <code>DocString</code> object, with the given values.</li>
+					<li><code>{DocString}.replace(key, value)</code> - Replaces the given string (key) with the given value in the content of the DocString.</li>
+					<li><code>{DocString}.toString({FormatConfig}) : string</code> - Converts the docString to string, i.e. formats it.</li>
+					<li><code>{DocString}.clone() : DocString</code> - Clones the docString.</li>
+					<li><code>DocString.parse({Object} object) : DocString</code> - Parses the given <a href="/test/data/base.ast.json#314">DocString object</a> to a <code>DocString</code>.</li>
+				</ul>
+				<h3 id="datatable"><code>DataTable</code></h3>
+				<p>Model of a Gherkin DataTable step argument.</p>
+				<pre><code class="language-gherkin"><span class="hljs-keyword">And</span> this is a when step with data table too
+  |<span class="hljs-string"> col1 </span>|<span class="hljs-string"> col2 </span>|
+  |<span class="hljs-string"> val1 </span>|<span class="hljs-string"> val2 </span>|
+  |<span class="hljs-string"> val3 </span>|<span class="hljs-string"> val4 </span>|</code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{Array&lt;TableRow&gt;} rows</code> - The rows of the data table.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new DataTable(rows) : DataTable</code> - Creates a new <code>DataTable</code> object, with the given values.</li>
+					<li><code>{DataTable}.replace(key, value)</code> - Replaces the given string (key) with the given value in the cells of the data table.</li>
+					<li><code>{DataTable}.toString({FormatConfig}) : string</code> - Converts the data table to string, i.e. formats it.</li>
+					<li><code>{DataTable}.clone() : DataTable</code> - Clones the data table.</li>
+					<li><code>DataTable.parse({Object} object) : DataTable</code> - Parses the given <a href="/test/data/base.ast.json#221">DataTable object</a> to a <code>DataTable</code>.</li>
+				</ul>
+				<h3 id="tablerow"><code>TableRow</code></h3>
+				<p>Model of a row in Gherkin DataTable or Examples.</p>
+				<pre><code class="language-gherkin"><span class="hljs-keyword">And</span> this is a when step with data table too
+  |<span class="hljs-string"> col1 </span>|<span class="hljs-string"> col2 </span>|
+  |<span class="hljs-string"> val1 </span>|<span class="hljs-string"> val2 </span>|
+  |<span class="hljs-string"> val3 </span>|<span class="hljs-string"> val4 </span>|</code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{Array&lt;TableCell&gt;} cells</code> - The cells of the table row.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new TableRow(cells) : TableRow</code> - Creates a new <code>TableRow</code> object, with the given values.</li>
+					<li><code>{TableRow}.replace(key, value)</code> - Replaces the given string (key) with the given value in the cells of the table row.</li>
+					<li><code>{TableRow}.toString({FormatConfig}) : string</code> - Converts the table row to string, i.e. formats it.</li>
+					<li><code>{TableRow}.clone() : TableRow</code> - Clones the table row.</li>
+					<li><code>TableRow.parse({Object} object) : TableRow</code> - Parses the given <a href="/test/data/base.ast.json#228">TableRow object</a> to a <code>TableRow</code>.</li>
+				</ul>
+				<h3 id="tablecell"><code>TableCell</code></h3>
+				<p>Model of a cell in a Gherkin TableRow.</p>
+				<pre><code class="language-gherkin"><span class="hljs-keyword">And</span> this is a when step with data table too
+  |<span class="hljs-string"> col1 </span>|<span class="hljs-string"> col2 </span>|
+  |<span class="hljs-string"> val1 </span>|<span class="hljs-string"> val2 </span>|
+  |<span class="hljs-string"> val3 </span>|<span class="hljs-string"> val4 </span>|</code></pre>
+				<h4 id="fields">Fields</h4>
+				<ul>
+					<li><code>{string} value</code> - The value of the cell, e.g. <code>&quot;col1&quot;</code>.</li>
+				</ul>
+				<h4 id="methods">Methods</h4>
+				<ul>
+					<li><code>new TableCell(value) : TableCell</code> - Creates a new <code>TableCell</code> object, with the given values.</li>
+					<li><code>{TableCell}.replace(key, value)</code> - Replaces the given string (key) with the given value in the value of the table cell.</li>
+					<li><code>{TableCell}.toString() : string</code> - Converts the table cell to string, i.e. formats it.</li>
+					<li><code>{TableCell}.clone() : TableCell</code> - Clones the table cell.</li>
+					<li><code>TableCell.parse({Object} object) : TableCell</code> - Parses the given <a href="/test/data/base.ast.json#235">TableCell object</a> to a <code>TableCell</code>.</li>
+				</ul>
+				<h3 id="formatconfig"><code>FormatConfig</code></h3>
+				<p>By passing an <code>FormatConfig</code> object to format method (or other Ast type methods where it&#39;s applicable) it can be set, how feature file text is rendered.</p>
+				<table>
+					<thead>
+						<tr>
+							<th align="left">Option</th>
+							<th align="left">Description</th>
+							<th align="left">Default</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td align="left"><code>oneTagPerLine</code></td>
+							<td align="left">Should tags rendered separately, one by line?</td>
+							<td align="left"><code>false</code>, i.e. all tag of a scenario, feature, etc will be rendered in the same line</td>
+						</tr>
+						<tr>
+							<td align="left"><code>separateStepGroups</code></td>
+							<td align="left">Should step groups (when-then) be separated?</td>
+							<td align="left"><code>false</code></td>
+						</tr>
+						<tr>
+							<td align="left"><code>compact</code></td>
+							<td align="left">Should empty lines be skipped, removed from the result?</td>
+							<td align="left"><code>false</code>, i.e. there will be empty lines in appropriate places</td>
+						</tr>
+						<tr>
+							<td align="left"><code>lineBreak</code></td>
+							<td align="left">The line break character(s).</td>
+							<td align="left"><code>\n</code>, i.e. it uses Unix line break, to set Windows style, set <code>\r\n</code></td>
+						</tr>
+						<tr>
+							<td align="left"><code>indentation</code></td>
+							<td align="left">The indentation character(s).</td>
+							<td align="left"><code>&#39;  &#39;</code>, i.e. it uses two space character to add indentation where it&#39;s appropriate</td>
+						</tr>
+				</tbody></table>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_background_.html">"ast/background"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_datatable_.html">"ast/data<wbr>Table"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_docstring_.html">"ast/doc<wbr>String"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_element_.html">"ast/element"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_examples_.html">"ast/examples"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_feature_.html">"ast/feature"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_gherkindocument_.html">"ast/gherkin<wbr>Document"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_scenario_.html">"ast/scenario"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_scenariooutline_.html">"ast/scenario<wbr>Outline"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_step_.html">"ast/step"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_tablecell_.html">"ast/table<wbr>Cell"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_tablerow_.html">"ast/table<wbr>Row"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ast_tag_.html">"ast/tag"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_common_.html">"common"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_gherkinobject_.html">"gherkin<wbr>Object"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
