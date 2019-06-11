@@ -36,6 +36,7 @@ describe("Examples", () => {
 
         beforeEach(() => {
             jest.spyOn(common, "cloneArray");
+            jest.spyOn(example.header, "clone").mockReturnValue({cells: []} as TableRow);
             clonedExample = example.clone();
         });
 
@@ -47,9 +48,8 @@ describe("Examples", () => {
         });
 
         test("should clone header", () => {
-            expect(common.cloneArray).toHaveBeenCalledWith(example.header.cells);
-            expect(clonedExample.header).toEqual(example.header);
-            expect(clonedExample.header).not.toBe(example.header);
+            expect(example.header.clone).toHaveBeenCalled();
+            expect(clonedExample.header).toEqual({cells: []} as TableRow);
         });
 
         test("should clone tags", () => {

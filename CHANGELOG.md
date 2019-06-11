@@ -1,5 +1,16 @@
 # Changelog
 
+## TODO
+
+- Laci: Update README
+- Laci: DOCS to Wiki
+- Sanyi: E2E test
+- Juci: Doksi comments
+
+## 2.0.0 - ???
+
+- TBD
+
 ## 1.1.0 - 2018-04-12
 
 ### Added

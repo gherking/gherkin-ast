@@ -3,6 +3,9 @@ import { GherkinExamples } from "../gherkinObject";
 import { TableRow } from "./tableRow";
 import { Tag } from "./tag";
 
+/**
+ * Model for Examples table
+ */
 export class Examples {
     public static parse(obj?: GherkinExamples): Examples {
         if (!obj || !Array.isArray(obj.tableBody)) {
@@ -21,7 +24,9 @@ export class Examples {
         return examples;
     }
 
+    /** Keyword of the examples table */
     public keyword: string;
+    /** Name of the examples table */
     public name: string;
     public tags: Tag[];
     public header: TableRow;
