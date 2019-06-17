@@ -3,6 +3,9 @@ import ObjectSet = require("object-set-type");
 import { replaceAll, safeString } from "../common";
 import { GherkinTag } from "../gherkinObject";
 
+/**
+ * Model for Tag
+ */
 export class Tag {
     public static parse(obj?: GherkinTag): Tag {
         if (!obj || !obj.name) {

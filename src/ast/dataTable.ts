@@ -2,6 +2,9 @@ import { cloneArray, replaceArray } from "../common";
 import { GherkinDataTable } from "../gherkinObject";
 import { TableRow } from "./tableRow";
 
+/**
+ * Model for DataTable
+ */
 export class DataTable {
     public static parse(obj: GherkinDataTable): DataTable {
         if (!obj || !Array.isArray(obj.rows)) {

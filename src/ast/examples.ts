@@ -28,8 +28,11 @@ export class Examples {
     public keyword: string;
     /** Name of the examples table */
     public name: string;
+    /** Tags of the examples table */
     public tags: Tag[];
+    /** Header of the examples table */
     public header: TableRow;
+    /** Body of the examples table */
     public body: TableRow[];
 
     constructor(keyword: string, name: string) {

@@ -5,6 +5,9 @@ import { DocString } from "./docString";
 
 export type Argument = DataTable | DocString;
 
+/**
+ * Model for Step
+ */
 export class Step {
     public static parse(obj: GherkinStep): Step {
         if (!obj || !obj.text) {
@@ -21,9 +24,13 @@ export class Step {
         return step;
     }
 
+    /** Keyword of the Step */
     public keyword: string;
+    /** Text of the Step */
     public text: string;
+    /** CDataTable of the Step */
     public dataTable: DataTable;
+    /** DocString of the Step */
     public docString: DocString;
 
     constructor(keyword: string, text: string) {

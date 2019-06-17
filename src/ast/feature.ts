@@ -6,6 +6,9 @@ import { Scenario } from "./scenario";
 import { ScenarioOutline } from "./scenarioOutline";
 import { Tag } from "./tag";
 
+/**
+ * Model for Feature
+ */
 export class Feature {
     public static parse(obj?: GherkinFeature): Feature {
         if (!obj || !Array.isArray(obj.children)) {
@@ -30,11 +33,17 @@ export class Feature {
         return feature;
     }
 
+    /** Language of the Feature */
     public language: string;
+    /** Keyword of the Feature */
     public keyword: string;
+    /** Name of the Feature */
     public name: string;
+    /** Descrition of the Feature */
     public description: string;
+    /** Elements of the Feature */
     public elements: Element[];
+    /** Tags of the Feature */
     public tags: Tag[];
 
     constructor(keyword: string, name: string, description: string, language: string = "en") {

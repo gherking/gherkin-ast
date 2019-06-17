@@ -1,6 +1,9 @@
 import { GherkinDocument } from "../gherkinObject";
 import { Feature } from "./feature";
 
+/**
+ * Model for Document
+ */
 export class Document {
     public static parse(obj?: GherkinDocument) {
         if (!obj || !obj.gherkinDocument) {

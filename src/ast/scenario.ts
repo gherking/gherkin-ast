@@ -4,6 +4,9 @@ import { Element } from "./element";
 import { Step } from "./step";
 import { Tag } from "./tag";
 
+/**
+ * Model for Scenario
+ */
 export class Scenario extends Element {
     public static parse(obj?: GherkinScenario): Scenario {
         if (!obj || !obj.scenario || obj.scenario.examples) {
@@ -24,6 +27,7 @@ export class Scenario extends Element {
         return scenario;
     }
 
+    /** CTags of the Scenario */
     public tags: Tag[];
 
     constructor(keyword: string, name: string, description: string) {

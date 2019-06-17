@@ -2,6 +2,9 @@ import { cloneArray, replaceArray } from "../common";
 import { GherkinTableRow } from "../gherkinObject";
 import { TableCell } from "./tableCell";
 
+/**
+ * Model for TableRow
+ */
 export class TableRow {
     public static parse(obj?: GherkinTableRow): TableRow {
         if (!obj || !Array.isArray(obj.cells)) {

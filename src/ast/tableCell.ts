@@ -1,6 +1,9 @@
 import { replaceAll } from "../common";
 import { GherkinTableCell } from "../gherkinObject";
 
+/**
+ * Model for TableCell
+ */
 export class TableCell {
     public static parse(obj: GherkinTableCell): TableCell {
         if (!obj || !obj.value) {

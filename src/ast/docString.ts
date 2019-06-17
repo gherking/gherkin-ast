@@ -1,6 +1,9 @@
 import { normalizeString, replaceAll } from "../common";
 import { GherkinDocString } from "../gherkinObject";
 
+/**
+ * Model for DocString
+ */
 export class DocString {
     public static parse(obj: GherkinDocString): DocString {
         if (!obj || !obj.content) {
@@ -8,8 +11,9 @@ export class DocString {
         }
         return new DocString(obj.content, obj.delimiter);
     }
-
+    /** Content of the DocString */
     public content: string;
+    /** Delimiter of the DocString */
     public delimiter: string;
 
     constructor(content: string, delimiter: string = "\"\"\"") {
