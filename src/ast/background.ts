@@ -3,6 +3,9 @@ import { GherkinBackground } from "../gherkinObject";
 import { Element } from "./element";
 import { Step } from "./step";
 
+/**
+ * Model for Background
+ */
 export class Background extends Element {
     public static parse(obj?: GherkinBackground): Background {
         if (!obj || !obj.background) {

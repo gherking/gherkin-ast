@@ -3,10 +3,17 @@ import { Step } from "./step";
 
 export const REPEAT_STEP_KEYWORDS: string[] = ["And", "But", "*"];
 
+/**
+ * Model for Element
+ */
 export class Element {
+    /** Keyword of the Element */
     public keyword: string;
+    /** Name of the Element */
     public name: string;
+    /** Description of the Element */
     public description: string;
+    /** Steps of the Element */
     public steps: Step[];
 
     constructor(keyword: string, name: string, description: string) {

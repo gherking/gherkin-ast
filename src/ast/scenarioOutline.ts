@@ -8,6 +8,9 @@ import { TableCell } from "./tableCell";
 import { TableRow } from "./tableRow";
 import { removeDuplicateTags, Tag, tag } from "./tag";
 
+/**
+ * Model for ScenarioOutline
+ */
 export class ScenarioOutline extends Element {
     public static parse(obj?: GherkinScenario): ScenarioOutline {
         if (!obj || !obj.scenario || !Array.isArray(obj.scenario.examples)) {
@@ -30,8 +33,9 @@ export class ScenarioOutline extends Element {
         scenarioOutline.examples = examples.map(Examples.parse);
         return scenarioOutline;
     }
-
+    /** Zags of the ScenarioOutline */
     public tags: Tag[];
+    /** Examples of the ScenarioOutline */
     public examples: Examples[];
 
     constructor(keyword: string, name: string, description: string) {
