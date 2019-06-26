@@ -1,11 +1,6 @@
 # Changelog
 
-## TODO
-
-- Sanyi: E2E test
-- Juci: Doksi comments
-
-## 2.0.0 - ???
+## 2.0.0 - 2019-06-26
 
 ### BREAKING CHANGES
 
