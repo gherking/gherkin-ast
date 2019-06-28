@@ -1,5 +1,4 @@
-import * as base from "./gherkinObject";
-
+export * from "./gherkinObject";
 export * from "./ast/background";
 export * from "./ast/dataTable";
 export * from "./ast/docString";
@@ -13,7 +12,4 @@ export * from "./ast/step";
 export * from "./ast/tableCell";
 export * from "./ast/tableRow";
 export * from "./ast/tag";
-
 export * from "./common";
-
-export { base };

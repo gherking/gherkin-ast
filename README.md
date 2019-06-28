@@ -22,3 +22,5 @@ feature.elements.push(new Scenario("Scenario", "Opening a document"));
 ```
 
 For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/gherkin-ast/).
+
+**NOTE** `parse` functions only support AST provided by the parser of `gherkin@6`.
