@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>gherkin-ast</title>
+	<title>GherkinBackground | gherkin-ast</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">gherkin-ast</a>
+					<a href="../index.html" class="title">gherkin-ast</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -53,150 +53,200 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="gherkinbackground.html">GherkinBackground</a>
 				</li>
 			</ul>
-			<h1> gherkin-ast</h1>
+			<h1>Interface GherkinBackground</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<h1 id="gherkin-ast">gherkin-ast</h1>
-				<p><a href="https://travis-ci.org/gherking/gherkin-ast"><img src="https://travis-ci.org/gherking/gherkin-ast.svg?branch=master" alt="Build Status"></a> <a href="https://david-dm.org/gherking/gherkin-ast"><img src="https://david-dm.org/gherking/gherkin-ast.svg" alt="dependency Status"></a> <a href="https://david-dm.org/gherking/gherkin-ast#info=devDependencies"><img src="https://david-dm.org/gherking/gherkin-ast/dev-status.svg" alt="devDependency Status"></a></p>
-				<p>Models for Gherkin feature files</p>
-				<h2 id="ast">AST</h2>
-				<p>The API provides types to be able to handle different parts of Gherkin feature files.</p>
-				<p>In TypeScript:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {Feature, Scenario <span class="hljs-comment">/*, Background, ... */</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">"gherkin-ast"</span>;</code></pre>
-				<p>OR in JavaScript:</p>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> {Feature, Scenario <span class="hljs-comment">/*, Background, ... */</span>} = <span class="hljs-built_in">require</span>(<span class="hljs-string">"gherkin-ast"</span>);
-<span class="hljs-keyword">const</span> feature = <span class="hljs-keyword">new</span> Feature(<span class="hljs-string">"Feature"</span>, <span class="hljs-string">"Displaying documents"</span>);
-feature.elements.push(<span class="hljs-keyword">new</span> Scenario(<span class="hljs-string">"Scenario"</span>, <span class="hljs-string">"Opening a document"</span>));
-<span class="hljs-comment">// ...</span></code></pre>
-				<p>For detailed documentation see the <a href="https://gherking.github.io/gherkin-ast/">TypeDocs documentation</a>.</p>
-				<p><strong>NOTE</strong> <code>parse</code> functions only support AST provided by the parser of <code>gherkin@6</code>.</p>
-			</div>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">GherkinBackground</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="gherkinbackground.html#background" class="tsd-kind-icon">background</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="background" class="tsd-anchor"></a>
+					<h3>background</h3>
+					<div class="tsd-signature tsd-kind-icon">background<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/06943b8/src/gherkinObject.ts#L19">gherkinObject.ts:19</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>description<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>keyword<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>location<span class="tsd-signature-symbol">: </span><a href="gherkinlocation.html" class="tsd-signature-type">GherkinLocation</a></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5>steps<span class="tsd-signature-symbol">: </span><a href="gherkinstep.html" class="tsd-signature-type">GherkinStep</a><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="classes/background.html" class="tsd-kind-icon">Background</a>
+						<a href="../classes/background.html" class="tsd-kind-icon">Background</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/datatable.html" class="tsd-kind-icon">Data<wbr>Table</a>
+						<a href="../classes/datatable.html" class="tsd-kind-icon">Data<wbr>Table</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/docstring.html" class="tsd-kind-icon">Doc<wbr>String</a>
+						<a href="../classes/docstring.html" class="tsd-kind-icon">Doc<wbr>String</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/document.html" class="tsd-kind-icon">Document</a>
+						<a href="../classes/document.html" class="tsd-kind-icon">Document</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/element.html" class="tsd-kind-icon">Element</a>
+						<a href="../classes/element.html" class="tsd-kind-icon">Element</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/examples.html" class="tsd-kind-icon">Examples</a>
+						<a href="../classes/examples.html" class="tsd-kind-icon">Examples</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/feature.html" class="tsd-kind-icon">Feature</a>
+						<a href="../classes/feature.html" class="tsd-kind-icon">Feature</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/scenario.html" class="tsd-kind-icon">Scenario</a>
+						<a href="../classes/scenario.html" class="tsd-kind-icon">Scenario</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/scenariooutline.html" class="tsd-kind-icon">Scenario<wbr>Outline</a>
+						<a href="../classes/scenariooutline.html" class="tsd-kind-icon">Scenario<wbr>Outline</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/step.html" class="tsd-kind-icon">Step</a>
+						<a href="../classes/step.html" class="tsd-kind-icon">Step</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/tablecell.html" class="tsd-kind-icon">Table<wbr>Cell</a>
+						<a href="../classes/tablecell.html" class="tsd-kind-icon">Table<wbr>Cell</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/tablerow.html" class="tsd-kind-icon">Table<wbr>Row</a>
+						<a href="../classes/tablerow.html" class="tsd-kind-icon">Table<wbr>Row</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/tag.html" class="tsd-kind-icon">Tag</a>
+						<a href="../classes/tag.html" class="tsd-kind-icon">Tag</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-has-type-parameter tsd-is-not-exported">
-						<a href="interfaces/clonable.html" class="tsd-kind-icon">Clonable</a>
+						<a href="clonable.html" class="tsd-kind-icon">Clonable</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="gherkinbackground.html" class="tsd-kind-icon">Gherkin<wbr>Background</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="gherkinbackground.html#background" class="tsd-kind-icon">background</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface">
+						<a href="gherkindatatable.html" class="tsd-kind-icon">Gherkin<wbr>Data<wbr>Table</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkinbackground.html" class="tsd-kind-icon">Gherkin<wbr>Background</a>
+						<a href="gherkindocstring.html" class="tsd-kind-icon">Gherkin<wbr>Doc<wbr>String</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkindatatable.html" class="tsd-kind-icon">Gherkin<wbr>Data<wbr>Table</a>
+						<a href="gherkindocument.html" class="tsd-kind-icon">Gherkin<wbr>Document</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkindocstring.html" class="tsd-kind-icon">Gherkin<wbr>Doc<wbr>String</a>
+						<a href="gherkinexamples.html" class="tsd-kind-icon">Gherkin<wbr>Examples</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkindocument.html" class="tsd-kind-icon">Gherkin<wbr>Document</a>
+						<a href="gherkinfeature.html" class="tsd-kind-icon">Gherkin<wbr>Feature</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkinexamples.html" class="tsd-kind-icon">Gherkin<wbr>Examples</a>
+						<a href="gherkinlocation.html" class="tsd-kind-icon">Gherkin<wbr>Location</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkinfeature.html" class="tsd-kind-icon">Gherkin<wbr>Feature</a>
+						<a href="gherkinscenario.html" class="tsd-kind-icon">Gherkin<wbr>Scenario</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkinlocation.html" class="tsd-kind-icon">Gherkin<wbr>Location</a>
+						<a href="gherkinstep.html" class="tsd-kind-icon">Gherkin<wbr>Step</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkinscenario.html" class="tsd-kind-icon">Gherkin<wbr>Scenario</a>
+						<a href="gherkintablecell.html" class="tsd-kind-icon">Gherkin<wbr>Table<wbr>Cell</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkinstep.html" class="tsd-kind-icon">Gherkin<wbr>Step</a>
+						<a href="gherkintablerow.html" class="tsd-kind-icon">Gherkin<wbr>Table<wbr>Row</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkintablecell.html" class="tsd-kind-icon">Gherkin<wbr>Table<wbr>Cell</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkintablerow.html" class="tsd-kind-icon">Gherkin<wbr>Table<wbr>Row</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/gherkintag.html" class="tsd-kind-icon">Gherkin<wbr>Tag</a>
+						<a href="gherkintag.html" class="tsd-kind-icon">Gherkin<wbr>Tag</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-is-not-exported">
-						<a href="interfaces/replacable.html" class="tsd-kind-icon">Replacable</a>
+						<a href="replacable.html" class="tsd-kind-icon">Replacable</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#argument" class="tsd-kind-icon">Argument</a>
+						<a href="../globals.html#argument" class="tsd-kind-icon">Argument</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#repeat_step_keywords" class="tsd-kind-icon">REPEAT_<wbr>STEP_<wbr>KEYWORDS</a>
+						<a href="../globals.html#repeat_step_keywords" class="tsd-kind-icon">REPEAT_<wbr>STEP_<wbr>KEYWORDS</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#clonearray" class="tsd-kind-icon">clone<wbr>Array</a>
+						<a href="../globals.html#clonearray" class="tsd-kind-icon">clone<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#normalizestring" class="tsd-kind-icon">normalize<wbr>String</a>
+						<a href="../globals.html#normalizestring" class="tsd-kind-icon">normalize<wbr>String</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#removeduplicatetags" class="tsd-kind-icon">remove<wbr>Duplicate<wbr>Tags</a>
+						<a href="../globals.html#removeduplicatetags" class="tsd-kind-icon">remove<wbr>Duplicate<wbr>Tags</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#replaceall" class="tsd-kind-icon">replace<wbr>All</a>
+						<a href="../globals.html#replaceall" class="tsd-kind-icon">replace<wbr>All</a>
 					</li>
 					<li class=" tsd-kind-function tsd-has-type-parameter">
-						<a href="globals.html#replacearray" class="tsd-kind-icon">replace<wbr>Array</a>
+						<a href="../globals.html#replacearray" class="tsd-kind-icon">replace<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#safestring" class="tsd-kind-icon">safe<wbr>String</a>
+						<a href="../globals.html#safestring" class="tsd-kind-icon">safe<wbr>String</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#tag" class="tsd-kind-icon">tag</a>
+						<a href="../globals.html#tag" class="tsd-kind-icon">tag</a>
 					</li>
 				</ul>
 			</nav>
@@ -266,7 +316,7 @@ feature.elements.push(<span class="hljs-keyword">new</span> Scenario(<span class
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
