@@ -4,6 +4,10 @@ node_js:
 notifications:
   email: false
 
+stages:
+  - test
+  - pages
+  - release
 jobs:
   include:
     - stage: test
