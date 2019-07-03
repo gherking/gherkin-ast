@@ -3,7 +3,7 @@ node_js:
 - lts/*
 notifications:
   email: false
-
+cache: yarn
 stages:
   - test
   - pages
