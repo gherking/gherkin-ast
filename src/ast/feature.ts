@@ -1,7 +1,8 @@
 import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common";
-import { GherkinBackground, GherkinFeature, GherkinScenario } from "../gherkinObject";
+import { GherkinBackground, GherkinFeature, GherkinRule, GherkinScenario } from "../gherkinObject";
 import { Background } from "./background";
 import { Element } from "./element";
+import { Rule } from "./rule";
 import { Scenario } from "./scenario";
 import { ScenarioOutline } from "./scenarioOutline";
 import { Tag } from "./tag";
@@ -21,7 +22,10 @@ export class Feature {
         } else {
             feature.tags = [];
         }
-        feature.elements = children.map((child: GherkinBackground | GherkinScenario): Element => {
+        feature.elements = children.map((child: GherkinRule | GherkinBackground | GherkinScenario): Element | Rule => {
+            if ((child as GherkinRule).rule) {
+                return Rule.parse(child as GherkinRule);
+            }
             if ((child as GherkinBackground).background) {
                 return Background.parse(child as GherkinBackground);
             }
@@ -36,13 +40,13 @@ export class Feature {
     /** Language of the Feature */
     public language: string;
     /** Keyword of the Feature */
-    public keyword: string;
+    public keyword: "Feature" | "Business Need" | "Ability" | string;
     /** Name of the Feature */
     public name: string;
     /** Descrition of the Feature */
     public description: string;
     /** Elements of the Feature */
-    public elements: Element[];
+    public elements: Array<Element | Rule>;
     /** Tags of the Feature */
     public tags: Tag[];
 
@@ -61,7 +65,7 @@ export class Feature {
             this.description, this.language,
         );
         feature.tags = cloneArray<Tag>(this.tags);
-        feature.elements = cloneArray<Element>(this.elements);
+        feature.elements = cloneArray<Element | Rule>(this.elements);
         return feature;
     }
 
@@ -69,6 +73,6 @@ export class Feature {
         this.name = replaceAll(this.name, key, value);
         this.description = replaceAll(this.description, key, value);
         replaceArray<Tag>(this.tags, key, value);
-        replaceArray<Element>(this.elements, key, value);
+        replaceArray<Element | Rule>(this.elements, key, value);
     }
 }

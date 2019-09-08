@@ -6,6 +6,7 @@ export * from "./ast/element";
 export * from "./ast/examples";
 export * from "./ast/feature";
 export * from "./ast/gherkinDocument";
+export * from "./ast/rule";
 export * from "./ast/scenario";
 export * from "./ast/scenarioOutline";
 export * from "./ast/step";

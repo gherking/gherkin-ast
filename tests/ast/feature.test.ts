@@ -1,4 +1,4 @@
-import { Background, Feature, Scenario, ScenarioOutline, Tag } from "../../src";
+import { Background, Feature, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinFeature, GherkinTag } from "../../src/gherkinObject";
 
@@ -106,6 +106,32 @@ describe("Feature", () => {
             expect(feature.tags).toHaveLength(1);
             expect(Tag.parse).toHaveBeenCalledTimes(1);
             expect(Tag.parse).toHaveBeenCalledWith(obj.tags[0], expect.any(Number), expect.any(Array));
+        });
+
+        test("should parse GherkingRule children", () => {
+            const obj: GherkinFeature = {
+                children: [
+                    {
+                        rule: {
+                            name: "N",
+                            keyword: "R",
+                            description: "D",
+                            children: [],
+                        },
+                    },
+                ],
+                description: "D",
+                keyword: "F",
+                name: "N",
+                language: "HU",
+                tags: [],
+            } as GherkinFeature;
+            jest.spyOn(Rule, "parse");
+            const feature: Feature = Feature.parse(obj);
+            expect(feature).toBeDefined();
+            expect(feature.elements).toHaveLength(1);
+            expect(Rule.parse).toHaveBeenCalledTimes(1);
+            expect(Rule.parse).toHaveBeenCalledWith(obj.children[0]);
         });
 
         test("should parse GherkinBackground children", () => {
