@@ -90,7 +90,7 @@ describe("Rule", () => {
                     description: "D",
                     keyword: "R",
                     name: "N",
-                }
+                },
             } as GherkinRule;
             jest.spyOn(Background, "parse");
             const rule: Rule = Rule.parse(obj);
@@ -115,7 +115,7 @@ describe("Rule", () => {
                     description: "D",
                     keyword: "R",
                     name: "N",
-                }
+                },
             } as GherkinRule;
             jest.spyOn(Scenario, "parse");
             const rule: Rule = Rule.parse(obj);
