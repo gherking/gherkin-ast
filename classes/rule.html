@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DataTable | gherkin-ast</title>
+	<title>Rule | gherkin-ast</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="datatable.html">DataTable</a>
+					<a href="rule.html">Rule</a>
 				</li>
 			</ul>
-			<h1>Class DataTable</h1>
+			<h1>Class Rule</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Model for DataTable</p>
+						<p>Model for Rule</p>
 					</div>
 				</div>
 			</section>
@@ -77,7 +77,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">DataTable</span>
+						<span class="target">Rule</span>
 					</li>
 				</ul>
 			</section>
@@ -88,21 +88,24 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="datatable.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="rule.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="datatable.html#rows" class="tsd-kind-icon">rows</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rule.html#description" class="tsd-kind-icon">description</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rule.html#elements" class="tsd-kind-icon">elements</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rule.html#keyword" class="tsd-kind-icon">keyword</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="rule.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="datatable.html#clone" class="tsd-kind-icon">clone</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="datatable.html#replace" class="tsd-kind-icon">replace</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="datatable.html#parse" class="tsd-kind-icon">parse</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rule.html#clone" class="tsd-kind-icon">clone</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="rule.html#replace" class="tsd-kind-icon">replace</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="rule.html#parse" class="tsd-kind-icon">parse</a></li>
 							</ul>
 						</section>
 					</div>
@@ -114,22 +117,28 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Data<wbr>Table<span class="tsd-signature-symbol">(</span>rows<span class="tsd-signature-symbol">?: </span><a href="tablerow.html" class="tsd-signature-type">TableRow</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="datatable.html" class="tsd-signature-type">DataTable</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Rule<span class="tsd-signature-symbol">(</span>keyword<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, description<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rule.html" class="tsd-signature-type">Rule</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/dataTable.ts#L16">ast/dataTable.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/rule.ts#L37">ast/rule.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> rows: <a href="tablerow.html" class="tsd-signature-type">TableRow</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
+									<h5>keyword: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>name: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>description: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="datatable.html" class="tsd-signature-type">DataTable</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="rule.html" class="tsd-signature-type">Rule</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -137,14 +146,64 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="rows" class="tsd-anchor"></a>
-					<h3>rows</h3>
-					<div class="tsd-signature tsd-kind-icon">rows<span class="tsd-signature-symbol">:</span> <a href="tablerow.html" class="tsd-signature-type">TableRow</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="description" class="tsd-anchor"></a>
+					<h3>description</h3>
+					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/dataTable.ts#L18">ast/dataTable.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/rule.ts#L35">ast/rule.ts:35</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Descrition of the Rule</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="elements" class="tsd-anchor"></a>
+					<h3>elements</h3>
+					<div class="tsd-signature tsd-kind-icon">elements<span class="tsd-signature-symbol">:</span> <a href="element.html" class="tsd-signature-type">Element</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/rule.ts#L37">ast/rule.ts:37</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Elements of the Rule</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="keyword" class="tsd-anchor"></a>
+					<h3>keyword</h3>
+					<div class="tsd-signature tsd-kind-icon">keyword<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Rule"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/rule.ts#L31">ast/rule.ts:31</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Keyword of the Rule</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="name" class="tsd-anchor"></a>
+					<h3>name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/rule.ts#L33">ast/rule.ts:33</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Name of the Rule</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -153,16 +212,16 @@
 					<a name="clone" class="tsd-anchor"></a>
 					<h3>clone</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">clone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="datatable.html" class="tsd-signature-type">DataTable</a></li>
+						<li class="tsd-signature tsd-kind-icon">clone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rule.html" class="tsd-signature-type">Rule</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/dataTable.ts#L20">ast/dataTable.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/rule.ts#L46">ast/rule.ts:46</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="datatable.html" class="tsd-signature-type">DataTable</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="rule.html" class="tsd-signature-type">Rule</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -176,7 +235,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/dataTable.ts#L24">ast/dataTable.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/rule.ts#L55">ast/rule.ts:55</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -196,22 +255,22 @@
 					<a name="parse" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> parse</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">: </span><a href="../interfaces/gherkindatatable.html" class="tsd-signature-type">GherkinDataTable</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="datatable.html" class="tsd-signature-type">DataTable</a></li>
+						<li class="tsd-signature tsd-kind-icon">parse<span class="tsd-signature-symbol">(</span>obj<span class="tsd-signature-symbol">?: </span><a href="../interfaces/gherkinrule.html" class="tsd-signature-type">GherkinRule</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="rule.html" class="tsd-signature-type">Rule</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/dataTable.ts#L9">ast/dataTable.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/ast/rule.ts#L12">ast/rule.ts:12</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>obj: <a href="../interfaces/gherkindatatable.html" class="tsd-signature-type">GherkinDataTable</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> obj: <a href="../interfaces/gherkinrule.html" class="tsd-signature-type">GherkinRule</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="datatable.html" class="tsd-signature-type">DataTable</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="rule.html" class="tsd-signature-type">Rule</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -230,30 +289,9 @@
 					<li class=" tsd-kind-class">
 						<a href="background.html" class="tsd-kind-icon">Background</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class">
+					<li class=" tsd-kind-class">
 						<a href="datatable.html" class="tsd-kind-icon">Data<wbr>Table</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="datatable.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="datatable.html#rows" class="tsd-kind-icon">rows</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="datatable.html#clone" class="tsd-kind-icon">clone</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="datatable.html#replace" class="tsd-kind-icon">replace</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="datatable.html#parse" class="tsd-kind-icon">parse</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="docstring.html" class="tsd-kind-icon">Doc<wbr>String</a>
 					</li>
@@ -269,9 +307,39 @@
 					<li class=" tsd-kind-class">
 						<a href="feature.html" class="tsd-kind-icon">Feature</a>
 					</li>
-					<li class=" tsd-kind-class">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
 						<a href="rule.html" class="tsd-kind-icon">Rule</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="rule.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rule.html#description" class="tsd-kind-icon">description</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rule.html#elements" class="tsd-kind-icon">elements</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rule.html#keyword" class="tsd-kind-icon">keyword</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="rule.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rule.html#clone" class="tsd-kind-icon">clone</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="rule.html#replace" class="tsd-kind-icon">replace</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="rule.html#parse" class="tsd-kind-icon">parse</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class">
 						<a href="scenario.html" class="tsd-kind-icon">Scenario</a>
 					</li>

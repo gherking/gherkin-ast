@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>GherkinBackground | gherkin-ast</title>
+	<title>GherkinRule | gherkin-ast</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="gherkinbackground.html">GherkinBackground</a>
+					<a href="gherkinrule.html">GherkinRule</a>
 				</li>
 			</ul>
-			<h1>Interface GherkinBackground</h1>
+			<h1>Interface GherkinRule</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">GherkinBackground</span>
+						<span class="target">GherkinRule</span>
 					</li>
 				</ul>
 			</section>
@@ -81,7 +81,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="gherkinbackground.html#background" class="tsd-kind-icon">background</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="gherkinrule.html#rule" class="tsd-kind-icon">rule</a></li>
 							</ul>
 						</section>
 					</div>
@@ -90,17 +90,20 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="background" class="tsd-anchor"></a>
-					<h3>background</h3>
-					<div class="tsd-signature tsd-kind-icon">background<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<a name="rule" class="tsd-anchor"></a>
+					<h3>rule</h3>
+					<div class="tsd-signature tsd-kind-icon">rule<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/gherkinObject.ts#L29">gherkinObject.ts:29</a></li>
+							<li>Defined in <a href="https://github.com/gherking/gherkin-ast/blob/861ac14/src/gherkinObject.ts#L19">gherkinObject.ts:19</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
 						<h4>Type declaration</h4>
 						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5>children<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="gherkinbackground.html" class="tsd-signature-type">GherkinBackground</a><span class="tsd-signature-symbol"> | </span><a href="gherkinscenario.html" class="tsd-signature-type">GherkinScenario</a><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
 							<li class="tsd-parameter">
 								<h5>description<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
 							</li>
@@ -112,9 +115,6 @@
 							</li>
 							<li class="tsd-parameter">
 								<h5>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5>
-							</li>
-							<li class="tsd-parameter">
-								<h5>steps<span class="tsd-signature-symbol">: </span><a href="gherkinstep.html" class="tsd-signature-type">GherkinStep</a><span class="tsd-signature-symbol">[]</span></h5>
 							</li>
 						</ul>
 					</div>
@@ -176,18 +176,9 @@
 					<li class=" tsd-kind-interface tsd-has-type-parameter tsd-is-not-exported">
 						<a href="clonable.html" class="tsd-kind-icon">Clonable</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class=" tsd-kind-interface">
 						<a href="gherkinbackground.html" class="tsd-kind-icon">Gherkin<wbr>Background</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="gherkinbackground.html#background" class="tsd-kind-icon">background</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="gherkindatatable.html" class="tsd-kind-icon">Gherkin<wbr>Data<wbr>Table</a>
 					</li>
@@ -206,9 +197,18 @@
 					<li class=" tsd-kind-interface">
 						<a href="gherkinlocation.html" class="tsd-kind-icon">Gherkin<wbr>Location</a>
 					</li>
-					<li class=" tsd-kind-interface">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
 						<a href="gherkinrule.html" class="tsd-kind-icon">Gherkin<wbr>Rule</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="gherkinrule.html#rule" class="tsd-kind-icon">rule</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface">
 						<a href="gherkinscenario.html" class="tsd-kind-icon">Gherkin<wbr>Scenario</a>
 					</li>
