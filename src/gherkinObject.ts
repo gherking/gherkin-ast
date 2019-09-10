@@ -12,7 +12,17 @@ export interface GherkinFeature {
     keyword: string;
     name: string;
     description: string;
-    children: Array<GherkinBackground | GherkinScenario>;
+    children: Array<GherkinRule | GherkinBackground | GherkinScenario>;
+}
+
+export interface GherkinRule {
+    rule: {
+        location: GherkinLocation;
+        keyword: string;
+        name: string;
+        description: string;
+        children: Array<GherkinBackground | GherkinScenario>;
+    };
 }
 
 export interface GherkinBackground {

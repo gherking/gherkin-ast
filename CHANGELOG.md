@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0 - 2019-09-10
+
+### Added
+
+- Added `Rule`
+- Added keywords for certain types
+
 ## 2.0.0 - 2019-06-26
 
 ### BREAKING CHANGES

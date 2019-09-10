@@ -25,7 +25,7 @@ export class Step {
     }
 
     /** Keyword of the Step */
-    public keyword: string;
+    public keyword: "Given" | "When" | "Then" | "And" | "But" | "*" | string;
     /** Text of the Step */
     public text: string;
     /** CDataTable of the Step */

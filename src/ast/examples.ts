@@ -25,7 +25,7 @@ export class Examples {
     }
 
     /** Keyword of the examples table */
-    public keyword: string;
+    public keyword: "Examples" | "Scenarios" | string;
     /** Name of the examples table */
     public name: string;
     /** Tags of the examples table */

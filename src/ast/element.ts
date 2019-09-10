@@ -8,7 +8,7 @@ export const REPEAT_STEP_KEYWORDS: string[] = ["And", "But", "*"];
  */
 export class Element {
     /** Keyword of the Element */
-    public keyword: string;
+    public keyword: "Background" | "Scenario" | "Example" | "Scenario Outline" | "Scenario Template" | string;
     /** Name of the Element */
     public name: string;
     /** Description of the Element */
