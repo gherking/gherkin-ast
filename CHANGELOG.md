@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.0.0 - 2020-09-21
+
+### Breaking changed
+
+Added support for normal and parametirized tags:
+
+- Normal tag, e.g. `@tag` same as `new Tag("tag")`
+- Parametirized tag, e.g. `@suite(smoke)` same as `new Tag("suite", "smoke")`
+
+All methods of a tag work with both type of tags. Also added `Tag.parseString(string)` to be able to parse a tag string to any of the above type of tags.
+
 ## 2.1.0 - 2019-09-10
 
 ### Added

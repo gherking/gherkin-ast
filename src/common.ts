@@ -10,6 +10,9 @@ export const replaceAll = (s: string, key: RegExp | string, value: string): stri
     if (!(key instanceof RegExp)) {
         key = new RegExp(key, "g");
     }
+    if (!s || typeof s !== "string") {
+        return s;
+    }
     return s.replace(key, value);
 };
 

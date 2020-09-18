@@ -159,10 +159,10 @@
           ],
           "tags": [
             {
-              "name": "@tag2"
+              "name": "tag2"
             },
             {
-              "name": "@tag3"
+              "name": "tag3"
             }
           ]
         },
@@ -210,10 +210,11 @@
           ],
           "tags": [
             {
-              "name": "@tag2"
+              "name": "tag2"
             },
             {
-              "name": "@tag(3)"
+              "name": "tag",
+              "value": "3"
             }
           ],
           "examples": [
@@ -222,7 +223,7 @@
               "name": "First examples",
               "tags": [
                 {
-                  "name": "@tagE1"
+                  "name": "tagE1"
                 }
               ],
               "header": {
@@ -247,7 +248,7 @@
               "name": "Second examples",
               "tags": [
                 {
-                  "name": "@tagE2"
+                  "name": "tagE2"
                 }
               ],
               "header": {
@@ -272,10 +273,10 @@
       ],
       "tags": [
         {
-          "name": "@tag1"
+          "name": "tag1"
         },
         {
-          "name": "@tag2"
+          "name": "tag2"
         }
       ]
     }

@@ -7,26 +7,41 @@ describe("Tag", () => {
         const t: Tag = new Tag("name");
         expect(t).toBeDefined();
         expect(t.name).toEqual("name");
+        expect(t.value).toBeFalsy();
     });
 
+    test("should create model of a parametirized tag", () => {
+        const t = new Tag("name", "value");
+        expect(t).toBeDefined();
+        expect(t.name).toEqual("name");
+        expect(t.value).toEqual("value");
+    })
+
     test("should have method to clone it", () => {
-        const tagA: Tag = new Tag("A");
+        const tagA: Tag = new Tag("A", "V");
         const tagB: Tag = tagA.clone();
 
         expect(tagA.name).toEqual(tagB.name);
+        expect(tagA.value).toEqual(tagB.value);
         expect(tagA).not.toBe(tagB);
     });
 
-    test("should have toString", () => {
+    test("should have toString for simple tag", () => {
         const t: Tag = new Tag("tag");
         expect(t.toString()).toEqual("@tag");
     });
 
+    test("should have toString for parametirized tag", () => {
+        const t: Tag = new Tag("tag", "value");
+        expect(t.toString()).toEqual("@tag(value)");
+    });
+
     test("should have method to replace value", () => {
-        const t: Tag = new Tag("tag");
+        const t: Tag = new Tag("tag", "value");
         jest.spyOn(common, "replaceAll");
         t.replace("a", "e");
         expect(common.replaceAll).toHaveBeenCalledWith("tag", "a", "e");
+        expect(common.replaceAll).toHaveBeenCalledWith("value", "a", "e");
     });
 
     describe("parse", () => {
@@ -37,20 +52,39 @@ describe("Tag", () => {
         test("should parse GherkinTag", () => {
             const t: Tag = Tag.parse({
                 location: { column: 1, line: 1 },
-                name: "tag",
+                name: "tag(value)",
             });
             expect(t.name).toEqual("tag");
+            expect(t.value).toEqual("value");
+        });
+    });
+
+    describe("parseString", () => {
+        test("should throw error if not Gherkin tag passed", () => {
+            expect(() => Tag.parseString()).toThrow();
+        });
+
+        test("should parse Gherkin tag", () => {
+            const t: Tag = Tag.parseString("@name(value)");
+            expect(t.name).toEqual("name");
+            expect(t.value).toEqual("value");
+        });
+
+        test("should parse Gherkin tag without at", () => {
+            const t: Tag = Tag.parseString("name(value)");
+            expect(t.name).toEqual("name");
+            expect(t.value).toEqual("value");
         });
     });
 });
 
 describe("tag", () => {
     test("should create parameterized tag", () => {
-        expect(tag("name", "value").name).toEqual("name(value)");
+        expect(tag("name", "value").toString()).toEqual("@name(value)");
     });
 
     test("should create simple tag", () => {
-        expect(tag("name").name).toEqual("name");
+        expect(tag("name").toString()).toEqual("@name");
     });
 });
 
