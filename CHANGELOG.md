@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0 - 2020-09-21
+## 3.0.0 - 2021-01-19
 
 ### Breaking changed
 
