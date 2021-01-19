@@ -46,7 +46,7 @@ export class Feature {
     /** Descrition of the Feature */
     public description: string;
     /** Elements of the Feature */
-    public elements: Array<Element | Rule>;
+    public elements: (Element | Rule)[];
     /** Tags of the Feature */
     public tags: Tag[];
 

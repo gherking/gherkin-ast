@@ -199,13 +199,13 @@ describe("ScenarioOutline", () => {
                 new Tag("T1"),
                 new Tag("T2"),
                 new Tag("T3"),
-                new Tag("A(A1)"),
+                new Tag("A", "A1"),
             ]);
             expect(scenarios[1].tags).toEqual([
                 new Tag("T1"),
                 new Tag("T2"),
                 new Tag("T3"),
-                new Tag("A(A2)"),
+                new Tag("A", "A2"),
             ]);
         });
 
