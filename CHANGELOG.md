@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Integration with Github Actions
+
 ## 3.0.0 - 2021-01-19
 
 ### Breaking changed
