@@ -1,5 +1,9 @@
 # gherkin-ast
 
+![Version](https://img.shields.io/github/package-json/v/gherking/gherkin-ast/master?style=flat-square)
+![CI](https://img.shields.io/github/workflow/status/gherking/gherkin-ast/CI/master?label=ci&style=flat-square)
+![Docs](https://img.shields.io/github/workflow/status/gherking/gherkin-ast/Docs/master?label=docs&style=flat-square)
+
 Models for Gherkin feature files
 
 ## AST
