@@ -1,7 +1,5 @@
 # gherkin-ast
 
-[![Build Status](https://travis-ci.org/gherking/gherkin-ast.svg?branch=master)](https://travis-ci.org/gherking/gherkin-ast) [![dependency Status](https://david-dm.org/gherking/gherkin-ast.svg)](https://david-dm.org/gherking/gherkin-ast) [![devDependency Status](https://david-dm.org/gherking/gherkin-ast/dev-status.svg)](https://david-dm.org/gherking/gherkin-ast#info=devDependencies)
-
 Models for Gherkin feature files
 
 ## AST
