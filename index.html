@@ -74,12 +74,14 @@
 				</a>
 				<p>The API provides types to be able to handle different parts of Gherkin feature files.</p>
 				<p>In TypeScript:</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {Feature, Scenario <span class="hljs-comment">/*, Background, ... */</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gherkin-ast&quot;</span>;</code></pre>
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {Feature, Scenario <span class="hljs-comment">/*, Background, ... */</span>} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;gherkin-ast&quot;</span>;
+</code></pre>
 				<p>OR in JavaScript:</p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> {Feature, Scenario <span class="hljs-comment">/*, Background, ... */</span>} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;gherkin-ast&quot;</span>);
 <span class="hljs-keyword">const</span> feature = <span class="hljs-keyword">new</span> Feature(<span class="hljs-string">&quot;Feature&quot;</span>, <span class="hljs-string">&quot;Displaying documents&quot;</span>);
 feature.elements.push(<span class="hljs-keyword">new</span> Scenario(<span class="hljs-string">&quot;Scenario&quot;</span>, <span class="hljs-string">&quot;Opening a document&quot;</span>));
-<span class="hljs-comment">// ...</span></code></pre>
+<span class="hljs-comment">// ...</span>
+</code></pre>
 				<p>For detailed documentation see the <a href="https://gherking.github.io/gherkin-ast/">TypeDocs documentation</a>.</p>
 				<p><strong>NOTE</strong> <code>parse</code> functions only support AST provided by the parser of <code>gherkin@6</code>.</p>
 			</div>
