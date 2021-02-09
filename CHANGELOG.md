@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.2 - 2021-02-10
+
+### Fixed
+
+- Fixed Scenario parsing issue ([#19](https://github.com/gherking/gherkin-ast/issues/19))
+
 ## 3.0.1 - 2021-01-29
 
 ### Added
