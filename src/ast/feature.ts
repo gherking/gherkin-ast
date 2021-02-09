@@ -50,7 +50,7 @@ export class Feature {
     /** Tags of the Feature */
     public tags: Tag[];
 
-    constructor(keyword: string, name: string, description: string, language: string = "en") {
+    constructor(keyword: string, name: string, description: string, language = "en") {
         this.keyword = normalizeString(keyword);
         this.name = normalizeString(name);
         this.description = normalizeString(description);

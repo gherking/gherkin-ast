@@ -3,7 +3,7 @@ import ObjectSet = require("object-set-type");
 import { replaceAll, safeString } from "../common";
 import { GherkinTag } from "../gherkinObject";
 
-const TAG_W_VALUE = /^@?([^\(@]+)\(([^\)]+)\)$/i;
+const TAG_W_VALUE = /^@?([^(@]+)\(([^)]+)\)$/i;
 const TAG_WO_VALUE = /^@?([^@]+)$/i;
 
 /**

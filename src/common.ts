@@ -1,6 +1,6 @@
-export const safeString = (s: string = ""): string => s.replace(/\s/g, "_");
+export const safeString = (s = ""): string => s.replace(/\s/g, "_");
 
-export const normalizeString = (s: string = ""): string => {
+export const normalizeString = (s = ""): string => {
     return s.split("\n")
         .map((line: string): string => line.trim())
         .join("\n");
