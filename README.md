@@ -1,10 +1,10 @@
 # gherkin-ast
 
-![Downloads](https://img.shields.io/npm/dw/gherkin-ast?style=flat-square)
-![Version@npm](https://img.shields.io/npm/v/gherkin-ast?label=version%40npm&style=flat-square)
-![Version@git](https://img.shields.io/github/package-json/v/gherking/gherkin-ast/master?label=version%40git&style=flat-square)
-![CI](https://img.shields.io/github/workflow/status/gherking/gherkin-ast/CI/master?label=ci&style=flat-square)
-![Docs](https://img.shields.io/github/workflow/status/gherking/gherkin-ast/Docs/master?label=docs&style=flat-square)
+![Downloads](https://img.shields.io/npm/dw/gpc-template?style=flat-square)
+![Version@npm](https://img.shields.io/npm/v/gpc-template?label=version%40npm&style=flat-square)
+![Version@git](https://img.shields.io/github/package-json/v/gherking/gpc-template/master?label=version%40git&style=flat-square)
+![CI](https://img.shields.io/github/workflow/status/gherking/gpc-template/CI/master?label=ci&style=flat-square)
+![Docs](https://img.shields.io/github/workflow/status/gherking/gpc-template/Docs/master?label=docs&style=flat-square)
 
 Models for Gherkin feature files
 
@@ -26,5 +26,7 @@ feature.elements.push(new Scenario("Scenario", "Opening a document"));
 ```
 
 For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/gherkin-ast/).
+
+This package uses [debug](https://www.npmjs.com/package/debug) for logging.
 
 **NOTE** `parse` functions only support AST provided by the parser of `gherkin@6`.

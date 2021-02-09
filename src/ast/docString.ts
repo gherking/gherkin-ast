@@ -16,7 +16,7 @@ export class DocString {
     /** Delimiter of the DocString */
     public delimiter: string;
 
-    constructor(content: string, delimiter: string = "\"\"\"") {
+    constructor(content: string, delimiter = "\"\"\"") {
         this.content = normalizeString(content);
         this.delimiter = delimiter;
     }

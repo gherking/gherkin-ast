@@ -5,7 +5,7 @@ import { Feature } from "./feature";
  * Model for Document
  */
 export class Document {
-    public static parse(obj?: GherkinDocument) {
+    public static parse(obj?: GherkinDocument): Document {
         if (!obj || !obj.gherkinDocument) {
             throw new TypeError("The given object is not a GherkinDocument!");
         }
