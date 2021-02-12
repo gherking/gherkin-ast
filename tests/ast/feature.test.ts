@@ -169,24 +169,6 @@ describe("Feature", () => {
                             description: "D",
                         },
                     },
-                ],
-                description: "D",
-                keyword: "F",
-                name: "N",
-                language: "HU",
-                tags: [],
-            } as GherkinFeature;
-            jest.spyOn(Scenario, "parse");
-            const feature: Feature = Feature.parse(obj);
-            expect(feature).toBeDefined();
-            expect(feature.elements).toHaveLength(1);
-            expect(Scenario.parse).toHaveBeenCalledTimes(1);
-            expect(Scenario.parse).toHaveBeenCalledWith(obj.children[0]);
-        });
-
-        test("should parse GherkinScenario as Outline children", () => {
-            const obj: GherkinFeature = {
-                children: [
                     {
                         scenario: {
                             name: "N",
@@ -202,12 +184,54 @@ describe("Feature", () => {
                 language: "HU",
                 tags: [],
             } as GherkinFeature;
+            jest.spyOn(Scenario, "parse");
+            const feature: Feature = Feature.parse(obj);
+            expect(feature).toBeDefined();
+            expect(feature.elements).toHaveLength(2);
+            expect(Scenario.parse).toHaveBeenCalledTimes(2);
+            expect(Scenario.parse).toHaveBeenCalledWith(obj.children[0]);
+            expect(Scenario.parse).toHaveBeenCalledWith(obj.children[1]);
+        });
+
+        test("should parse GherkinScenario as Outline children", () => {
+            const obj: GherkinFeature = {
+                children: [
+                    {
+                        scenario: {
+                            name: "N",
+                            keyword: "B",
+                            description: "D",
+                            examples: [
+                                {
+                                    keyword: 'Examples',
+                                    tableBody: [],
+                                }
+                            ],
+                        },
+                    },
+                    {
+                        scenario: {
+                            name: "N",
+                            keyword: "B",
+                            description: "D",
+                            examples: [],
+                        },
+                    },
+                ],
+                description: "D",
+                keyword: "F",
+                name: "N",
+                language: "HU",
+                tags: [],
+            } as GherkinFeature;
+            jest.spyOn(Scenario, "parse");
             jest.spyOn(ScenarioOutline, "parse");
             const feature: Feature = Feature.parse(obj);
             expect(feature).toBeDefined();
-            expect(feature.elements).toHaveLength(1);
+            expect(feature.elements).toHaveLength(2);
             expect(ScenarioOutline.parse).toHaveBeenCalledTimes(1);
             expect(ScenarioOutline.parse).toHaveBeenCalledWith(obj.children[0]);
+            expect(ScenarioOutline.parse).not.toHaveBeenCalledWith(obj.children[1]);
         });
     });
 });

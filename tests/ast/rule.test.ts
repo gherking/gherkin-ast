@@ -111,6 +111,14 @@ describe("Rule", () => {
                                 description: "D",
                             },
                         },
+                        {
+                            scenario: {
+                                name: "N",
+                                keyword: "B",
+                                description: "D",
+                                examples: [],
+                            },
+                        },
                     ],
                     description: "D",
                     keyword: "R",
@@ -120,15 +128,29 @@ describe("Rule", () => {
             jest.spyOn(Scenario, "parse");
             const rule: Rule = Rule.parse(obj);
             expect(rule).toBeDefined();
-            expect(rule.elements).toHaveLength(1);
-            expect(Scenario.parse).toHaveBeenCalledTimes(1);
+            expect(rule.elements).toHaveLength(2);
+            expect(Scenario.parse).toHaveBeenCalledTimes(2);
             expect(Scenario.parse).toHaveBeenCalledWith(obj.rule.children[0]);
+            expect(Scenario.parse).toHaveBeenCalledWith(obj.rule.children[1]);
         });
 
         test("should parse GherkinScenario as Outline children", () => {
             const obj: GherkinRule = {
                 rule: {
                     children: [
+                        {
+                            scenario: {
+                                name: "N",
+                                keyword: "B",
+                                description: "D",
+                                examples: [
+                                    {
+                                        keyword: "Examples",
+                                        tableBody: [],
+                                    }
+                                ],
+                            },
+                        },
                         {
                             scenario: {
                                 name: "N",
@@ -144,11 +166,13 @@ describe("Rule", () => {
                 },
             } as GherkinRule;
             jest.spyOn(ScenarioOutline, "parse");
+            jest.spyOn(Scenario, "parse");
             const rule: Rule = Rule.parse(obj);
             expect(rule).toBeDefined();
-            expect(rule.elements).toHaveLength(1);
+            expect(rule.elements).toHaveLength(2);
             expect(ScenarioOutline.parse).toHaveBeenCalledTimes(1);
             expect(ScenarioOutline.parse).toHaveBeenCalledWith(obj.rule.children[0]);
+            expect(ScenarioOutline.parse).not.toHaveBeenCalledWith(obj.rule.children[1]);
         });
     });
 });

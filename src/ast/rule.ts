@@ -19,7 +19,7 @@ export class Rule {
             if ((child as GherkinBackground).background) {
                 return Background.parse(child as GherkinBackground);
             }
-            if ((child as GherkinScenario).scenario.examples) {
+            if ((child as GherkinScenario).scenario?.examples?.length) {
                 return ScenarioOutline.parse(child as GherkinScenario);
             }
             return Scenario.parse(child as GherkinScenario);
