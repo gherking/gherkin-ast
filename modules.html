@@ -57,38 +57,40 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#gherkin-ast" id="gherkin-ast" style="color: inherit; text-decoration: none;">
-					<h1>gherkin-ast</h1>
-				</a>
-				<p><img src="https://img.shields.io/npm/dw/gherkin-ast?style=flat-square" alt="Downloads">
-					<img src="https://img.shields.io/npm/v/gherkin-ast?label=version%40npm&style=flat-square" alt="Version@npm">
-					<img src="https://img.shields.io/github/package-json/v/gherking/gherkin-ast/master?label=version%40git&style=flat-square" alt="Version@git">
-					<img src="https://img.shields.io/github/workflow/status/gherking/gherkin-ast/CI/master?label=ci&style=flat-square" alt="CI">
-				<img src="https://img.shields.io/github/workflow/status/gherking/gherkin-ast/Docs/master?label=docs&style=flat-square" alt="Docs"></p>
-				<p>Models for Gherkin feature files</p>
-				<a href="#ast" id="ast" style="color: inherit; text-decoration: none;">
-					<h2>AST</h2>
-				</a>
-				<p>The API provides types to be able to handle different parts of Gherkin feature files.</p>
-				<p>In TypeScript:</p>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> {</span><span style="color: #001080">Feature</span><span style="color: #000000">, </span><span style="color: #001080">Scenario</span><span style="color: #000000"> </span><span style="color: #008000">/*, Background, ... */</span><span style="color: #000000">} </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;gherkin-ast&quot;</span><span style="color: #000000">;</span>
-</code></pre>
-				<p>OR in JavaScript:</p>
-				<pre><code class="language-javascript"><span style="color: #0000FF">const</span><span style="color: #000000"> {</span><span style="color: #0070C1">Feature</span><span style="color: #000000">, </span><span style="color: #0070C1">Scenario</span><span style="color: #000000"> </span><span style="color: #008000">/*, Background, ... */</span><span style="color: #000000">} = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;gherkin-ast&quot;</span><span style="color: #000000">);</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">feature</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Feature</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Feature&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;Displaying documents&quot;</span><span style="color: #000000">);</span>
-<span style="color: #001080">feature</span><span style="color: #000000">.</span><span style="color: #001080">elements</span><span style="color: #000000">.</span><span style="color: #795E26">push</span><span style="color: #000000">(</span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Scenario</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;Scenario&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;Opening a document&quot;</span><span style="color: #000000">));</span>
-<span style="color: #008000">// ...</span>
-</code></pre>
-				<p>For detailed documentation see the <a href="https://gherking.github.io/gherkin-ast/">TypeDocs documentation</a>.</p>
-				<p>This package uses <a href="https://www.npmjs.com/package/debug">debug</a> for logging.</p>
-				<p><strong>NOTE</strong> <code>parse</code> functions only support AST provided by the parser of <code>gherkin@6</code>.</p>
-			</div>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Modules</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-module"><a href="modules/ast_background.html" class="tsd-kind-icon">ast/background</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_datatable.html" class="tsd-kind-icon">ast/data<wbr>Table</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_docstring.html" class="tsd-kind-icon">ast/doc<wbr>String</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_element.html" class="tsd-kind-icon">ast/element</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_examples.html" class="tsd-kind-icon">ast/examples</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_feature.html" class="tsd-kind-icon">ast/feature</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_gherkindocument.html" class="tsd-kind-icon">ast/gherkin<wbr>Document</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_rule.html" class="tsd-kind-icon">ast/rule</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_scenario.html" class="tsd-kind-icon">ast/scenario</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_scenariooutline.html" class="tsd-kind-icon">ast/scenario<wbr>Outline</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_step.html" class="tsd-kind-icon">ast/step</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_tablecell.html" class="tsd-kind-icon">ast/table<wbr>Cell</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_tablerow.html" class="tsd-kind-icon">ast/table<wbr>Row</a></li>
+								<li class="tsd-kind-module"><a href="modules/ast_tag.html" class="tsd-kind-icon">ast/tag</a></li>
+								<li class="tsd-kind-module"><a href="modules/common.html" class="tsd-kind-icon">common</a></li>
+								<li class="tsd-kind-module"><a href="modules/gherkinobject.html" class="tsd-kind-icon">gherkin<wbr>Object</a></li>
+								<li class="tsd-kind-module"><a href="modules/index.html" class="tsd-kind-icon">index</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class=" ">
+					<li class="current ">
 						<a href="modules.html">Exports</a>
 					</li>
 					<li class=" tsd-kind-module">
