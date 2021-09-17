@@ -6,7 +6,7 @@ import { GherkinTableCell } from "../gherkinObject";
  */
 export class TableCell {
     public static parse(obj: GherkinTableCell): TableCell {
-        if (!obj || !obj.value) {
+        if (!obj || !("value" in obj)) {
             throw new TypeError("The given object is not a TableCell!");
         }
         return new TableCell(obj.value);
