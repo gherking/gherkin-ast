@@ -39,6 +39,18 @@ describe("TableCell", () => {
             expect(() => TableCell.parse(obj)).toThrow();
         });
 
+        test("should hadle empty cells", () => {
+            // Given
+            const obj: GherkinTableCell = {
+                value: "",
+            } as GherkinTableCell;
+            // When
+            const cell: TableCell = TableCell.parse(obj);
+            // Then
+            expect(cell).toBeDefined();
+            expect(cell.value).toEqual("");
+        });
+
         test("should parse GherkinTableCell", () => {
             // Given
             const obj: GherkinTableCell = {

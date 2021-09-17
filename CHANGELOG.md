@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.3 - 2021-09-17
+
+### Fixed
+
+- Fixed empty cell issue ([#29](https://github.com/gherking/gherkin-ast/issues/29))
+
 ## 3.0.2 - 2021-02-10
 
 ### Fixed

@@ -1,6 +1,6 @@
 {
   "name": "gherkin-ast",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "JS model for Gherkin feature files",
   "main": "index.js",
   "types": "index.d.ts",
@@ -55,7 +55,7 @@
     "jest-junit": "^12.0.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.5.1",
-    "typedoc": "^0.20.23",
+    "typedoc": "^0.22.3",
     "typescript": "^4.1.4"
   },
   "dependencies": {
