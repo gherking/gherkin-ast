@@ -18,6 +18,7 @@ export interface GherkinFeature {
 export interface GherkinRule {
     rule: {
         location: GherkinLocation;
+        tags: GherkinTag[];
         keyword: string;
         name: string;
         description: string;
