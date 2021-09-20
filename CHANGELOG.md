@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.1.0 - 2021-09-20
+
+### Added
+
+- Added support for tags in Rules ([#22](https://github.com/gherking/gherkin-ast/issues/22))
+
 ## 3.0.3 - 2021-09-17
 
 ### Fixed

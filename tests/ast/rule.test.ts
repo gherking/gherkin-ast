@@ -1,6 +1,6 @@
-import { Background, Rule, Scenario, ScenarioOutline } from "../../src";
+import { Background, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
 import * as common from "../../src/common";
-import { GherkinRule } from "../../src/gherkinObject";
+import { GherkinRule, GherkinTag } from "../../src/gherkinObject";
 
 describe("Rule", () => {
     test("should create a model of a Rule", () => {
@@ -9,6 +9,7 @@ describe("Rule", () => {
         expect(rule.keyword).toEqual("Rule");
         expect(rule.name).toEqual("test");
         expect(rule.description).toEqual("description");
+        expect(rule.tags).toEqual([]);
         expect(rule.elements).toEqual([]);
     });
 
@@ -25,6 +26,10 @@ describe("Rule", () => {
         test("should clone basic data of rule", () => {
             expect(ruleB).toBeDefined();
             expect(ruleB).toEqual(ruleA);
+        });
+
+        test("should clone tags", () => {
+            expect(common.cloneArray).toHaveBeenCalledWith(ruleA.tags);
         });
 
         test("should clone elements", () => {
@@ -45,6 +50,10 @@ describe("Rule", () => {
         test("should replace in basic data", () => {
             expect(common.replaceAll).toHaveBeenCalledWith("T", "K", "V");
             expect(common.replaceAll).toHaveBeenCalledWith("D", "K", "V");
+        });
+
+        test("should replace in tags", () => {
+            expect(common.replaceArray).toHaveBeenCalledWith(ruleA.tags, "K", "V");
         });
 
         test("should replace in elements", () => {
@@ -73,7 +82,28 @@ describe("Rule", () => {
             expect(rule.name).toEqual("N");
             expect(rule.description).toEqual("D");
             expect(rule.elements).toEqual([]);
+            expect(rule.tags).toEqual([]);
         });
+
+        test("should parse tags", () => {
+            const obj: GherkinRule = {
+                rule: {
+                    children: [],
+                    description: "D",
+                    keyword: "R",
+                    name: "N",
+                    tags: [
+                        { name: "TAG" } as GherkinTag,
+                    ],
+                },
+            } as GherkinRule;
+            jest.spyOn(Tag, "parse");
+            const rule: Rule = Rule.parse(obj);
+            expect(rule).toBeDefined();
+            expect(rule.tags).toHaveLength(1);
+            expect(Tag.parse).toHaveBeenCalledTimes(1);
+            expect(Tag.parse).toHaveBeenCalledWith(obj.rule.tags[0], expect.any(Number), expect.any(Array));
+        })
 
         test("should parse GherkinBackground children", () => {
             const obj: GherkinRule = {
@@ -90,6 +120,7 @@ describe("Rule", () => {
                     description: "D",
                     keyword: "R",
                     name: "N",
+                    tags: [],
                 },
             } as GherkinRule;
             jest.spyOn(Background, "parse");
@@ -123,6 +154,7 @@ describe("Rule", () => {
                     description: "D",
                     keyword: "R",
                     name: "N",
+                    tags: [],
                 },
             } as GherkinRule;
             jest.spyOn(Scenario, "parse");
@@ -163,6 +195,7 @@ describe("Rule", () => {
                     description: "D",
                     keyword: "F",
                     name: "N",
+                    tags: [],
                 },
             } as GherkinRule;
             jest.spyOn(ScenarioOutline, "parse");
