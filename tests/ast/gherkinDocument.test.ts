@@ -2,6 +2,7 @@ import { Document } from "../../src";
 import { Feature } from "../../src/ast/feature";
 import * as common from "../../src/common";
 import { GherkinDocument, GherkinFeature } from "../../src/gherkinObject";
+import { pruneID } from "../utils";
 
 describe("Document", () => {
 
@@ -21,7 +22,8 @@ describe("Document", () => {
         // When
         const clone: Document = d.clone();
         // Then
-        expect(clone).toEqual(d);
+        expect(clone._id).not.toEqual(d._id);
+        expect(pruneID(clone)).toEqual(pruneID(d));
         expect(clone.feature).toEqual(null);
     });
 
@@ -31,7 +33,7 @@ describe("Document", () => {
         // When
         const clone: Document = d.clone();
         // Then
-        expect(clone).toEqual(d);
+        expect(pruneID(clone)).toEqual(pruneID(d));
         expect(clone.feature).toEqual(d.feature);
         expect(clone.feature).not.toBe(d.feature);
     });
@@ -67,6 +69,6 @@ describe("Document", () => {
         // Then
         expect(d.uri).toEqual("string");
         expect(Feature.parse).toHaveBeenCalledWith({});
-        expect(d.feature).toEqual(new Feature("S1", "S2", "S3"));
+        expect(pruneID(d.feature)).toEqual(pruneID(new Feature("S1", "S2", "S3")));
     });
 });

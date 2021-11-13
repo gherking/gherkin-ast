@@ -2,13 +2,14 @@ import { normalizeString, replaceAll } from "../common";
 import { GherkinStep } from "../gherkinObject";
 import { DataTable } from "./dataTable";
 import { DocString } from "./docString";
+import { UniqueObject } from "./uniqueObject";
 
 export type Argument = DataTable | DocString;
 
 /**
  * Model for Step
  */
-export class Step {
+export class Step extends UniqueObject {
     public static parse(obj: GherkinStep): Step {
         if (!obj || !obj.text) {
             throw new Error("The given object is not a Step!");
@@ -34,6 +35,7 @@ export class Step {
     public docString: DocString;
 
     constructor(keyword: string, text: string) {
+        super();
         this.keyword = normalizeString(keyword);
         this.text = normalizeString(text);
         this.dataTable = null;

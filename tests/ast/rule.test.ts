@@ -1,11 +1,13 @@
 import { Background, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinRule, GherkinTag } from "../../src/gherkinObject";
+import { pruneID } from "../utils";
 
 describe("Rule", () => {
     test("should create a model of a Rule", () => {
         const rule = new Rule("Rule", "test", "description");
         expect(rule).toBeDefined();
+        expect(rule._id).toBeDefined();
         expect(rule.keyword).toEqual("Rule");
         expect(rule.name).toEqual("test");
         expect(rule.description).toEqual("description");
@@ -25,7 +27,8 @@ describe("Rule", () => {
 
         test("should clone basic data of rule", () => {
             expect(ruleB).toBeDefined();
-            expect(ruleB).toEqual(ruleA);
+            expect(ruleB._id).not.toEqual(ruleA._id);
+            expect(pruneID(ruleB)).toEqual(pruneID(ruleA));
         });
 
         test("should clone tags", () => {
@@ -78,6 +81,7 @@ describe("Rule", () => {
             } as GherkinRule;
             const rule: Rule = Rule.parse(obj);
             expect(rule).toBeDefined();
+            expect(rule._id).toBeDefined();
             expect(rule.keyword).toEqual("R");
             expect(rule.name).toEqual("N");
             expect(rule.description).toEqual("D");
@@ -100,6 +104,7 @@ describe("Rule", () => {
             jest.spyOn(Tag, "parse");
             const rule: Rule = Rule.parse(obj);
             expect(rule).toBeDefined();
+            expect(rule._id).toBeDefined();
             expect(rule.tags).toHaveLength(1);
             expect(Tag.parse).toHaveBeenCalledTimes(1);
             expect(Tag.parse).toHaveBeenCalledWith(obj.rule.tags[0], expect.any(Number), expect.any(Array));
@@ -126,6 +131,7 @@ describe("Rule", () => {
             jest.spyOn(Background, "parse");
             const rule: Rule = Rule.parse(obj);
             expect(rule).toBeDefined();
+            expect(rule._id).toBeDefined();
             expect(rule.elements).toHaveLength(1);
             expect(Background.parse).toHaveBeenCalledTimes(1);
             expect(Background.parse).toHaveBeenCalledWith(obj.rule.children[0]);
@@ -160,6 +166,7 @@ describe("Rule", () => {
             jest.spyOn(Scenario, "parse");
             const rule: Rule = Rule.parse(obj);
             expect(rule).toBeDefined();
+            expect(rule._id).toBeDefined();
             expect(rule.elements).toHaveLength(2);
             expect(Scenario.parse).toHaveBeenCalledTimes(2);
             expect(Scenario.parse).toHaveBeenCalledWith(obj.rule.children[0]);
@@ -202,6 +209,7 @@ describe("Rule", () => {
             jest.spyOn(Scenario, "parse");
             const rule: Rule = Rule.parse(obj);
             expect(rule).toBeDefined();
+            expect(rule._id).toBeDefined();
             expect(rule.elements).toHaveLength(2);
             expect(ScenarioOutline.parse).toHaveBeenCalledTimes(1);
             expect(ScenarioOutline.parse).toHaveBeenCalledWith(obj.rule.children[0]);

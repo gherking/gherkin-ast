@@ -5,22 +5,25 @@ describe("Background", () => {
     test("should create model of a Background", () => {
         // Given
         // When
-        const backGround: Background = new Background("Bkeeyword", "Bname", "Bdesc");
+        const background: Background = new Background("Bkeeyword", "Bname", "Bdesc");
         // Then
-        expect(backGround).toBeDefined();
-        expect(backGround.keyword).toEqual("Bkeeyword");
+        expect(background).toBeDefined();
+        expect(background._id).toBeDefined();
+        expect(background.keyword).toEqual("Bkeeyword");
     });
 
     test("should have a method to clone it", () => {
         // Given
-        const backGroundA: Background = new Background("Bkeeyword", "Bname", "Bdesc");
+        const backgroundA: Background = new Background("Bkeeyword", "Bname", "Bdesc");
         // When
-        const backGroundB: Background = backGroundA.clone();
+        const backgroundB: Background = backgroundA.clone();
         // Then
-        expect(backGroundB.keyword).toEqual(backGroundA.keyword);
-        expect(backGroundB.name).toEqual(backGroundA.name);
-        expect(backGroundB.description).toEqual(backGroundA.description);
-        expect(backGroundB).not.toBe(backGroundA);
+        expect(backgroundB._id).toBeDefined();
+        expect(backgroundB._id).not.toEqual(backgroundA._id);
+        expect(backgroundB.keyword).toEqual(backgroundA.keyword);
+        expect(backgroundB.name).toEqual(backgroundA.name);
+        expect(backgroundB.description).toEqual(backgroundA.description);
+        expect(backgroundB).not.toBe(backgroundA);
     });
 
     describe("parse", () => {
@@ -48,6 +51,7 @@ describe("Background", () => {
             // Then
             expect(Step.parse).toHaveBeenCalledWith({}, 0, [{}]);
             expect(bg).toBeDefined();
+            expect(bg._id).toBeDefined();
             expect(bg.keyword).toEqual("Bkeeyword");
             expect(bg.name).toEqual("Bname");
         });
@@ -66,6 +70,7 @@ describe("Background", () => {
             const bg: Background = Background.parse(obj);
             // Then
             expect(bg).toBeDefined();
+            expect(bg._id).toBeDefined();
             expect(bg.keyword).toEqual("Bkeeyword");
             expect(bg.name).toEqual("Bname");
             expect(bg.steps).toEqual([]);

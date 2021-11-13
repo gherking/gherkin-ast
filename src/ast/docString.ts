@@ -1,10 +1,11 @@
 import { normalizeString, replaceAll } from "../common";
 import { GherkinDocString } from "../gherkinObject";
+import { UniqueObject } from "./uniqueObject";
 
 /**
  * Model for DocString
  */
-export class DocString {
+export class DocString extends UniqueObject {
     public static parse(obj: GherkinDocString): DocString {
         if (!obj || !obj.content) {
             throw new TypeError("The given object is not a DocString!");
@@ -17,6 +18,7 @@ export class DocString {
     public delimiter: string;
 
     constructor(content: string, delimiter = "\"\"\"") {
+        super();
         this.content = normalizeString(content);
         this.delimiter = delimiter;
     }

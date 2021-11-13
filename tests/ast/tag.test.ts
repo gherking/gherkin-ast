@@ -1,11 +1,13 @@
 import { removeDuplicateTags, Tag, tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinTag } from "../../src/gherkinObject";
+import { pruneID } from "../utils";
 
 describe("Tag", () => {
     test("should create model of a tag", () => {
         const t: Tag = new Tag("name");
         expect(t).toBeDefined();
+        expect(t._id).toBeDefined();
         expect(t.name).toEqual("name");
         expect(t.value).toBeFalsy();
     });
@@ -13,6 +15,7 @@ describe("Tag", () => {
     test("should create model of a parametirized tag", () => {
         const t = new Tag("name", "value");
         expect(t).toBeDefined();
+        expect(t._id).toBeDefined();
         expect(t.name).toEqual("name");
         expect(t.value).toEqual("value");
     })
@@ -24,6 +27,7 @@ describe("Tag", () => {
         expect(tagA.name).toEqual(tagB.name);
         expect(tagA.value).toEqual(tagB.value);
         expect(tagA).not.toBe(tagB);
+        expect(tagB._id).not.toEqual(tagA._id);
     });
 
     test("should have toString for simple tag", () => {
@@ -54,6 +58,7 @@ describe("Tag", () => {
                 location: { column: 1, line: 1 },
                 name: "tag(value)",
             });
+            expect(t._id).toBeDefined();
             expect(t.name).toEqual("tag");
             expect(t.value).toEqual("value");
         });
@@ -66,12 +71,14 @@ describe("Tag", () => {
 
         test("should parse Gherkin tag", () => {
             const t: Tag = Tag.parseString("@name(value)");
+            expect(t._id).toBeDefined();
             expect(t.name).toEqual("name");
             expect(t.value).toEqual("value");
         });
 
         test("should parse Gherkin tag without at", () => {
             const t: Tag = Tag.parseString("name(value)");
+            expect(t._id).toBeDefined();
             expect(t.name).toEqual("name");
             expect(t.value).toEqual("value");
         });
@@ -90,15 +97,15 @@ describe("tag", () => {
 
 describe("removeDuplicateTags", () => {
     test("should remove duplicate tags", () => {
-        expect(removeDuplicateTags([
+        expect(pruneID(removeDuplicateTags([
             new Tag("A"),
             new Tag("B"),
             new Tag("A"),
             new Tag("C"),
-        ])).toEqual([
+        ]))).toEqual(pruneID([
             new Tag("A"),
             new Tag("B"),
             new Tag("C"),
-        ]);
+        ]));
     });
 });

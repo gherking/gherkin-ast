@@ -6,11 +6,12 @@ import { Rule } from "./rule";
 import { Scenario } from "./scenario";
 import { ScenarioOutline } from "./scenarioOutline";
 import { Tag } from "./tag";
+import { UniqueObject } from "./uniqueObject";
 
 /**
  * Model for Feature
  */
-export class Feature {
+export class Feature extends UniqueObject {
     public static parse(obj?: GherkinFeature): Feature {
         if (!obj || !Array.isArray(obj.children)) {
             throw new TypeError("The given object is not a Feature!");
@@ -51,6 +52,7 @@ export class Feature {
     public tags: Tag[];
 
     constructor(keyword: string, name: string, description: string, language = "en") {
+        super();
         this.keyword = normalizeString(keyword);
         this.name = normalizeString(name);
         this.description = normalizeString(description);

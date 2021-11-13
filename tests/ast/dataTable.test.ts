@@ -1,6 +1,7 @@
 import { DataTable, TableCell, TableRow } from "../../src";
 import * as common from "../../src/common";
 import { GherkinDataTable, GherkinTableRow } from "../../src/gherkinObject";
+import { pruneID } from "../utils";
 
 describe("DataTable", () => {
     const cell: TableCell = new TableCell("Cell");
@@ -13,6 +14,7 @@ describe("DataTable", () => {
             const table: DataTable = new DataTable([row]);
             // Then
             expect(table).toBeDefined();
+            expect(table._id).toBeDefined();
             expect(table.rows).toEqual([row]);
         });
 
@@ -22,6 +24,7 @@ describe("DataTable", () => {
             const table: DataTable = new DataTable();
             // Then
             expect(table).toBeDefined();
+            expect(table._id).toBeDefined();
             expect(table.rows).toEqual([]);
         });
     });
@@ -34,7 +37,9 @@ describe("DataTable", () => {
         const tableB: DataTable = table.clone();
         // Then
         expect(common.cloneArray).toHaveBeenCalledWith(table.rows);
-        expect(table).toEqual(tableB);
+        expect(tableB._id).toBeDefined();
+        expect(tableB._id).not.toEqual(table._id);
+        expect(pruneID(table)).toEqual(pruneID(tableB));
     });
 
     test("should replace value in rows", () => {
@@ -70,6 +75,7 @@ describe("DataTable", () => {
             const table: DataTable = DataTable.parse(obj);
             // Then
             expect(table).toBeDefined();
+            expect(table._id).toBeDefined();
             expect(table.rows).toHaveLength(1);
             expect(TableRow.parse).toHaveBeenCalledTimes(1);
         });

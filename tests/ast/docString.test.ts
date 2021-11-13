@@ -9,6 +9,7 @@ describe("DocString", () => {
         const s: DocString = new DocString("String", "\"\"\"");
         // Then
         expect(s).toBeDefined();
+        expect(s._id).toBeDefined();
         expect(s.content).toEqual("String");
         expect(s.delimiter).toEqual("\"\"\"");
     });
@@ -19,6 +20,8 @@ describe("DocString", () => {
         // When
         const stringB: DocString = stringA.clone();
         // Then
+        expect(stringB._id).toBeDefined();
+        expect(stringB._id).not.toEqual(stringA._id);
         expect(stringB.content).toEqual(stringA.content);
         expect(stringB.delimiter).toEqual(stringA.delimiter);
         expect(stringB).not.toBe(stringA);
@@ -52,6 +55,7 @@ describe("DocString", () => {
             const s: DocString = DocString.parse(obj);
             // Then
             expect(s).toBeDefined();
+            expect(s._id).toBeDefined();
             expect(s.content).toEqual("String");
         });
     });

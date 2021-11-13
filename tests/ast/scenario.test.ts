@@ -1,6 +1,7 @@
 import { Element, Scenario, Step, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinScenario, GherkinStep, GherkinTag } from "../../src/gherkinObject";
+import { pruneID } from "../utils";
 
 describe("Scenario", () => {
     let scenario: Scenario;
@@ -55,6 +56,8 @@ describe("Scenario", () => {
             scenario.tags = [new Tag("T1")];
             scenario.steps = [new Step("K", "T")];
             clonedScenario = scenario.clone();
+            pruneID(scenario);
+            pruneID(clonedScenario);
         });
 
         test("should clone basic data", () => {
@@ -100,6 +103,7 @@ describe("Scenario", () => {
         test("should parse basic data", () => {
             const parsed: Scenario = Scenario.parse(obj);
             expect(parsed).toBeDefined();
+            expect(parsed._id).toBeDefined();
             expect(parsed.keyword).toEqual("Keyword");
             expect(parsed.name).toEqual("Name");
             expect(parsed.description).toEqual("Description");
@@ -114,17 +118,17 @@ describe("Scenario", () => {
         test("should parse steps", () => {
             obj.scenario.steps = [{ keyword: "K", text: "T" } as GherkinStep];
             const parsed: Scenario = Scenario.parse(obj);
-            expect(parsed).toBeDefined();
+            expect(pruneID(parsed)).toBeDefined();
             expect(Step.parse).toHaveBeenCalledWith(obj.scenario.steps[0], 0, obj.scenario.steps);
-            expect(parsed.steps).toEqual([new Step("K", "T")]);
+            expect(parsed.steps).toEqual([pruneID(new Step("K", "T"))]);
         });
 
         test("should parse tags", () => {
             obj.scenario.tags = [{ name: "N" } as GherkinTag];
             const parsed: Scenario = Scenario.parse(obj);
-            expect(parsed).toBeDefined();
+            expect(pruneID(parsed)).toBeDefined();
             expect(Tag.parse).toHaveBeenCalledWith(obj.scenario.tags[0], 0, obj.scenario.tags);
-            expect(parsed.tags).toEqual([new Tag("N")]);
+            expect(parsed.tags).toEqual([pruneID(new Tag("N"))]);
         });
     });
 });

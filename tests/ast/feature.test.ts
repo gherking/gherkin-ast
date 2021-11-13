@@ -1,6 +1,7 @@
 import { Background, Feature, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinFeature, GherkinTag } from "../../src/gherkinObject";
+import { pruneID } from "../utils";
 
 describe("Feature", () => {
     test("should create a model of a Feature", () => {
@@ -9,6 +10,7 @@ describe("Feature", () => {
         const feature = new Feature("Feature", "test", "description");
         // Then
         expect(feature).toBeDefined();
+        expect(feature._id).toBeDefined();
         expect(feature.language).toEqual("en");
         expect(feature.keyword).toEqual("Feature");
         expect(feature.name).toEqual("test");
@@ -29,7 +31,8 @@ describe("Feature", () => {
 
         test("should clone basic data of feature", () => {
             expect(featureB).toBeDefined();
-            expect(featureB).toEqual(featureA);
+            expect(featureB._id).not.toEqual(featureA._id);
+            expect(pruneID(featureB)).toEqual(pruneID(featureA));
         });
 
         test("should clone tags", () => {
@@ -81,6 +84,7 @@ describe("Feature", () => {
             } as GherkinFeature;
             const feature: Feature = Feature.parse(obj);
             expect(feature).toBeDefined();
+            expect(feature._id).toBeDefined();
             expect(feature.keyword).toEqual("F");
             expect(feature.name).toEqual("N");
             expect(feature.language).toEqual("HU");
@@ -103,6 +107,7 @@ describe("Feature", () => {
             jest.spyOn(Tag, "parse");
             const feature: Feature = Feature.parse(obj);
             expect(feature).toBeDefined();
+            expect(feature._id).toBeDefined();
             expect(feature.tags).toHaveLength(1);
             expect(Tag.parse).toHaveBeenCalledTimes(1);
             expect(Tag.parse).toHaveBeenCalledWith(obj.tags[0], expect.any(Number), expect.any(Array));
@@ -129,6 +134,7 @@ describe("Feature", () => {
             jest.spyOn(Rule, "parse");
             const feature: Feature = Feature.parse(obj);
             expect(feature).toBeDefined();
+            expect(feature._id).toBeDefined();
             expect(feature.elements).toHaveLength(1);
             expect(Rule.parse).toHaveBeenCalledTimes(1);
             expect(Rule.parse).toHaveBeenCalledWith(obj.children[0]);

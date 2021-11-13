@@ -9,6 +9,7 @@ describe("Element", () => {
         const e: Element = new Element("String1", "String2", "String3");
         // Then
         expect(e).toBeDefined();
+        expect(e._id).toBeDefined();
         expect(e.keyword).toEqual("String1");
         expect(e.name).toEqual("String2");
         expect(e.description).toEqual("String3");
