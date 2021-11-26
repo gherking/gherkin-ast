@@ -2,11 +2,12 @@ import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common
 import { GherkinExamples } from "../gherkinObject";
 import { TableRow } from "./tableRow";
 import { Tag } from "./tag";
+import { UniqueObject } from "./uniqueObject";
 
 /**
  * Model for Examples table
  */
-export class Examples {
+export class Examples extends UniqueObject {
     public static parse(obj?: GherkinExamples): Examples {
         if (!obj || !Array.isArray(obj.tableBody)) {
             throw new TypeError("The given obj is not an Examples!");
@@ -36,6 +37,7 @@ export class Examples {
     public body: TableRow[];
 
     constructor(keyword: string, name: string) {
+        super();
         this.keyword = normalizeString(keyword);
         this.name = normalizeString(name);
         this.tags = [];

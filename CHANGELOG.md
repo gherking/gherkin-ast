@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.0 - 2021-11-13
+
+### Added
+
+- Added unique ID to all AST objects (`_id`)
+
 ## 3.1.0 - 2021-09-20
 
 ### Added

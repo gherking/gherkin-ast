@@ -1,12 +1,13 @@
 import { normalizeString, replaceAll, replaceArray } from "../common";
 import { Step } from "./step";
+import { UniqueObject } from "./uniqueObject";
 
 export const REPEAT_STEP_KEYWORDS: string[] = ["And", "But", "*"];
 
 /**
  * Model for Element
  */
-export class Element {
+export class Element extends UniqueObject {
     /** Keyword of the Element */
     public keyword: "Background" | "Scenario" | "Example" | "Scenario Outline" | "Scenario Template" | string;
     /** Name of the Element */
@@ -17,6 +18,7 @@ export class Element {
     public steps: Step[];
 
     constructor(keyword: string, name: string, description: string) {
+        super();
         this.keyword = normalizeString(keyword);
         this.name = normalizeString(name);
         this.description = normalizeString(description);

@@ -1,6 +1,7 @@
 import { Element, Examples, Scenario, ScenarioOutline, Step, TableCell, TableRow, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinExamples, GherkinScenario, GherkinStep, GherkinTag } from "../../src/gherkinObject";
+import { pruneID } from "../utils";
 
 describe("ScenarioOutline", () => {
     let outline: ScenarioOutline;
@@ -15,6 +16,7 @@ describe("ScenarioOutline", () => {
     describe("constructor", () => {
         test("should create model of a Scenario Outline", () => {
             expect(outline).toBeDefined();
+            expect(outline._id).toBeDefined();
             expect(outline.keyword).toEqual("Keyword");
             expect(outline.name).toEqual("Name");
             expect(outline.description).toEqual("Description");
@@ -67,6 +69,8 @@ describe("ScenarioOutline", () => {
 
         test("should clone basic data", () => {
             expect(clonedOutline).toBeDefined();
+            expect(clonedOutline._id).toBeDefined();
+            expect(clonedOutline._id).not.toEqual(outline._id);
             expect(clonedOutline.keyword).toEqual("Keyword");
             expect(clonedOutline.name).toEqual("Name");
             expect(clonedOutline.description).toEqual("Description");
@@ -74,18 +78,24 @@ describe("ScenarioOutline", () => {
         });
 
         test("should clone tags", () => {
+            pruneID(clonedOutline);
+            pruneID(outline);
             expect(common.cloneArray).toHaveBeenCalledWith(outline.tags);
             expect(clonedOutline.tags).toEqual(outline.tags);
             expect(clonedOutline.tags).not.toBe(outline.tags);
         });
 
         test("should clone steps", () => {
+            pruneID(clonedOutline);
+            pruneID(outline);
             expect(common.cloneArray).toHaveBeenCalledWith(outline.steps);
             expect(clonedOutline.steps).toEqual(outline.steps);
             expect(clonedOutline.steps).not.toBe(outline.steps);
         });
 
         test("should clone examples", () => {
+            pruneID(clonedOutline);
+            pruneID(outline);
             expect(common.cloneArray).toHaveBeenCalledWith(outline.examples);
             expect(clonedOutline.examples).toEqual(outline.examples);
             expect(clonedOutline.examples).not.toBe(outline.examples);
@@ -135,7 +145,7 @@ describe("ScenarioOutline", () => {
             const parsed: ScenarioOutline = ScenarioOutline.parse(obj);
             expect(parsed).toBeDefined();
             expect(Step.parse).toHaveBeenCalledWith(obj.scenario.steps[0], 0, obj.scenario.steps);
-            expect(parsed.steps).toEqual([new Step("K", "T")]);
+            expect(pruneID(parsed.steps)).toEqual(pruneID([new Step("K", "T")]));
         });
 
         test("should parse tags", () => {
@@ -143,7 +153,7 @@ describe("ScenarioOutline", () => {
             const parsed: ScenarioOutline = ScenarioOutline.parse(obj);
             expect(parsed).toBeDefined();
             expect(Tag.parse).toHaveBeenCalledWith(obj.scenario.tags[0], 0, obj.scenario.tags);
-            expect(parsed.tags).toEqual([new Tag("N")]);
+            expect(pruneID(parsed.tags)).toEqual([pruneID(new Tag("N"))]);
         });
 
         test("should parse examples", () => {
@@ -151,7 +161,7 @@ describe("ScenarioOutline", () => {
             const parsed: ScenarioOutline = ScenarioOutline.parse(obj);
             expect(parsed).toBeDefined();
             expect(Examples.parse).toHaveBeenCalledWith(obj.scenario.examples[0], 0, obj.scenario.examples);
-            expect(parsed.examples).toEqual([new Examples("K", "N")]);
+            expect(pruneID(parsed.examples)).toEqual([pruneID(new Examples("K", "N"))]);
         });
     });
 
@@ -187,7 +197,7 @@ describe("ScenarioOutline", () => {
                     new TableCell("B2"),
                 ]),
             ];
-            scenarios = outline.toScenario();
+            scenarios = outline.toScenario().map(pruneID) as Scenario[];
         });
 
         test("should parse as many scenario as examples rows", () => {
@@ -196,27 +206,27 @@ describe("ScenarioOutline", () => {
 
         test("should add column tag and examples tags", () => {
             expect(scenarios[0].tags).toEqual([
-                new Tag("T1"),
-                new Tag("T2"),
-                new Tag("T3"),
-                new Tag("A", "A1"),
+                pruneID(new Tag("T1")),
+                pruneID(new Tag("T2")),
+                pruneID(new Tag("T3")),
+                pruneID(new Tag("A", "A1")),
             ]);
             expect(scenarios[1].tags).toEqual([
-                new Tag("T1"),
-                new Tag("T2"),
-                new Tag("T3"),
-                new Tag("A", "A2"),
+                pruneID(new Tag("T1")),
+                pruneID(new Tag("T2")),
+                pruneID(new Tag("T3")),
+                pruneID(new Tag("A", "A2")),
             ]);
         });
 
         test("should clone steps", () => {
             expect(scenarios[0].steps).toEqual([
-                new Step("K", "X A1 Y"),
-                new Step("K", "X B1 Y"),
+                pruneID(new Step("K", "X A1 Y")),
+                pruneID(new Step("K", "X B1 Y")),
             ]);
             expect(scenarios[1].steps).toEqual([
-                new Step("K", "X A2 Y"),
-                new Step("K", "X B2 Y"),
+                pruneID(new Step("K", "X A2 Y")),
+                pruneID(new Step("K", "X B2 Y")),
             ]);
         });
 

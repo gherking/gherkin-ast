@@ -2,6 +2,7 @@
 import ObjectSet = require("object-set-type");
 import { replaceAll, safeString } from "../common";
 import { GherkinTag } from "../gherkinObject";
+import { UniqueObject } from "./uniqueObject";
 
 const TAG_W_VALUE = /^@?([^(@]+)\(([^)]+)\)$/i;
 const TAG_WO_VALUE = /^@?([^@]+)$/i;
@@ -9,7 +10,7 @@ const TAG_WO_VALUE = /^@?([^@]+)$/i;
 /**
  * Model for Tag
  */
-export class Tag {
+export class Tag extends UniqueObject {
     public static parse(obj?: GherkinTag): Tag {
         if (!obj || !obj.name) {
             throw new TypeError("The given object is not a Tag!");
@@ -33,6 +34,7 @@ export class Tag {
     public value: string;
 
     constructor(name: string, value?: string) {
+        super();
         this.name = safeString(name);
         this.value = value;
     }
@@ -59,5 +61,6 @@ export const tag = (name: string, value?: string): Tag => {
 };
 
 export const removeDuplicateTags = (tags: Tag[]): Tag[] => {
-    return Array.from(new ObjectSet(tags)) as Tag[];
+    const tagsWithoutID = tags.map(({ name, value }) => ({ name, value }));
+    return Array.from(new ObjectSet(tagsWithoutID)).map(({ name, value }) => new Tag(name, value))
 };

@@ -4,6 +4,7 @@ import { TableRow } from "../../src";
 import { Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinExamples, GherkinTableRow, GherkinTag } from "../../src/gherkinObject";
+import { pruneID } from "../utils";
 
 describe("Examples", () => {
     let example: Examples;
@@ -24,6 +25,7 @@ describe("Examples", () => {
             );
 
             expect(example).toBeDefined();
+            expect(example._id).toBeDefined();
             expect(example.keyword).toEqual("Keyword");
             expect(example.name).toEqual("Name");
             expect(example.tags).toEqual([]);
@@ -36,8 +38,10 @@ describe("Examples", () => {
 
         beforeEach(() => {
             jest.spyOn(common, "cloneArray");
-            jest.spyOn(example.header, "clone").mockReturnValue({cells: []} as TableRow);
+            jest.spyOn(example.header, "clone").mockReturnValue({ cells: [] } as TableRow);
             clonedExample = example.clone();
+            pruneID(example);
+            pruneID(clonedExample);
         });
 
         test("should clone basic data", () => {
@@ -49,7 +53,7 @@ describe("Examples", () => {
 
         test("should clone header", () => {
             expect(example.header.clone).toHaveBeenCalled();
-            expect(clonedExample.header).toEqual({cells: []} as TableRow);
+            expect(clonedExample.header).toEqual({ cells: [] } as TableRow);
         });
 
         test("should clone tags", () => {
@@ -77,12 +81,12 @@ describe("Examples", () => {
 
         test("should replace in body", () => {
             example.replace("e", "X");
-            expect(common.replaceArray).toHaveBeenCalledWith([{cells: [{value: "Body"}]}], "e", "X");
+            expect(common.replaceArray).toHaveBeenCalledWith([expect.objectContaining({ cells: [expect.objectContaining({ value: "Body" })] })], "e", "X");
         });
 
         test("should replace in tags", () => {
             example.replace("e", "X");
-            expect(common.replaceArray).toHaveBeenCalledWith([{name: "@tag"}], "e", "X");
+            expect(common.replaceArray).toHaveBeenCalledWith([expect.objectContaining({ name: "@tag" })], "e", "X");
         });
 
         test("should replace in header", () => {
@@ -117,6 +121,7 @@ describe("Examples", () => {
         test("should parse basic data", () => {
             const parsed: Examples = Examples.parse(obj);
             expect(parsed).toBeDefined();
+            expect(parsed._id).toBeDefined();
             expect(parsed.name).toEqual("Name");
             expect(parsed.keyword).toEqual("Keyword");
             expect(parsed.header).toEqual(null);
@@ -131,19 +136,19 @@ describe("Examples", () => {
         });
 
         test("should parse tags", () => {
-            obj.tags = [{name: "N"} as GherkinTag];
+            obj.tags = [{ name: "N" } as GherkinTag];
             const parsed: Examples = Examples.parse(obj);
-            expect(parsed).toBeDefined();
+            expect(pruneID(parsed)).toBeDefined();
             expect(Tag.parse).toHaveBeenCalledWith(obj.tags[0], 0, obj.tags);
-            expect(parsed.tags).toEqual([new Tag("N")]);
+            expect(parsed.tags).toEqual([pruneID(new Tag("N"))]);
         });
 
         test("should parse header", () => {
             obj.tableHeader = {} as GherkinTableRow;
             const parsed: Examples = Examples.parse(obj);
-            expect(parsed).toBeDefined();
+            expect(pruneID(parsed)).toBeDefined();
             expect(TableRow.parse).toHaveBeenCalledWith(obj.tableHeader);
-            expect(parsed.header).toEqual({cells: [new TableCell("Cell")]});
+            expect(parsed.header).toEqual({ cells: [pruneID(new TableCell("Cell"))] });
         });
     });
 });

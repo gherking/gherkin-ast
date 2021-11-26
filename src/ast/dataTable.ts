@@ -1,11 +1,12 @@
 import { cloneArray, replaceArray } from "../common";
 import { GherkinDataTable } from "../gherkinObject";
 import { TableRow } from "./tableRow";
+import { UniqueObject } from "./uniqueObject";
 
 /**
  * Model for DataTable
  */
-export class DataTable {
+export class DataTable extends UniqueObject {
     public static parse(obj: GherkinDataTable): DataTable {
         if (!obj || !Array.isArray(obj.rows)) {
             throw new Error("The given object is not a DataTable!");
@@ -15,7 +16,9 @@ export class DataTable {
         return table;
     }
 
-    constructor(public rows: TableRow[] = []) { }
+    constructor(public rows: TableRow[] = []) {
+        super();
+    }
 
     public clone(): DataTable {
         return new DataTable(cloneArray<TableRow>(this.rows));

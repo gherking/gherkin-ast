@@ -1,6 +1,7 @@
 import { TableCell } from "../../src";
 import { TableRow } from "../../src";
 import { GherkinTableCell, GherkinTableRow } from "../../src/gherkinObject";
+import { pruneID } from "../utils";
 
 describe("TableRow", () => {
     test("should create model of a TableRow", () => {
@@ -18,6 +19,9 @@ describe("TableRow", () => {
         // When
         const rowB: TableRow = rowA.clone();
         // Then
+        expect(rowA._id).not.toEqual(rowB._id);
+        pruneID(rowA);
+        pruneID(rowB);
         expect(rowA.cells).toEqual(rowB.cells);
         expect(rowB).not.toBe(rowA);
     });

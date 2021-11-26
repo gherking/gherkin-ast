@@ -5,11 +5,12 @@ import { Element } from "./element";
 import { Scenario } from "./scenario";
 import { ScenarioOutline } from "./scenarioOutline";
 import { Tag } from "./tag";
+import { UniqueObject } from "./uniqueObject";
 
 /**
  * Model for Rule
  */
-export class Rule {
+export class Rule extends UniqueObject {
     public static parse(obj?: GherkinRule): Rule {
         if (!obj || !obj.rule || !Array.isArray(obj.rule.children)) {
             throw new TypeError("The given object is not a Rule!");
@@ -45,6 +46,7 @@ export class Rule {
     public tags: Tag[];
 
     constructor(keyword: string, name: string, description: string) {
+        super();
         this.keyword = normalizeString(keyword);
         this.name = normalizeString(name);
         this.description = normalizeString(description);
