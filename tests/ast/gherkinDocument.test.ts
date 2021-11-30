@@ -2,7 +2,7 @@ import { Document } from "../../src";
 import { Feature } from "../../src/ast/feature";
 import * as common from "../../src/common";
 import { GherkinDocument, GherkinFeature } from "../../src/gherkinObject";
-import { pruneID } from "../utils";
+import { pruneID } from "../../src/utils";
 
 describe("Document", () => {
 

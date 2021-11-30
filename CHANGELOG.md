@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.2.1 - 2021-11-30
+
+### Added
+
+- Published `pruneID` utility
+
 ## 3.2.0 - 2021-11-13
 
 ### Added

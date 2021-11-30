@@ -1,6 +1,6 @@
 // @ts-ignore
 import objectScan = require("object-scan");
-import { UniqueObject } from "../src/ast/uniqueObject";
+import { UniqueObject } from "./ast/uniqueObject";
 
 export const pruneID = <T extends UniqueObject>(input: T | T[]): T | T[] => {
     if (Array.isArray(input)) {

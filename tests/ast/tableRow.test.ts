@@ -1,7 +1,7 @@
 import { TableCell } from "../../src";
 import { TableRow } from "../../src";
 import { GherkinTableCell, GherkinTableRow } from "../../src/gherkinObject";
-import { pruneID } from "../utils";
+import { pruneID } from "../../src/utils";
 
 describe("TableRow", () => {
     test("should create model of a TableRow", () => {

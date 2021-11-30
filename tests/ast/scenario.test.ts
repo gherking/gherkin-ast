@@ -1,7 +1,7 @@
 import { Element, Scenario, Step, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinScenario, GherkinStep, GherkinTag } from "../../src/gherkinObject";
-import { pruneID } from "../utils";
+import { pruneID } from "../../src/utils";
 
 describe("Scenario", () => {
     let scenario: Scenario;

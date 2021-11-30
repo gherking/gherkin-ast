@@ -1,7 +1,7 @@
 import { Element, Examples, Scenario, ScenarioOutline, Step, TableCell, TableRow, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinExamples, GherkinScenario, GherkinStep, GherkinTag } from "../../src/gherkinObject";
-import { pruneID } from "../utils";
+import { pruneID } from "../../src/utils";
 
 describe("ScenarioOutline", () => {
     let outline: ScenarioOutline;

@@ -1,7 +1,7 @@
 import { Background, Feature, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinFeature, GherkinTag } from "../../src/gherkinObject";
-import { pruneID } from "../utils";
+import { pruneID } from "../../src/utils";
 
 describe("Feature", () => {
     test("should create a model of a Feature", () => {

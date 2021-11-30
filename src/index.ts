@@ -14,3 +14,4 @@ export * from "./ast/tableCell";
 export * from "./ast/tableRow";
 export * from "./ast/tag";
 export * from "./common";
+export * from "./utils";

@@ -1,7 +1,7 @@
 import { removeDuplicateTags, Tag, tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinTag } from "../../src/gherkinObject";
-import { pruneID } from "../utils";
+import { pruneID } from "../../src/utils";
 
 describe("Tag", () => {
     test("should create model of a tag", () => {

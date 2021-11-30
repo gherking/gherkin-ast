@@ -4,7 +4,7 @@ import { TableRow } from "../../src";
 import { Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinExamples, GherkinTableRow, GherkinTag } from "../../src/gherkinObject";
-import { pruneID } from "../utils";
+import { pruneID } from "../../src/utils";
 
 describe("Examples", () => {
     let example: Examples;

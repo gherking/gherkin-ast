@@ -1,7 +1,7 @@
 import { DataTable, TableCell, TableRow } from "../../src";
 import * as common from "../../src/common";
 import { GherkinDataTable, GherkinTableRow } from "../../src/gherkinObject";
-import { pruneID } from "../utils";
+import { pruneID } from "../../src/utils";
 
 describe("DataTable", () => {
     const cell: TableCell = new TableCell("Cell");

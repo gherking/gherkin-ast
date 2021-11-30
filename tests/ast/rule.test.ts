@@ -1,7 +1,7 @@
 import { Background, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinRule, GherkinTag } from "../../src/gherkinObject";
-import { pruneID } from "../utils";
+import { pruneID } from "../../src/utils";
 
 describe("Rule", () => {
     test("should create a model of a Rule", () => {
@@ -37,6 +37,7 @@ describe("Rule", () => {
 
         test("should clone elements", () => {
             expect(common.cloneArray).toHaveBeenCalledWith(ruleA.elements);
+            expect(ruleB.elements.length).toBe(ruleA.elements.length);
         });
     });
 
