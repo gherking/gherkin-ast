@@ -1,4 +1,5 @@
 import { normalizeString, replaceAll, replaceArray } from "../common";
+import { Comment } from "./comment";
 import { Step } from "./step";
 import { UniqueObject } from "./uniqueObject";
 
@@ -16,6 +17,11 @@ export class Element extends UniqueObject {
     public description: string;
     /** Steps of the Element */
     public steps: Step[];
+
+    // TODO
+    public precedingComments: Comment[];
+    // TODO
+    public intermediateComments: Comment[];
 
     constructor(keyword: string, name: string, description: string) {
         super();

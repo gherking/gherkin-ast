@@ -1,5 +1,6 @@
 import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common";
 import { GherkinExamples } from "../gherkinObject";
+import { Comment } from "./comment";
 import { TableRow } from "./tableRow";
 import { Tag } from "./tag";
 import { UniqueObject } from "./uniqueObject";
@@ -36,6 +37,11 @@ export class Examples extends UniqueObject {
     /** Body of the examples table */
     public body: TableRow[];
 
+    // TODO
+    public tagComments: Comment[];
+    // TODO
+    public precedingComments: Comment[];
+    
     constructor(keyword: string, name: string) {
         super();
         this.keyword = normalizeString(keyword);

@@ -1,6 +1,7 @@
 import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common";
 import { GherkinBackground, GherkinRule, GherkinScenario } from "../gherkinObject";
 import { Background } from "./background";
+import { Comment } from "./comment";
 import { Element } from "./element";
 import { Scenario } from "./scenario";
 import { ScenarioOutline } from "./scenarioOutline";
@@ -44,6 +45,13 @@ export class Rule extends UniqueObject {
     public elements: Element[];
     /** Tags of the Rule */
     public tags: Tag[];
+
+    // TODO
+    public tagComments: Comment[];
+    // TODO
+    public precedingComments: Comment[];
+    // TODO
+    public intermediateComments: Comment[];
 
     constructor(keyword: string, name: string, description: string) {
         super();

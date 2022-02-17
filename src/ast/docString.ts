@@ -1,5 +1,6 @@
 import { normalizeString, replaceAll } from "../common";
 import { GherkinDocString } from "../gherkinObject";
+import { Comment } from "./comment";
 import { UniqueObject } from "./uniqueObject";
 
 /**
@@ -16,6 +17,11 @@ export class DocString extends UniqueObject {
     public content: string;
     /** Delimiter of the DocString */
     public delimiter: string;
+
+    // TODO
+    public mediaType: string;
+    // TODO
+    public comment: Comment;
 
     constructor(content: string, delimiter = "\"\"\"") {
         super();

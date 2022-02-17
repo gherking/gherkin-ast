@@ -1,5 +1,6 @@
 import { cloneArray, replaceArray } from "../common";
 import { GherkinTableRow } from "../gherkinObject";
+import { Comment } from "./comment";
 import { TableCell } from "./tableCell";
 import { UniqueObject } from "./uniqueObject";
 
@@ -15,6 +16,9 @@ export class TableRow extends UniqueObject {
         row.cells = obj.cells.map(TableCell.parse);
         return row;
     }
+
+    // TODO
+    public comment: Comment;
 
     constructor(public cells: TableCell[] = []) {
         super();

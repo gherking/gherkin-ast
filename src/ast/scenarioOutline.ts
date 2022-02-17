@@ -1,5 +1,6 @@
 import { cloneArray, replaceArray } from "../common";
 import { GherkinScenario } from "../gherkinObject";
+import { Comment } from "./comment";
 import { Element } from "./element";
 import { Examples } from "./examples";
 import { Scenario } from "./scenario";
@@ -38,6 +39,9 @@ export class ScenarioOutline extends Element {
     /** Examples of the ScenarioOutline */
     public examples: Examples[];
 
+    // TODO
+    public tagComments: Comment[];
+    
     constructor(keyword: string, name: string, description: string) {
         super(keyword, name, description);
         this.tags = [];

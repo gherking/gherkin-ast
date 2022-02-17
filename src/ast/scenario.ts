@@ -1,5 +1,6 @@
 import { cloneArray, replaceArray } from "../common";
 import { GherkinScenario } from "../gherkinObject";
+import { Comment } from "./comment";
 import { Element } from "./element";
 import { Step } from "./step";
 import { Tag } from "./tag";
@@ -30,6 +31,9 @@ export class Scenario extends Element {
     /** CTags of the Scenario */
     public tags: Tag[];
 
+    // TODO
+    public tagComments: Comment[];
+    
     constructor(keyword: string, name: string, description: string) {
         super(keyword, name, description);
         this.tags = [];

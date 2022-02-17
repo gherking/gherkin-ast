@@ -2,6 +2,7 @@
 import ObjectSet = require("object-set-type");
 import { replaceAll, safeString } from "../common";
 import { GherkinTag } from "../gherkinObject";
+import { Comment } from "./comment";
 import { UniqueObject } from "./uniqueObject";
 
 const TAG_W_VALUE = /^@?([^(@]+)\(([^)]+)\)$/i;
@@ -32,6 +33,8 @@ export class Tag extends UniqueObject {
 
     public name: string;
     public value: string;
+    // TODO
+    public comment: Comment;
 
     constructor(name: string, value?: string) {
         super();

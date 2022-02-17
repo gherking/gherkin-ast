@@ -1,6 +1,7 @@
 import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common";
 import { GherkinBackground, GherkinFeature, GherkinRule, GherkinScenario } from "../gherkinObject";
 import { Background } from "./background";
+import { Comment } from "./comment";
 import { Element } from "./element";
 import { Rule } from "./rule";
 import { Scenario } from "./scenario";
@@ -50,6 +51,13 @@ export class Feature extends UniqueObject {
     public elements: (Element | Rule)[];
     /** Tags of the Feature */
     public tags: Tag[];
+
+    // TODO
+    public tagComments: Comment[];
+    // TODO
+    public precedingComments: Comment[];
+    // TODO
+    public intermediateComments: Comment[];
 
     constructor(keyword: string, name: string, description: string, language = "en") {
         super();

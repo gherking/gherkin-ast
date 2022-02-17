@@ -1,5 +1,6 @@
 import { normalizeString, replaceAll } from "../common";
 import { GherkinStep } from "../gherkinObject";
+import { Comment } from "./comment";
 import { DataTable } from "./dataTable";
 import { DocString } from "./docString";
 import { UniqueObject } from "./uniqueObject";
@@ -34,6 +35,9 @@ export class Step extends UniqueObject {
     /** DocString of the Step */
     public docString: DocString;
 
+    // TODO
+    public comment: Comment;
+    
     constructor(keyword: string, text: string) {
         super();
         this.keyword = normalizeString(keyword);

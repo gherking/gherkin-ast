@@ -1,7 +1,13 @@
+export interface GherkinComment {
+    location: GherkinLocation;
+    text: string;
+}
+
 export interface GherkinDocument {
     gherkinDocument: {
         uri: string;
         feature: GherkinFeature;
+        comments: GherkinComment[];
     };
 }
 
@@ -17,6 +23,7 @@ export interface GherkinFeature {
 
 export interface GherkinRule {
     rule: {
+        id: string;
         location: GherkinLocation;
         tags: GherkinTag[];
         keyword: string;
@@ -28,6 +35,7 @@ export interface GherkinRule {
 
 export interface GherkinBackground {
     background: {
+        id: string;
         location: GherkinLocation;
         keyword: string;
         name: string;
@@ -38,6 +46,7 @@ export interface GherkinBackground {
 
 export interface GherkinScenario {
     scenario: {
+        id: string;
         location: GherkinLocation;
         tags: GherkinTag[];
         keyword: string;
@@ -54,11 +63,13 @@ export interface GherkinLocation {
 }
 
 export interface GherkinTag {
+    id: string;
     location: GherkinLocation;
     name: string;
 }
 
 export interface GherkinStep {
+    id: string;
     location: GherkinLocation;
     keyword: string;
     text: string;
@@ -72,6 +83,7 @@ export interface GherkinDataTable {
 }
 
 export interface GherkinTableRow {
+    id: string;
     location: GherkinLocation;
     cells: GherkinTableCell[];
 }
@@ -85,9 +97,11 @@ export interface GherkinDocString {
     location: GherkinLocation;
     content: string;
     delimiter: string;
+    mediaType: string;
 }
 
 export interface GherkinExamples {
+    id: string;
     location: GherkinLocation;
     tags: GherkinTag[];
     keyword: string;
