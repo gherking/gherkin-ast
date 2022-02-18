@@ -15,20 +15,25 @@ export class Element extends UniqueObject {
     public name: string;
     /** Description of the Element */
     public description: string;
+
     /** Steps of the Element */
     public steps: Step[];
-
-    // TODO
-    public precedingComments: Comment[];
-    // TODO
-    public intermediateComments: Comment[];
+    
+    /** Comment before the Element */
+    public precedingComment: Comment;
+    /** Comment after the description of the Element */
+    public descriptionComment: Comment;
 
     constructor(keyword: string, name: string, description: string) {
         super();
         this.keyword = normalizeString(keyword);
         this.name = normalizeString(name);
         this.description = normalizeString(description);
+        
         this.steps = [];
+        
+        this.precedingComment = null;
+        this.descriptionComment = null;
     }
 
     public clone(): Element {
@@ -38,7 +43,11 @@ export class Element extends UniqueObject {
     public replace(key: RegExp | string, value: string): void {
         this.name = replaceAll(this.name, key, value);
         this.description = replaceAll(this.description, key, value);
+    
         replaceArray<Step>(this.steps, key, value);
+    
+        this.precedingComment && this.precedingComment.replace(key, value);
+        this.descriptionComment && this.descriptionComment.replace(key, value);
     }
 
     public useNormalStepKeywords(): void {

@@ -7,7 +7,7 @@ export interface GherkinDocument {
     gherkinDocument: {
         uri: string;
         feature: GherkinFeature;
-        comments: GherkinComment[];
+        comments?: GherkinComment[];
     };
 }
 
@@ -23,7 +23,7 @@ export interface GherkinFeature {
 
 export interface GherkinRule {
     rule: {
-        id: string;
+        id?: string;
         location: GherkinLocation;
         tags: GherkinTag[];
         keyword: string;
@@ -33,9 +33,13 @@ export interface GherkinRule {
     };
 }
 
+export function isGherkinRule(obj: unknown): obj is GherkinRule {
+    return !!(obj as GherkinRule).rule;
+}
+
 export interface GherkinBackground {
     background: {
-        id: string;
+        id?: string;
         location: GherkinLocation;
         keyword: string;
         name: string;
@@ -44,9 +48,13 @@ export interface GherkinBackground {
     };
 }
 
+export function isGherkinBackground(obj: unknown): obj is GherkinBackground {
+    return !!(obj as GherkinBackground).background;
+}
+
 export interface GherkinScenario {
     scenario: {
-        id: string;
+        id?: string;
         location: GherkinLocation;
         tags: GherkinTag[];
         keyword: string;
@@ -57,19 +65,23 @@ export interface GherkinScenario {
     };
 }
 
+export function isGherkinScenario(obj: unknown): obj is GherkinScenario {
+    return !!(obj as GherkinScenario).scenario;
+}
+
 export interface GherkinLocation {
     line: number;
     column: number;
 }
 
 export interface GherkinTag {
-    id: string;
+    id?: string;
     location: GherkinLocation;
     name: string;
 }
 
 export interface GherkinStep {
-    id: string;
+    id?: string;
     location: GherkinLocation;
     keyword: string;
     text: string;
@@ -83,7 +95,7 @@ export interface GherkinDataTable {
 }
 
 export interface GherkinTableRow {
-    id: string;
+    id?: string;
     location: GherkinLocation;
     cells: GherkinTableCell[];
 }
@@ -101,7 +113,7 @@ export interface GherkinDocString {
 }
 
 export interface GherkinExamples {
-    id: string;
+    id?: string;
     location: GherkinLocation;
     tags: GherkinTag[];
     keyword: string;

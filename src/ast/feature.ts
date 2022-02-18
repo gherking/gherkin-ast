@@ -1,3 +1,4 @@
+import { GherkinCommentHandler, GherkinLocation, isGherkinBackground, isGherkinRule, isGherkinScenario } from "..";
 import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common";
 import { GherkinBackground, GherkinFeature, GherkinRule, GherkinScenario } from "../gherkinObject";
 import { Background } from "./background";
@@ -13,29 +14,45 @@ import { UniqueObject } from "./uniqueObject";
  * Model for Feature
  */
 export class Feature extends UniqueObject {
-    public static parse(obj?: GherkinFeature): Feature {
+    public static parse(obj: GherkinFeature, comments?: GherkinCommentHandler): Feature {
         if (!obj || !Array.isArray(obj.children)) {
             throw new TypeError("The given object is not a Feature!");
         }
-        const { keyword, language, description, children, name, tags } = obj;
+        const { keyword, language, description, children, name, tags, location } = obj;
         const feature: Feature = new Feature(keyword, name, description, language);
-        if (Array.isArray(tags)) {
-            feature.tags = tags.map(Tag.parse);
-        } else {
-            feature.tags = [];
-        }
+
+        feature.precedingComment = comments?.parseComment(location);
+        feature.tagComment = comments?.parseTagComment(tags);
+
+        feature.tags = Tag.parseAll(tags, comments);
+
+        let firstLocation: GherkinLocation = null;
         feature.elements = children.map((child: GherkinRule | GherkinBackground | GherkinScenario): Element | Rule => {
-            if ((child as GherkinRule).rule) {
-                return Rule.parse(child as GherkinRule);
+            if (isGherkinRule(child)) {
+                if (!firstLocation) {
+                    firstLocation = child.rule.location;
+                }
+                return Rule.parse(child, comments);
             }
-            if ((child as GherkinBackground).background) {
-                return Background.parse(child as GherkinBackground);
+            if (isGherkinBackground(child)) {
+                if (!firstLocation) {
+                    firstLocation = child.background.location;
+                }
+                return Background.parse(child, comments);
             }
-            if ((child as GherkinScenario).scenario?.examples?.length) {
-                return ScenarioOutline.parse(child as GherkinScenario);
+            if (isGherkinScenario(child)) {
+                if (!firstLocation) {
+                    firstLocation = child.scenario.location;
+                }
+                if (child.scenario?.examples?.length) {
+                    return ScenarioOutline.parse(child, comments);
+                }
+                return Scenario.parse(child, comments);
             }
-            return Scenario.parse(child as GherkinScenario);
         });
+
+        feature.descriptionComment = comments?.parseCommentBetween(location, firstLocation);
+
         return feature;
     }
 
@@ -52,21 +69,28 @@ export class Feature extends UniqueObject {
     /** Tags of the Feature */
     public tags: Tag[];
 
-    // TODO
-    public tagComments: Comment[];
-    // TODO
-    public precedingComments: Comment[];
-    // TODO
-    public intermediateComments: Comment[];
+    /** Comment before all tag */
+    public tagComment: Comment;
+    /** Comment before the Feature */
+    public precedingComment: Comment;
+    /** Comment below the description of the Feature */
+    public descriptionComment: Comment;
 
     constructor(keyword: string, name: string, description: string, language = "en") {
         super();
+
+        this.language = language;
+
         this.keyword = normalizeString(keyword);
         this.name = normalizeString(name);
         this.description = normalizeString(description);
-        this.language = language;
+
         this.elements = [];
         this.tags = [];
+
+        this.precedingComment = null;
+        this.tagComment = null;
+        this.descriptionComment = null;
     }
 
     public clone(): Feature {
@@ -74,15 +98,26 @@ export class Feature extends UniqueObject {
             this.keyword, this.name,
             this.description, this.language,
         );
+
         feature.tags = cloneArray<Tag>(this.tags);
         feature.elements = cloneArray<Element | Rule>(this.elements);
+
+        feature.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
+        feature.tagComment = this.tagComment ? this.tagComment.clone() : null;
+        feature.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
+
         return feature;
     }
 
     public replace(key: RegExp | string, value: string): void {
         this.name = replaceAll(this.name, key, value);
         this.description = replaceAll(this.description, key, value);
+
         replaceArray<Tag>(this.tags, key, value);
         replaceArray<Element | Rule>(this.elements, key, value);
+
+        this.precedingComment && this.precedingComment.replace(key, value);
+        this.tagComment && this.tagComment.replace(key, value);
+        this.descriptionComment && this.descriptionComment.replace(key, value);
     }
 }

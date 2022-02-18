@@ -1,0 +1,405 @@
+{
+  "_id": "e04aa230-21a1-4374-b4be-7408f072f12d",
+  "uri": "tests/data/comment.feature",
+  "feature": {
+    "_id": "89880ca4-d607-4d62-bce1-4984ed853981",
+    "language": "en",
+    "keyword": "Feature",
+    "name": "Name",
+    "description": "Feature description\nOther fekature description",
+    "elements": [
+      {
+        "_id": "43a65ee0-779e-402f-b91e-98bb1d80a751",
+        "keyword": "Rule",
+        "name": "Name",
+        "description": "Rule description\nOther rule description",
+        "elements": [
+          {
+            "_id": "f846d1fc-a5d9-474e-8c6b-26c25dc8cd48",
+            "keyword": "Background",
+            "name": "Name",
+            "description": "Background description\nOther background description",
+            "steps": [
+              {
+                "_id": "2f8588bd-0374-4fab-8755-c9fa2fdbad30",
+                "keyword": "Given",
+                "text": "step",
+                "dataTable": null,
+                "docString": null,
+                "comment": {
+                  "_id": "0595eeb4-2f50-46a0-8c40-acaab20b0872",
+                  "text": "# Comment(s) of the given step"
+                }
+              },
+              {
+                "_id": "a2dd4beb-38dc-45b2-9144-d4465e52d1f4",
+                "keyword": "When",
+                "text": "step",
+                "dataTable": null,
+                "docString": null,
+                "comment": {
+                  "_id": "f7575573-860c-427f-8308-3bc732d9db74",
+                  "text": "# Comment(s) of the when step"
+                }
+              },
+              {
+                "_id": "8dfe39b8-bee1-4b25-905f-3cada4e54aa0",
+                "keyword": "Then",
+                "text": "step",
+                "dataTable": null,
+                "docString": null,
+                "comment": {
+                  "_id": "06f0e676-9962-40ac-99a7-3dc73e0808ee",
+                  "text": "# Comment(s) of the then step"
+                }
+              }
+            ],
+            "precedingComment": {
+              "_id": "49506a55-0685-43ce-b22d-244b2197bf3d",
+              "text": "# Comment(s) of the background"
+            },
+            "descriptionComment": {
+              "_id": "686882b2-d63d-457d-ad8b-2eea566e31a0",
+              "text": "# Additional comment(s) of the background"
+            }
+          },
+          {
+            "_id": "fb45b014-bb6d-440a-b13f-146b496085d6",
+            "keyword": "Scenario",
+            "name": "Name",
+            "description": "Scenario description\nOther scenario description",
+            "steps": [
+              {
+                "_id": "bb02ff5e-c625-4e75-8ceb-6397c98db4e8",
+                "keyword": "Given",
+                "text": "step",
+                "dataTable": null,
+                "docString": {
+                  "_id": "6adab533-a05b-4867-a4d1-62b0ad720ffa",
+                  "content": "docstring\nother docstring",
+                  "delimiter": "\"\"\"",
+                  "mediaType": null,
+                  "comment": {
+                    "_id": "8f9fcc91-f7b3-4228-baca-a38cba808e7a",
+                    "text": "# Comment(s) of the docstirng"
+                  }
+                },
+                "comment": {
+                  "_id": "2d1affa6-7437-44e3-8bd3-4f264db5b21a",
+                  "text": "# Comment(s) of the given step"
+                }
+              },
+              {
+                "_id": "edfe82dc-70e6-46da-8116-d9aff212d48e",
+                "keyword": "When",
+                "text": "step",
+                "dataTable": {
+                  "_id": "714a0720-65a7-46ce-aac6-73f206df7854",
+                  "rows": [
+                    {
+                      "_id": "b560bebc-9672-4b1a-b0a2-4b6bdb33d909",
+                      "cells": [
+                        {
+                          "_id": "47e28c50-9af2-4d16-b06e-fe2da8427715",
+                          "value": "data"
+                        },
+                        {
+                          "_id": "c1cf184a-64c2-4e87-ba79-1e7724d288ef",
+                          "value": "table"
+                        }
+                      ],
+                      "comment": {
+                        "_id": "c2e4be32-cd00-430d-a44d-1f0b9afd6751",
+                        "text": "# Comment(s) of the data table header (row)"
+                      }
+                    },
+                    {
+                      "_id": "b45cdd73-1d0a-4a0a-bf87-b0d3659ce8c4",
+                      "cells": [
+                        {
+                          "_id": "fc172df2-c5e4-41f5-a3b5-345ba3373550",
+                          "value": "value"
+                        },
+                        {
+                          "_id": "54ec0008-46c5-44ac-8437-b2ea5aa4ec66",
+                          "value": "value"
+                        }
+                      ],
+                      "comment": {
+                        "_id": "28806cd4-0a4d-43b0-8103-95ac6e4986b3",
+                        "text": "# Comment(s) of a data table row"
+                      }
+                    },
+                    {
+                      "_id": "b3b87bf3-b686-4bb0-b7c5-e1b499f7e8d5",
+                      "cells": [
+                        {
+                          "_id": "3ab8b491-6bff-4eda-99fb-29da20508e3a",
+                          "value": "value"
+                        },
+                        {
+                          "_id": "fac16300-16b8-4fb0-84f2-2eafe8853553",
+                          "value": "value"
+                        }
+                      ],
+                      "comment": null
+                    }
+                  ]
+                },
+                "docString": null,
+                "comment": {
+                  "_id": "5cc6f9d1-cd23-4ca9-a9ad-31179ab585dd",
+                  "text": "# Comment(s) of the when step"
+                }
+              },
+              {
+                "_id": "239727b8-4cf7-40ff-870f-660dd141f46f",
+                "keyword": "Then",
+                "text": "step",
+                "dataTable": null,
+                "docString": {
+                  "_id": "183bb130-c569-4943-859e-1c5a140e2d12",
+                  "content": "title\n=====\ndocstring with content type",
+                  "delimiter": "\"\"\"",
+                  "mediaType": "markdown",
+                  "comment": null
+                },
+                "comment": {
+                  "_id": "f5abb9c7-cee0-473f-97ee-17139c9b5234",
+                  "text": "# Comment(s) of the then step"
+                }
+              },
+              {
+                "_id": "5e5c3322-0367-4123-8414-cb2d3be6f5b8",
+                "keyword": "And",
+                "text": "step",
+                "dataTable": null,
+                "docString": {
+                  "_id": "34e53828-783c-4687-a252-086c5d79cb86",
+                  "content": "docstring with backtick and content type",
+                  "delimiter": "```",
+                  "mediaType": "markdown",
+                  "comment": null
+                },
+                "comment": null
+              }
+            ],
+            "precedingComment": {
+              "_id": "e9b85654-bf6d-4dbf-975f-ac2215690c4c",
+              "text": "# Comment(s) of the scenario"
+            },
+            "descriptionComment": {
+              "_id": "e071bc15-2029-4f03-963f-177b380e6af8",
+              "text": "# Additional comment(s) of the scenario"
+            },
+            "tags": [
+              {
+                "_id": "5f35bf79-009a-4f7a-b12f-61bafb496c3f",
+                "name": "tag1",
+                "comment": null
+              },
+              {
+                "_id": "68f51ca6-5beb-4f12-ac04-2d37ca371f34",
+                "name": "tag2",
+                "comment": null
+              }
+            ],
+            "tagComment": {
+              "_id": "6168331c-3408-4a22-b304-c6e6ee9f8db5",
+              "text": "# Comment(s) of all tags"
+            }
+          },
+          {
+            "_id": "b9756884-a38b-4a4b-b915-0d1c01dbaf00",
+            "keyword": "Scenario Outline",
+            "name": "Name",
+            "description": "Scenario outline description\nOther scenario outline description",
+            "steps": [
+              {
+                "_id": "7e6e689b-578f-4a49-8342-28a5e8f29778",
+                "keyword": "Given",
+                "text": "step <v>",
+                "dataTable": null,
+                "docString": null,
+                "comment": null
+              },
+              {
+                "_id": "db28a0d6-1540-4f99-b8fb-a9be7b61d9fd",
+                "keyword": "When",
+                "text": "step <w>",
+                "dataTable": null,
+                "docString": null,
+                "comment": null
+              }
+            ],
+            "precedingComment": {
+              "_id": "725c25c5-5329-4cad-accf-125de7267dea",
+              "text": "# Comment(s) of the scenario outline"
+            },
+            "descriptionComment": {
+              "_id": "b27bc28b-f797-4e6f-af00-3f822d986387",
+              "text": "# Another comment(s) of the scenario outline"
+            },
+            "tags": [
+              {
+                "_id": "f2b7a69a-3df7-4ab4-bfef-821669f4a7c8",
+                "name": "tag1",
+                "comment": null
+              },
+              {
+                "_id": "8e3475c7-a34f-4072-b9fe-174674f70dec",
+                "name": "tag2",
+                "comment": null
+              }
+            ],
+            "examples": [
+              {
+                "_id": "81a6b3d1-8016-41f7-8e9a-e06128d15cdf",
+                "keyword": "Examples",
+                "name": "Name",
+                "header": {
+                  "_id": "a8325daa-eb73-4e40-bb71-11bd0b2072c7",
+                  "cells": [
+                    {
+                      "_id": "30b6373e-21e6-48fe-9ea2-df98a7d43f62",
+                      "value": "v"
+                    },
+                    {
+                      "_id": "1c6ead1e-3f31-458a-9e29-9149e2caca71",
+                      "value": "w"
+                    }
+                  ],
+                  "comment": {
+                    "_id": "851559c1-50db-4e9b-995a-376df6c67199",
+                    "text": "# Comment(s) of the examples table"
+                  }
+                },
+                "precedingComment": {
+                  "_id": "2f99bef1-f4d4-4dbc-8fce-156db7883ca4",
+                  "text": "# Comment(s) of the examples"
+                },
+                "tags": [
+                  {
+                    "_id": "72454870-92ab-4b0f-a3c5-dc1ca141d4ca",
+                    "name": "tag1",
+                    "comment": null
+                  },
+                  {
+                    "_id": "af664e97-b4fa-47b4-afaf-1ff13059d578",
+                    "name": "tag2",
+                    "comment": null
+                  }
+                ],
+                "body": [
+                  {
+                    "_id": "c644c83f-ef76-4602-a456-29685e51b26f",
+                    "cells": [
+                      {
+                        "_id": "ab6a3f4a-7b82-400b-b051-569cb9ba72c9",
+                        "value": "1"
+                      },
+                      {
+                        "_id": "7ca18b1e-19ba-48da-a764-3b1a61700900",
+                        "value": "2"
+                      }
+                    ],
+                    "comment": {
+                      "_id": "65609015-9268-40f4-8fe7-393f4fb04693",
+                      "text": "# Comment(s) of an examples table row"
+                    }
+                  },
+                  {
+                    "_id": "498eebee-9203-4214-9679-dd55c418b778",
+                    "cells": [
+                      {
+                        "_id": "9aa602f2-3729-4a58-a0e6-c1cbf0c9882b",
+                        "value": "2"
+                      },
+                      {
+                        "_id": "1bec4c21-9635-46bb-b793-7a1313fe9f99",
+                        "value": "3"
+                      }
+                    ],
+                    "comment": null
+                  }
+                ],
+                "tagComment": {
+                  "_id": "3863a6df-f644-4f22-83e0-46f9db1dbb0f",
+                  "text": "# Comment(s) of all tags"
+                }
+              }
+            ],
+            "tagComment": {
+              "_id": "013a104f-0db7-44c2-b82d-10547e2d1db5",
+              "text": "# Comment(s) of all tags"
+            }
+          }
+        ],
+        "tags": [
+          {
+            "_id": "1261591b-6b97-41d0-9789-6c42ceb9743f",
+            "name": "tag1",
+            "comment": null
+          },
+          {
+            "_id": "be842d61-5581-4d5c-8866-62fa713dd468",
+            "name": "tag2",
+            "comment": null
+          }
+        ],
+        "precedingComment": {
+          "_id": "138cc340-56fb-40bd-aca3-93097cbf82eb",
+          "text": "# Comment(s) of the rule"
+        },
+        "tagComment": {
+          "_id": "829b6b1e-d49e-4dc5-867b-3bb283cd0d4d",
+          "text": "# Comment(s) of all tags"
+        },
+        "descriptionComment": {
+          "_id": "81d62872-113e-44c2-ae0b-ba40e7a2beb5",
+          "text": "# Additional comment(s) of the rule"
+        }
+      }
+    ],
+    "tags": [
+      {
+        "_id": "5a486a0c-55e4-4c13-b4e9-845ca8897186",
+        "name": "tag1",
+        "comment": null
+      },
+      {
+        "_id": "f6039f4f-9941-4f8a-b958-b028dc682596",
+        "name": "tag2",
+        "comment": null
+      },
+      {
+        "_id": "ece4923f-f03e-49d6-8010-7e36333fe6f2",
+        "name": "tag3",
+        "comment": {
+          "_id": "14242ec4-786b-451a-a32e-9a4f712b22f1",
+          "text": "# Comment(s) of @tag3"
+        }
+      }
+    ],
+    "precedingComment": {
+      "_id": "3136e0a9-b5b4-4148-9ddc-fbbb8b2a57a3",
+      "text": "# Comment(s) of the feature"
+    },
+    "tagComment": {
+      "_id": "a46478d6-1afe-45cb-90b1-21bb4b061bc8",
+      "text": "# Comment(s) of all tags"
+    },
+    "descriptionComment": {
+      "_id": "db5ae781-9c6e-4d38-aab2-95f807febc3a",
+      "text": "# Additional comment(s) of the feature"
+    }
+  },
+  "startComment": {
+    "_id": "b620dbd9-ce3c-4b20-b275-0616d02114fc",
+    "text": "# Comment(s) at the beginning of the file"
+  },
+  "endComment": {
+    "_id": "5599cf5b-177c-484c-a50e-e89b86a80da5",
+    "text": "# General comment(s)"
+  }
+}

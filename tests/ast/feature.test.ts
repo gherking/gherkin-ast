@@ -104,13 +104,13 @@ describe("Feature", () => {
                     { name: "TAG" } as GherkinTag,
                 ],
             } as GherkinFeature;
-            jest.spyOn(Tag, "parse");
+            jest.spyOn(Tag, "parseAll");
             const feature: Feature = Feature.parse(obj);
             expect(feature).toBeDefined();
             expect(feature._id).toBeDefined();
             expect(feature.tags).toHaveLength(1);
-            expect(Tag.parse).toHaveBeenCalledTimes(1);
-            expect(Tag.parse).toHaveBeenCalledWith(obj.tags[0], expect.any(Number), expect.any(Array));
+            expect(Tag.parseAll).toHaveBeenCalledTimes(1);
+            expect(Tag.parseAll).toHaveBeenCalledWith(obj.tags, undefined);
         });
 
         test("should parse GherkingRule children", () => {
@@ -137,7 +137,7 @@ describe("Feature", () => {
             expect(feature._id).toBeDefined();
             expect(feature.elements).toHaveLength(1);
             expect(Rule.parse).toHaveBeenCalledTimes(1);
-            expect(Rule.parse).toHaveBeenCalledWith(obj.children[0]);
+            expect(Rule.parse).toHaveBeenCalledWith(obj.children[0], undefined);
         });
 
         test("should parse GherkinBackground children", () => {
@@ -162,7 +162,7 @@ describe("Feature", () => {
             expect(feature).toBeDefined();
             expect(feature.elements).toHaveLength(1);
             expect(Background.parse).toHaveBeenCalledTimes(1);
-            expect(Background.parse).toHaveBeenCalledWith(obj.children[0]);
+            expect(Background.parse).toHaveBeenCalledWith(obj.children[0], undefined);
         });
 
         test("should parse GherkinScenario children", () => {
@@ -195,8 +195,8 @@ describe("Feature", () => {
             expect(feature).toBeDefined();
             expect(feature.elements).toHaveLength(2);
             expect(Scenario.parse).toHaveBeenCalledTimes(2);
-            expect(Scenario.parse).toHaveBeenCalledWith(obj.children[0]);
-            expect(Scenario.parse).toHaveBeenCalledWith(obj.children[1]);
+            expect(Scenario.parse).toHaveBeenCalledWith(obj.children[0], undefined);
+            expect(Scenario.parse).toHaveBeenCalledWith(obj.children[1], undefined);
         });
 
         test("should parse GherkinScenario as Outline children", () => {
@@ -236,8 +236,8 @@ describe("Feature", () => {
             expect(feature).toBeDefined();
             expect(feature.elements).toHaveLength(2);
             expect(ScenarioOutline.parse).toHaveBeenCalledTimes(1);
-            expect(ScenarioOutline.parse).toHaveBeenCalledWith(obj.children[0]);
-            expect(ScenarioOutline.parse).not.toHaveBeenCalledWith(obj.children[1]);
+            expect(ScenarioOutline.parse).toHaveBeenCalledWith(obj.children[0], undefined);
+            expect(ScenarioOutline.parse).not.toHaveBeenCalledWith(obj.children[1], undefined);
         });
     });
 });

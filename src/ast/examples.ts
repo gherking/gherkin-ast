@@ -1,4 +1,4 @@
-import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common";
+import { cloneArray, normalizeString, replaceAll, replaceArray, GherkinCommentHandler } from "../common";
 import { GherkinExamples } from "../gherkinObject";
 import { Comment } from "./comment";
 import { TableRow } from "./tableRow";
@@ -9,20 +9,22 @@ import { UniqueObject } from "./uniqueObject";
  * Model for Examples table
  */
 export class Examples extends UniqueObject {
-    public static parse(obj?: GherkinExamples): Examples {
+    public static parse(obj: GherkinExamples, comments?: GherkinCommentHandler): Examples {
         if (!obj || !Array.isArray(obj.tableBody)) {
             throw new TypeError("The given obj is not an Examples!");
         }
         const examples: Examples = new Examples(obj.keyword, obj.name);
-        if (Array.isArray(obj.tags)) {
-            examples.tags = obj.tags.map(Tag.parse);
-        } else {
-            examples.tags = [];
-        }
-        examples.body = obj.tableBody.map(TableRow.parse);
+
+        examples.precedingComment = comments?.parseComment(obj.location);
+        examples.tagComment = comments?.parseTagComment(obj.tags);
+
+        examples.tags = Tag.parseAll(obj.tags, comments);
+
         if (obj.tableHeader) {
-            examples.header = TableRow.parse(obj.tableHeader);
+            examples.header = TableRow.parse(obj.tableHeader, comments);
         }
+        examples.body = TableRow.parseAll(obj.tableBody, comments);
+
         return examples;
     }
 
@@ -36,33 +38,45 @@ export class Examples extends UniqueObject {
     public header: TableRow;
     /** Body of the examples table */
     public body: TableRow[];
+    /** Comment before all tags */
+    public tagComment: Comment;
+    /** Comment before the Examples */
+    public precedingComment: Comment;
 
-    // TODO
-    public tagComments: Comment[];
-    // TODO
-    public precedingComments: Comment[];
-    
     constructor(keyword: string, name: string) {
         super();
+
         this.keyword = normalizeString(keyword);
         this.name = normalizeString(name);
-        this.tags = [];
+
         this.header = null;
+        this.precedingComment = null;
+
+        this.tags = [];
         this.body = [];
     }
 
     public clone(): Examples {
         const examples: Examples = new Examples(this.keyword, this.name);
-        examples.tags = cloneArray<Tag>(this.tags);
+
         examples.header = this.header ? this.header.clone() : null;
+        examples.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
+        examples.tagComment = this.tagComment ? this.tagComment.clone() : null;
+
+        examples.tags = cloneArray<Tag>(this.tags);
         examples.body = cloneArray<TableRow>(this.body);
+
         return examples;
     }
 
     public replace(key: RegExp | string, value: string): void {
         this.name = replaceAll(this.name, key, value);
+
+        this.header && this.header.replace(key, value);
+        this.precedingComment && this.precedingComment.replace(key, value);
+        this.tagComment && this.tagComment.replace(key, value);
+
         replaceArray<Tag>(this.tags, key, value);
         replaceArray<TableRow>(this.body, key, value);
-        this.header && this.header.replace(key, value);
     }
 }

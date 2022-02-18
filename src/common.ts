@@ -1,4 +1,5 @@
-import { GherkinComment, GherkinLocation } from ".";
+import { GherkinComment, GherkinLocation, GherkinTag } from ".";
+import { Comment } from "./ast/comment";
 
 export const safeString = (s = ""): string => s.replace(/\s/g, "_");
 
@@ -36,8 +37,18 @@ export const replaceArray = <T extends Replacable>(array: T[], key: RegExp | str
 };
 
 export class GherkinCommentHandler {
+    private firstLine: number;
+    private lastLine: number;
+
     constructor(public comments: GherkinComment[]) {
-        this.comments = [...comments];
+        this.comments = comments ? [...comments] : [];
+        this.firstLine = Infinity;
+        this.lastLine = 0;
+    }
+
+    private storeLine(line: number): void {
+        this.firstLine = Math.min(this.firstLine, line);
+        this.lastLine = Math.max(this.lastLine, line);
     }
 
     public findCommentIndexBefore(location: GherkinLocation): number {
@@ -54,6 +65,7 @@ export class GherkinCommentHandler {
     }
 
     public popCommentsRightBefore(location: GherkinLocation): GherkinComment[] {
+        this.storeLine(location.line);
         let i = this.findCommentIndexBefore(location);
         const comments: GherkinComment[] = [];
         if (i > -1) {
@@ -66,5 +78,62 @@ export class GherkinCommentHandler {
             }
         }
         return comments;
+    }
+
+    public parseComment(location: GherkinLocation): Comment {
+        const comments = this.popCommentsRightBefore(location);
+        if (comments.length) {
+            return Comment.parse(...comments);
+        }
+        return null;
+    }
+
+    public parseTagComment(tags: GherkinTag[]): Comment {
+        if (!Array.isArray(tags) || !tags.length) {
+            return null;
+        }
+        return this.parseComment(tags[0].location);
+    }
+
+    public parseCommentBetween(locA: GherkinLocation, locB: GherkinLocation): Comment {
+        this.storeLine(locA.line);
+        this.storeLine(locB.line);
+        let i = 0;
+        const comments: GherkinComment[] = [];
+        for (; i < this.comments.length && this.comments[i].location.line < locA.line; ++i);
+        for (; i < this.comments.length && this.comments[i].location.line < locB.line;) {
+            comments.push(this.popFromIndex(i));
+        }
+        return this.parseMultiLineComment(comments);
+    }
+
+    public parseStartingComment(): Comment {
+        const comments: GherkinComment[] = [];
+        for (let i = 0; i < this.comments.length && this.comments[i].location.line < this.firstLine;) {
+            comments.push(this.popFromIndex(i));
+        }
+        return this.parseMultiLineComment(comments);
+    }
+
+    public parseEndingComment(): Comment {
+        const comments: GherkinComment[] = [];
+        let i = 0;
+        for (; i < this.comments.length && this.comments[i].location.line < this.lastLine; ++i);
+        for (; i < this.comments.length;) {
+            comments.push(this.popFromIndex(i));
+        }
+        return this.parseMultiLineComment(comments);
+    }
+
+    private parseMultiLineComment(comments: GherkinComment[]): Comment {
+        if (!comments.length) {
+            return null;
+        }
+        const lines: string[] = [];
+        const firstLine = comments[0].location.line;
+        for (const comment of comments) {
+            lines[comment.location.line - firstLine] = comment.text;
+        }
+        return new Comment(lines.join("\n"));
     }
 }

@@ -1,4 +1,4 @@
-import { cloneArray, replaceArray } from "../common";
+import { cloneArray, replaceArray, GherkinCommentHandler } from "../common";
 import { GherkinDataTable } from "../gherkinObject";
 import { TableRow } from "./tableRow";
 import { UniqueObject } from "./uniqueObject";
@@ -7,12 +7,14 @@ import { UniqueObject } from "./uniqueObject";
  * Model for DataTable
  */
 export class DataTable extends UniqueObject {
-    public static parse(obj: GherkinDataTable): DataTable {
+    public static parse(obj: GherkinDataTable, comments?: GherkinCommentHandler): DataTable {
         if (!obj || !Array.isArray(obj.rows)) {
             throw new Error("The given object is not a DataTable!");
         }
         const table: DataTable = new DataTable();
-        table.rows = obj.rows.map(TableRow.parse);
+        
+        table.rows = TableRow.parseAll(obj.rows, comments);
+        
         return table;
     }
 

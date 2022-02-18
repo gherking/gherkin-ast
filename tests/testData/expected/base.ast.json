@@ -1,0 +1,399 @@
+{
+  "_id": "7f8b7fe0-fb01-4369-bd23-c8b67c9cedaf",
+  "uri": "D:\\Repos\\gherkin-ast\\test\\data\\base.feature",
+  "feature": {
+    "_id": "d67e9933-05eb-4de6-b82d-d74177cb8f37",
+    "language": "en",
+    "keyword": "Feature",
+    "name": "Hello world",
+    "description": "As a smth\nI want to do smth\nSo that I am smth",
+    "elements": [
+      {
+        "_id": "aa3ad9b6-c3a7-494d-a7fd-bc9a012dc76d",
+        "keyword": "Background",
+        "name": "Name of background",
+        "description": "Description of background",
+        "steps": [
+          {
+            "_id": "f5f37cfb-18ab-47af-8f62-c3d69fd45dd4",
+            "keyword": "Given",
+            "text": "this is a given step",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "7c05285d-53bf-40b4-a794-d4e77a5c50bf",
+            "keyword": "And",
+            "text": "this is a given step too",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "03eda112-6186-48f5-a295-9b1749eb68bc",
+            "keyword": "When",
+            "text": "this is a when step",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "7b41bd4b-9bbf-48a7-9928-c30a275609dd",
+            "keyword": "And",
+            "text": "this is a when step too",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "2698d7a3-e54a-49ea-b50d-7697a6a298c7",
+            "keyword": "Then",
+            "text": "it should be a then step",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "8951a5ed-5e36-438f-b5c5-0085eea8ed2a",
+            "keyword": "And",
+            "text": "it should be a then step too",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          }
+        ],
+        "precedingComment": null,
+        "descriptionComment": null
+      },
+      {
+        "_id": "abf826f8-46ae-4149-a89e-7178e9e61b51",
+        "keyword": "Scenario",
+        "name": "Name of scenario",
+        "description": "Description of the scenario",
+        "steps": [
+          {
+            "_id": "57ddb17f-7bed-4dd5-91bf-468a18595823",
+            "keyword": "Given",
+            "text": "this is a given step",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "71be72fe-e01b-421c-b7a1-d9f9e6998c8b",
+            "keyword": "And",
+            "text": "this is a given step too",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "ac04b572-a596-4b2f-b1db-98e2757e312c",
+            "keyword": "When",
+            "text": "this is a when step with data table",
+            "dataTable": {
+              "_id": "6bf2a546-25a5-4e84-8bdd-fe3f5987e95e",
+              "rows": [
+                {
+                  "_id": "5369f48f-1e09-4acc-927f-89ef3278325e",
+                  "cells": [
+                    {
+                      "_id": "275c5f87-ef5a-40bf-8ea3-8d25f1a2610a",
+                      "value": "val1"
+                    }
+                  ],
+                  "comment": null
+                },
+                {
+                  "_id": "2b252dbf-68c1-4cfb-938b-d796dc3091a1",
+                  "cells": [
+                    {
+                      "_id": "72f2e378-0f62-4059-90a6-f456a5306916",
+                      "value": "val2"
+                    }
+                  ],
+                  "comment": null
+                },
+                {
+                  "_id": "da6a75f2-3f35-43c0-9fdc-af53a54588b3",
+                  "cells": [
+                    {
+                      "_id": "7325dee4-8653-4a7f-a211-99ee46fae962",
+                      "value": "val3"
+                    }
+                  ],
+                  "comment": null
+                }
+              ]
+            },
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "4a3c01fa-16d6-44cb-ad23-b13d943b1a9a",
+            "keyword": "And",
+            "text": "this is a when step with data table too",
+            "dataTable": {
+              "_id": "a4118410-dfa0-40c1-a2d6-259dd07bb242",
+              "rows": [
+                {
+                  "_id": "aac9d3e7-d2a5-47cc-8930-e5771d30c478",
+                  "cells": [
+                    {
+                      "_id": "238661ef-4944-40ea-bd76-69e939c290f0",
+                      "value": "col1"
+                    },
+                    {
+                      "_id": "bd9297f0-8743-4fd3-9145-fb182c591d04",
+                      "value": "col2"
+                    }
+                  ],
+                  "comment": null
+                },
+                {
+                  "_id": "6bd19725-e4bf-4578-bfc0-97a58e2e05b3",
+                  "cells": [
+                    {
+                      "_id": "126f2640-004c-4470-9c4a-2e9cfb35a374",
+                      "value": "val1"
+                    },
+                    {
+                      "_id": "d60d3df0-da3a-473a-9edc-150a2b769894",
+                      "value": ""
+                    }
+                  ],
+                  "comment": null
+                },
+                {
+                  "_id": "c0617cce-2d3d-4b68-be51-a0d553e77b19",
+                  "cells": [
+                    {
+                      "_id": "87d5b539-7e07-4b49-a3d8-040ea7337438",
+                      "value": "val3"
+                    },
+                    {
+                      "_id": "69647906-faa1-4edd-9c06-0b2504696b9d",
+                      "value": "val4"
+                    }
+                  ],
+                  "comment": null
+                }
+              ]
+            },
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "f2cfb53b-2f2e-4547-9dc0-d85f9d6791e2",
+            "keyword": "And",
+            "text": "this is a when step with doc string",
+            "dataTable": null,
+            "docString": {
+              "_id": "3fabf384-9bb1-4c85-bba8-88437389ce69",
+              "content": "Hello world\nHello World\nhello World\nhello world",
+              "delimiter": "\"\"\"",
+              "mediaType": null,
+              "comment": null
+            },
+            "comment": null
+          },
+          {
+            "_id": "5b75f251-e7ea-4413-95a4-14cbd5445ad5",
+            "keyword": "Then",
+            "text": "it should be a then step",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "0a0c34f1-5aef-4072-9a83-b6f36b7cc55e",
+            "keyword": "And",
+            "text": "it should be a then step too",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          }
+        ],
+        "precedingComment": null,
+        "descriptionComment": null,
+        "tags": [
+          {
+            "_id": "3648c022-015a-4e54-953b-cd9cbac26ba2",
+            "name": "tag2",
+            "comment": null
+          },
+          {
+            "_id": "de2b9921-53d9-4ad0-a4d3-65f5b722ae4d",
+            "name": "tag3",
+            "comment": null
+          }
+        ],
+        "tagComment": null
+      },
+      {
+        "_id": "0421c294-5e39-4773-9382-a6f9a3517b27",
+        "keyword": "Scenario Outline",
+        "name": "Name of background <key>",
+        "description": "Description of scenario outline",
+        "steps": [
+          {
+            "_id": "ccfa0cc0-41e3-4403-a9eb-081de14adeb6",
+            "keyword": "Given",
+            "text": "this is a given step",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "0f8cc28c-2e90-4a62-b19d-f248e79da620",
+            "keyword": "And",
+            "text": "this is a given step too",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "98f45696-e31d-41f3-b808-e08aceb2f0c8",
+            "keyword": "When",
+            "text": "this is a when step <key>",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "e2d113d5-c0f0-4497-8499-949086596b9a",
+            "keyword": "And",
+            "text": "this is a when step too",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "c9f79a64-3e64-4e9d-8a55-45127edec363",
+            "keyword": "Then",
+            "text": "it should be a then step",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          },
+          {
+            "_id": "65f06e21-a864-4183-b15a-fffd6ca1c8f9",
+            "keyword": "And",
+            "text": "it should be a then step too",
+            "dataTable": null,
+            "docString": null,
+            "comment": null
+          }
+        ],
+        "precedingComment": null,
+        "descriptionComment": null,
+        "tags": [
+          {
+            "_id": "fb58a19b-e34b-416f-a1be-42bb81f44c08",
+            "name": "tag2",
+            "comment": null
+          },
+          {
+            "_id": "fcb13f32-bda9-4172-92cb-0db9e7fac0d6",
+            "name": "tag",
+            "value": "3",
+            "comment": null
+          }
+        ],
+        "examples": [
+          {
+            "_id": "3409d7f6-ff1f-4079-a64a-93ad73607570",
+            "keyword": "Examples",
+            "name": "First examples",
+            "header": {
+              "_id": "efc0b465-792e-4259-bb46-a1864a7dc25a",
+              "cells": [
+                {
+                  "_id": "30a157a0-f82f-48c4-a7ce-3d243239afcd",
+                  "value": "key"
+                }
+              ],
+              "comment": null
+            },
+            "precedingComment": null,
+            "tags": [
+              {
+                "_id": "19827e56-a220-48ce-bc81-6946a9644699",
+                "name": "tagE1",
+                "comment": null
+              }
+            ],
+            "body": [
+              {
+                "_id": "53d352cc-fd0f-4b9a-afa3-c76d8789bee3",
+                "cells": [
+                  {
+                    "_id": "c3e92592-5252-4b8a-9545-0e5824c686f4",
+                    "value": "value1"
+                  }
+                ],
+                "comment": null
+              }
+            ],
+            "tagComment": null
+          },
+          {
+            "_id": "f4b7b8fa-6a4a-4448-a548-07fe83ffb5ab",
+            "keyword": "Examples",
+            "name": "Second examples",
+            "header": {
+              "_id": "1a30a308-1606-4c32-b899-772344f597c3",
+              "cells": [
+                {
+                  "_id": "8addd695-6e06-4562-a33a-56ddec6c0aa1",
+                  "value": "key"
+                }
+              ],
+              "comment": null
+            },
+            "precedingComment": null,
+            "tags": [
+              {
+                "_id": "f69306ca-9862-46f9-94bd-c449c94bd475",
+                "name": "tagE2",
+                "comment": null
+              }
+            ],
+            "body": [
+              {
+                "_id": "976d6912-2ce2-4a3a-b892-e9966d79139b",
+                "cells": [
+                  {
+                    "_id": "6281cab7-499c-423c-b2ec-200357c022e4",
+                    "value": "value2"
+                  }
+                ],
+                "comment": null
+              }
+            ],
+            "tagComment": null
+          }
+        ],
+        "tagComment": null
+      }
+    ],
+    "tags": [
+      {
+        "_id": "016704b2-ca3a-4a4f-a6c7-c8a0cea35d01",
+        "name": "tag1",
+        "comment": null
+      },
+      {
+        "_id": "274cd15a-c384-415b-a831-36af7dddb9b1",
+        "name": "tag2",
+        "comment": null
+      }
+    ],
+    "precedingComment": null,
+    "tagComment": null,
+    "descriptionComment": null
+  },
+  "startComment": null,
+  "endComment": null
+}

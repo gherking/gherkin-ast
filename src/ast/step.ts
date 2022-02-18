@@ -1,4 +1,4 @@
-import { normalizeString, replaceAll } from "../common";
+import { normalizeString, replaceAll, GherkinCommentHandler } from "../common";
 import { GherkinStep } from "../gherkinObject";
 import { Comment } from "./comment";
 import { DataTable } from "./dataTable";
@@ -11,19 +11,30 @@ export type Argument = DataTable | DocString;
  * Model for Step
  */
 export class Step extends UniqueObject {
-    public static parse(obj: GherkinStep): Step {
+    public static parse(obj: GherkinStep, comments?: GherkinCommentHandler): Step {
         if (!obj || !obj.text) {
             throw new Error("The given object is not a Step!");
         }
         const { keyword, text, dataTable, docString } = obj;
         const step: Step = new Step(keyword, text);
+        
         if (dataTable) {
-            step.dataTable = DataTable.parse(dataTable);
+            step.dataTable = DataTable.parse(dataTable, comments);
         }
         if (docString) {
-            step.docString = DocString.parse(docString);
+            step.docString = DocString.parse(docString, comments);
         }
+        
+        step.comment = comments?.parseComment(obj.location);
+        
         return step;
+    }
+
+    public static parseAll(obj: GherkinStep[], comments?: GherkinCommentHandler): Step[] {
+        if (!Array.isArray(obj)) {
+            return [];
+        }
+        return obj.map(o => this.parse(o, comments));
     }
 
     /** Keyword of the Step */
@@ -34,22 +45,23 @@ export class Step extends UniqueObject {
     public dataTable: DataTable;
     /** DocString of the Step */
     public docString: DocString;
-
-    // TODO
+    /** Comment before the Step */
     public comment: Comment;
-    
+
     constructor(keyword: string, text: string) {
         super();
         this.keyword = normalizeString(keyword);
         this.text = normalizeString(text);
         this.dataTable = null;
         this.docString = null;
+        this.comment = null;
     }
 
     public clone(): Step {
         const step: Step = new Step(this.keyword, this.text);
         step.dataTable = this.dataTable ? this.dataTable.clone() : null;
         step.docString = this.docString ? this.docString.clone() : null;
+        step.comment = this.comment ? this.comment.clone() : null;
         return step;
     }
 
@@ -57,5 +69,6 @@ export class Step extends UniqueObject {
         this.text = replaceAll(this.text, key, value);
         this.dataTable && this.dataTable.replace(key, value);
         this.docString && this.docString.replace(key, value);
+        this.comment && this.comment.replace(key, value);
     }
 }

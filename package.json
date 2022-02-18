@@ -75,7 +75,7 @@
     },
     "testEnvironment": "node",
     "testMatch": [
-      "**/tests/**/common.test.ts"
+      "**/tests/**/*.test.ts"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",

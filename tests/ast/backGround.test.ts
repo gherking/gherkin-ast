@@ -46,10 +46,10 @@ describe("Background", () => {
                 },
             } as GherkinBackground;
             // When
-            jest.spyOn(Step, "parse").mockReturnValue({} as Step);
+            jest.spyOn(Step, "parseAll").mockReturnValue([{} as Step]);
             const bg: Background = Background.parse(obj);
             // Then
-            expect(Step.parse).toHaveBeenCalledWith({}, 0, [{}]);
+            expect(Step.parseAll).toHaveBeenCalledWith([{}], undefined);
             expect(bg).toBeDefined();
             expect(bg._id).toBeDefined();
             expect(bg.keyword).toEqual("Bkeeyword");
@@ -57,7 +57,6 @@ describe("Background", () => {
         });
 
         test("should parse GherkinBackground without steps", () => {
-
             // Given
             const obj: GherkinBackground = {
                 background: {
@@ -67,8 +66,10 @@ describe("Background", () => {
                 },
             } as GherkinBackground;
             // When
+            jest.spyOn(Step, "parseAll").mockReturnValue([{} as Step]);
             const bg: Background = Background.parse(obj);
             // Then
+            expect(Step.parseAll).toHaveBeenCalledWith([], undefined);
             expect(bg).toBeDefined();
             expect(bg._id).toBeDefined();
             expect(bg.keyword).toEqual("Bkeeyword");
