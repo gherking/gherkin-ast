@@ -8,13 +8,12 @@ import { UniqueObject } from "./uniqueObject";
  * Model for Document
  */
 export class Document extends UniqueObject {
-    public static parse(obj: GherkinDocument, comments: GherkinCommentHandler): Document {
+    public static parse(obj: GherkinDocument, _: GherkinCommentHandler): Document {
         if (!obj || !obj.gherkinDocument) {
             throw new TypeError("The given object is not a GherkinDocument!");
         }
         const document: Document = new Document(obj.gherkinDocument.uri);
         document.feature = Feature.parse(obj.gherkinDocument.feature);
-        document.
         return document;
     }
 

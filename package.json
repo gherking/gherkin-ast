@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "jsonpath-faster": "^0.0.12",
-    "object-scan": "^18.0.0",
+    "object-scan": "^17.0.1",
     "object-set-type": "^2.1.2",
     "uuid": "^8.3.2"
   },
@@ -75,7 +75,7 @@
     },
     "testEnvironment": "node",
     "testMatch": [
-      "**/tests/**/*.test.ts"
+      "**/tests/**/common.test.ts"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",

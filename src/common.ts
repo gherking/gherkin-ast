@@ -21,6 +21,7 @@ export const replaceAll = (s: string, key: RegExp | string, value: string): stri
 interface Clonable<T> {
     clone(): T;
 }
+
 export const cloneArray = <T extends Clonable<T>>(array: T[]): T[] => {
     return Array.isArray(array) ? array.map((e: T): T => (e as Clonable<T>).clone()) : [];
 };
@@ -35,7 +36,9 @@ export const replaceArray = <T extends Replacable>(array: T[], key: RegExp | str
 };
 
 export class GherkinCommentHandler {
-    constructor(public comments: GherkinComment[]) { }
+    constructor(public comments: GherkinComment[]) {
+        this.comments = [...comments];
+    }
 
     public findCommentIndexBefore(location: GherkinLocation): number {
         for (let i = 0; i < this.comments.length; ++i) {
@@ -56,7 +59,7 @@ export class GherkinCommentHandler {
         if (i > -1) {
             comments.push(this.popFromIndex(i)); // take out the one found
             for (--i; i >= 0; --i) {
-                if (this.comments[i].location.line <= comments[0].location.line - 1) {
+                if (this.comments[i].location.line < comments[0].location.line - 1) {
                     break;
                 }
                 comments.unshift(this.popFromIndex(i));

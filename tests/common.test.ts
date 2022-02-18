@@ -1,4 +1,4 @@
-import { cloneArray, normalizeString, replaceAll, replaceArray, safeString } from "../src";
+import { cloneArray, normalizeString, replaceAll, replaceArray, safeString, GherkinCommentHandler, GherkinComment } from "../src";
 
 describe("safeString", () => {
     test("should remove white spaces", () => {
@@ -69,6 +69,65 @@ describe("cloneArray", () => {
         cloned.forEach((c: C, i: number): void => {
             expect(c).toBe(elements[i]);
             expect(elements[i].mock).toHaveBeenCalled();
+        });
+    });
+});
+
+describe.only("GherkinCommentHandler", () => {
+    let comments: GherkinComment[];
+    let handler: GherkinCommentHandler;
+
+    const commentToLine = (line: number): GherkinComment => ({
+        location: { column: 1, line },
+        text: 'comment in line ' + line,
+    });
+
+    beforeEach(() => {
+        comments = [11, 12, 14, 15, 17, 19, 20].map(commentToLine);
+        handler = new GherkinCommentHandler(comments);
+    });
+
+    describe("popFromIndex", () => {
+        test("should remove comment by index", () => {
+            const c = handler.popFromIndex(1);
+            expect(c.location.line).toBe(12);
+
+            expect(handler.comments).toHaveLength(comments.length - 1);
+            expect(handler.comments[0].location.line).toBe(comments[0].location.line);
+            expect(handler.comments[1].location.line).toBe(comments[2].location.line);
+        });
+
+        test("should handle removing comment with incorrect index", () => {
+            const c = handler.popFromIndex(500);
+            expect(c).toBeUndefined();
+
+            expect(handler.comments).toHaveLength(comments.length);
+        });
+    });
+
+    describe("popCommentsRightBefore", () => {
+        test("should not remove subsequent comments", () => {
+            const c = handler.popCommentsRightBefore({ column: 1, line: 200 });
+            expect(c).toEqual([]);
+
+            expect(handler.comments).toHaveLength(comments.length);
+        });
+
+        test("should remove single comment until space", () => {
+            const c = handler.popCommentsRightBefore({ column: 1, line: 18 });
+            expect(c).toHaveLength(1);
+            expect(c[0].location.line).toBe(17);
+
+            expect(handler.comments).toHaveLength(comments.length - 1);
+        });
+
+        test("should remove multiple comments", () => {
+            const c = handler.popCommentsRightBefore({ column: 1, line: 16 });
+            expect(c).toHaveLength(2);
+            expect(c[0].location.line).toBe(14);
+            expect(c[1].location.line).toBe(15);
+
+            expect(handler.comments).toHaveLength(comments.length - 2);
         });
     });
 });
