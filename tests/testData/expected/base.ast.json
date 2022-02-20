@@ -1,10 +1,10 @@
 {
   "_id": "7f8b7fe0-fb01-4369-bd23-c8b67c9cedaf",
-  "uri": "D:\\Repos\\gherkin-ast\\test\\data\\base.feature",
+  "uri": "tests/data/base.feature",
   "sourceFile": "base.feature",
-  "sourceFolder": "D:\\Repos\\gherkin-ast\\test\\data",
+  "sourceFolder": "tests/data",
   "targetFile": "base.feature",
-  "targetFolder": "D:\\Repos\\gherkin-ast\\test\\data",
+  "targetFolder": "tests/data",
   "feature": {
     "_id": "d67e9933-05eb-4de6-b82d-d74177cb8f37",
     "language": "en",
