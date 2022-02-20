@@ -8,7 +8,7 @@
 
 Models for Gherkin feature files
 
-## AST
+## AST (Abstract Syntax Tree)
 
 The API provides types to be able to handle different parts of Gherkin feature files.
 
