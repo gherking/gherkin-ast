@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.3.0 - 2022-02-20
+
+### Added
+
+- Added support for Gherkin Comments
+- Added support for Media Type in DocStrings
+
 ## 3.2.1 - 2021-11-30
 
 ### Added

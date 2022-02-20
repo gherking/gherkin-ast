@@ -1,6 +1,10 @@
 {
   "_id": "a270db0d-cd33-4028-9dd5-78fe399dd26d",
   "uri": "tests/data/comment.feature",
+  "sourceFile": "comment.feature",
+  "sourceFolder": "tests/data",
+  "targetFile": "comment.feature",
+  "targetFolder": "tests/data",
   "feature": {
     "_id": "d4a97d0c-3f7b-4595-be8d-7513dda4cbe9",
     "language": "en",
@@ -54,7 +58,7 @@
                 }
               }
             ],
-            "precedingComment": {
+            "preceedingComment": {
               "_id": "067f927b-9bea-4e50-afd6-5896ef8f3cdb",
               "text": "# Additional comment(s) of the rule\n# Comment(s) of the background"
             },
@@ -181,7 +185,7 @@
                 "comment": null
               }
             ],
-            "precedingComment": {
+            "preceedingComment": {
               "_id": "50cd6040-8b5e-44a5-898e-8cf7a5d09ef7",
               "text": "# Comment(s) of the scenario"
             },
@@ -229,7 +233,7 @@
                 "comment": null
               }
             ],
-            "precedingComment": {
+            "preceedingComment": {
               "_id": "441ddcd9-e9b1-451d-b469-227b0fa5751b",
               "text": "# Comment(s) of the scenario outline"
             },
@@ -268,7 +272,7 @@
                     "text": "# Comment(s) of the examples table"
                   }
                 },
-                "precedingComment": {
+                "preceedingComment": {
                   "_id": "5617b7d9-a667-4116-ac4e-74a9d25ece37",
                   "text": "# Comment(s) of the examples"
                 },
@@ -341,7 +345,7 @@
             "comment": null
           }
         ],
-        "precedingComment": {
+        "preceedingComment": {
           "_id": "531afffa-75bb-4a9d-9df0-1be726ee7088",
           "text": "# Comment(s) of the rule"
         },
@@ -372,7 +376,7 @@
         }
       }
     ],
-    "precedingComment": {
+    "preceedingComment": {
       "_id": "87b976b8-00cf-4b86-a0cf-86c6886afd01",
       "text": "# Comment(s) of the feature"
     },

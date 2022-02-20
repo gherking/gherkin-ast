@@ -34,7 +34,7 @@ export interface GherkinRule {
 }
 
 export function isGherkinRule(obj: unknown): obj is GherkinRule {
-    return !!(obj as GherkinRule).rule;
+  return !!(obj as GherkinRule).rule;
 }
 
 export interface GherkinBackground {
@@ -49,7 +49,7 @@ export interface GherkinBackground {
 }
 
 export function isGherkinBackground(obj: unknown): obj is GherkinBackground {
-    return !!(obj as GherkinBackground).background;
+  return !!(obj as GherkinBackground).background;
 }
 
 export interface GherkinScenario {
@@ -66,7 +66,7 @@ export interface GherkinScenario {
 }
 
 export function isGherkinScenario(obj: unknown): obj is GherkinScenario {
-    return !!(obj as GherkinScenario).scenario;
+  return !!(obj as GherkinScenario).scenario;
 }
 
 export interface GherkinLocation {

@@ -1,6 +1,10 @@
 {
   "_id": "7f8b7fe0-fb01-4369-bd23-c8b67c9cedaf",
   "uri": "D:\\Repos\\gherkin-ast\\test\\data\\base.feature",
+  "sourceFile": "base.feature",
+  "sourceFolder": "D:\\Repos\\gherkin-ast\\test\\data",
+  "targetFile": "base.feature",
+  "targetFolder": "D:\\Repos\\gherkin-ast\\test\\data",
   "feature": {
     "_id": "d67e9933-05eb-4de6-b82d-d74177cb8f37",
     "language": "en",
@@ -63,7 +67,7 @@
             "comment": null
           }
         ],
-        "precedingComment": null,
+        "preceedingComment": null,
         "descriptionComment": null
       },
       {
@@ -215,7 +219,7 @@
             "comment": null
           }
         ],
-        "precedingComment": null,
+        "preceedingComment": null,
         "descriptionComment": null,
         "tags": [
           {
@@ -286,7 +290,7 @@
             "comment": null
           }
         ],
-        "precedingComment": null,
+        "preceedingComment": null,
         "descriptionComment": null,
         "tags": [
           {
@@ -316,7 +320,7 @@
               ],
               "comment": null
             },
-            "precedingComment": null,
+            "preceedingComment": null,
             "tags": [
               {
                 "_id": "19827e56-a220-48ce-bc81-6946a9644699",
@@ -352,7 +356,7 @@
               ],
               "comment": null
             },
-            "precedingComment": null,
+            "preceedingComment": null,
             "tags": [
               {
                 "_id": "f69306ca-9862-46f9-94bd-c449c94bd475",
@@ -390,7 +394,7 @@
         "comment": null
       }
     ],
-    "precedingComment": null,
+    "preceedingComment": null,
     "tagComment": null,
     "descriptionComment": null
   },

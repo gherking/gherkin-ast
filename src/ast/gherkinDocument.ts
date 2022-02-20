@@ -3,51 +3,69 @@ import { GherkinCommentHandler } from "../common";
 import { Comment } from "./comment";
 import { Feature } from "./feature";
 import { UniqueObject } from "./uniqueObject";
+import { dirname, basename } from "path";
 
 /**
  * Model for Document
  */
 export class Document extends UniqueObject {
-    public static parse(obj: GherkinDocument): Document {
-        if (!obj || !obj.gherkinDocument) {
-            throw new TypeError("The given object is not a GherkinDocument!");
-        }
-        const comments: GherkinCommentHandler = new GherkinCommentHandler(obj.gherkinDocument?.comments);
-        const document: Document = new Document(obj.gherkinDocument.uri);
-
-        document.feature = Feature.parse(obj.gherkinDocument.feature, comments);
-
-        document.startComment = comments.parseStartingComment();
-        document.endComment = comments.parseEndingComment();
-
-        return document;
+  public static parse(obj: GherkinDocument): Document {
+    if (!obj || !obj.gherkinDocument) {
+      throw new TypeError("The given object is not a GherkinDocument!");
     }
+    const comments: GherkinCommentHandler = new GherkinCommentHandler(obj.gherkinDocument?.comments);
+    const document: Document = new Document(obj.gherkinDocument.uri);
 
-    /** Comment at the start of the feature file */
-    public startComment: Comment;
-    /** Comment at the end of the feature file */
-    public endComment: Comment;
+    document.feature = Feature.parse(obj.gherkinDocument.feature, comments);
 
-    constructor(public uri: string, public feature: Feature = null) {
-        super();
+    document.startComment = comments.parseStartingComment();
+    document.endComment = comments.parseEndingComment();
 
-        this.startComment = null;
-        this.endComment = null;
-    }
+    return document;
+  }
 
-    public clone(): Document {
-        const document: Document = new Document(this.uri);
+  /** URI of the original file, parsed */
+  public uri: string;
+  /* Folder path of the source file */
+  public sourceFolder: string;
+  /* Filename of the source file */
+  public sourceFile: string;
+  /* Folder path of the target file will be produced in gherking */
+  public targetFolder: string;
+  /* Filename of the target file will be produced in gherking */
+  public targetFile: string;
 
-        document.feature = this.feature ? this.feature.clone() : null;
-        document.startComment = this.startComment ? this.startComment.clone() : null;
-        document.endComment = this.endComment ? this.endComment.clone() : null;
+  /** Comment at the start of the feature file */
+  public startComment: Comment;
+  /** Comment at the end of the feature file */
+  public endComment: Comment;
 
-        return document;
-    }
+  constructor(uri: string, public feature: Feature = null) {
+    super();
 
-    public replace(key: RegExp | string, value: string): void {
-        this.feature && this.feature.replace(key, value);
-        this.startComment && this.startComment.replace(key, value);
-        this.endComment && this.endComment.replace(key, value);
-    }
+    this.startComment = null;
+    this.endComment = null;
+
+    this.uri = uri;
+    this.sourceFile = basename(uri);
+    this.sourceFolder = dirname(uri);
+    this.targetFile = this.sourceFile;
+    this.targetFolder = this.sourceFolder;
+  }
+
+  public clone(): Document {
+    const document: Document = new Document(this.uri);
+
+    document.feature = this.feature ? this.feature.clone() : null;
+    document.startComment = this.startComment ? this.startComment.clone() : null;
+    document.endComment = this.endComment ? this.endComment.clone() : null;
+
+    return document;
+  }
+
+  public replace(key: RegExp | string, value: string): void {
+    this.feature && this.feature.replace(key, value);
+    this.startComment && this.startComment.replace(key, value);
+    this.endComment && this.endComment.replace(key, value);
+  }
 }

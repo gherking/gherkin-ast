@@ -10,59 +10,59 @@ import { Tag } from "./tag";
  * Model for Scenario
  */
 export class Scenario extends Element {
-    public static parse(obj: GherkinScenario, comments?: GherkinCommentHandler): Scenario {
-        if (!obj || !obj.scenario || obj.scenario?.examples?.length) {
-            throw new TypeError("The given object is not a Scenario!");
-        }
-        const { description, keyword, name, steps, tags, location } = obj.scenario;
-        const scenario: Scenario = new Scenario(keyword, name, description);
-
-        scenario.precedingComment = comments?.parseComment(location);
-        scenario.tagComment = comments?.parseTagComment(tags);
-
-        scenario.steps = Step.parseAll(steps, comments);
-        scenario.tags = Tag.parseAll(tags, comments);
-
-        scenario.descriptionComment = comments?.parseCommentBetween(location, steps[0]?.location);
-
-        return scenario;
+  public static parse(obj: GherkinScenario, comments?: GherkinCommentHandler): Scenario {
+    if (!obj || !obj.scenario || obj.scenario?.examples?.length) {
+      throw new TypeError("The given object is not a Scenario!");
     }
+    const { description, keyword, name, steps, tags, location } = obj.scenario;
+    const scenario: Scenario = new Scenario(keyword, name, description);
 
-    /** CTags of the Scenario */
-    public tags: Tag[];
+    scenario.preceedingComment = comments?.parseComment(location);
+    scenario.tagComment = comments?.parseTagComment(tags);
 
-    /** Comment of the tags */
-    public tagComment: Comment;
+    scenario.steps = Step.parseAll(steps, comments);
+    scenario.tags = Tag.parseAll(tags, comments);
 
-    constructor(keyword: string, name: string, description: string) {
-        super(keyword, name, description);
+    scenario.descriptionComment = comments?.parseCommentBetween(location, steps[0]?.location);
 
-        this.tags = [];
+    return scenario;
+  }
 
-        this.precedingComment = null;
-        this.tagComment = null;
-    }
+  /** CTags of the Scenario */
+  public tags: Tag[];
 
-    public replace(key: RegExp | string, value: string): void {
-        super.replace(key, value);
+  /** Comment of the tags */
+  public tagComment: Comment;
 
-        replaceArray<Tag>(this.tags, key, value);
+  constructor(keyword: string, name: string, description: string) {
+    super(keyword, name, description);
 
-        this.tagComment && this.tagComment.replace(key, value);
-    }
+    this.tags = [];
 
-    public clone(): Scenario {
-        const scenario: Scenario = new Scenario(
-            this.keyword, this.name, this.description,
-        );
+    this.preceedingComment = null;
+    this.tagComment = null;
+  }
 
-        scenario.steps = cloneArray<Step>(this.steps);
-        scenario.tags = cloneArray<Tag>(this.tags);
+  public replace(key: RegExp | string, value: string): void {
+    super.replace(key, value);
 
-        scenario.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
-        scenario.tagComment = this.tagComment ? this.tagComment.clone() : null;
-        scenario.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
+    replaceArray<Tag>(this.tags, key, value);
 
-        return scenario;
-    }
+    this.tagComment && this.tagComment.replace(key, value);
+  }
+
+  public clone(): Scenario {
+    const scenario: Scenario = new Scenario(
+      this.keyword, this.name, this.description,
+    );
+
+    scenario.steps = cloneArray<Step>(this.steps);
+    scenario.tags = cloneArray<Tag>(this.tags);
+
+    scenario.preceedingComment = this.preceedingComment ? this.preceedingComment.clone() : null;
+    scenario.tagComment = this.tagComment ? this.tagComment.clone() : null;
+    scenario.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
+
+    return scenario;
+  }
 }

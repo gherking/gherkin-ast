@@ -14,110 +14,110 @@ import { UniqueObject } from "./uniqueObject";
  * Model for Feature
  */
 export class Feature extends UniqueObject {
-    public static parse(obj: GherkinFeature, comments?: GherkinCommentHandler): Feature {
-        if (!obj || !Array.isArray(obj.children)) {
-            throw new TypeError("The given object is not a Feature!");
+  public static parse(obj: GherkinFeature, comments?: GherkinCommentHandler): Feature {
+    if (!obj || !Array.isArray(obj.children)) {
+      throw new TypeError("The given object is not a Feature!");
+    }
+    const { keyword, language, description, children, name, tags, location } = obj;
+    const feature: Feature = new Feature(keyword, name, description, language);
+
+    feature.preceedingComment = comments?.parseComment(location);
+    feature.tagComment = comments?.parseTagComment(tags);
+
+    feature.tags = Tag.parseAll(tags, comments);
+
+    let firstLocation: GherkinLocation = null;
+    feature.elements = children.map((child: GherkinRule | GherkinBackground | GherkinScenario): Element | Rule => {
+      if (isGherkinRule(child)) {
+        if (!firstLocation) {
+          firstLocation = child.rule.location;
         }
-        const { keyword, language, description, children, name, tags, location } = obj;
-        const feature: Feature = new Feature(keyword, name, description, language);
+        return Rule.parse(child, comments);
+      }
+      if (isGherkinBackground(child)) {
+        if (!firstLocation) {
+          firstLocation = child.background.location;
+        }
+        return Background.parse(child, comments);
+      }
+      if (isGherkinScenario(child)) {
+        if (!firstLocation) {
+          firstLocation = child.scenario.location;
+        }
+        if (child.scenario?.examples?.length) {
+          return ScenarioOutline.parse(child, comments);
+        }
+        return Scenario.parse(child, comments);
+      }
+    });
 
-        feature.precedingComment = comments?.parseComment(location);
-        feature.tagComment = comments?.parseTagComment(tags);
+    feature.descriptionComment = comments?.parseCommentBetween(location, firstLocation);
 
-        feature.tags = Tag.parseAll(tags, comments);
+    return feature;
+  }
 
-        let firstLocation: GherkinLocation = null;
-        feature.elements = children.map((child: GherkinRule | GherkinBackground | GherkinScenario): Element | Rule => {
-            if (isGherkinRule(child)) {
-                if (!firstLocation) {
-                    firstLocation = child.rule.location;
-                }
-                return Rule.parse(child, comments);
-            }
-            if (isGherkinBackground(child)) {
-                if (!firstLocation) {
-                    firstLocation = child.background.location;
-                }
-                return Background.parse(child, comments);
-            }
-            if (isGherkinScenario(child)) {
-                if (!firstLocation) {
-                    firstLocation = child.scenario.location;
-                }
-                if (child.scenario?.examples?.length) {
-                    return ScenarioOutline.parse(child, comments);
-                }
-                return Scenario.parse(child, comments);
-            }
-        });
+  /** Language of the Feature */
+  public language: string;
+  /** Keyword of the Feature */
+  public keyword: "Feature" | "Business Need" | "Ability" | string;
+  /** Name of the Feature */
+  public name: string;
+  /** Descrition of the Feature */
+  public description: string;
+  /** Elements of the Feature */
+  public elements: (Element | Rule)[];
+  /** Tags of the Feature */
+  public tags: Tag[];
 
-        feature.descriptionComment = comments?.parseCommentBetween(location, firstLocation);
+  /** Comment before all tag */
+  public tagComment: Comment;
+  /** Comment before the Feature */
+  public preceedingComment: Comment;
+  /** Comment below the description of the Feature */
+  public descriptionComment: Comment;
 
-        return feature;
-    }
+  constructor(keyword: string, name: string, description: string, language = "en") {
+    super();
 
-    /** Language of the Feature */
-    public language: string;
-    /** Keyword of the Feature */
-    public keyword: "Feature" | "Business Need" | "Ability" | string;
-    /** Name of the Feature */
-    public name: string;
-    /** Descrition of the Feature */
-    public description: string;
-    /** Elements of the Feature */
-    public elements: (Element | Rule)[];
-    /** Tags of the Feature */
-    public tags: Tag[];
+    this.language = language;
 
-    /** Comment before all tag */
-    public tagComment: Comment;
-    /** Comment before the Feature */
-    public precedingComment: Comment;
-    /** Comment below the description of the Feature */
-    public descriptionComment: Comment;
+    this.keyword = normalizeString(keyword);
+    this.name = normalizeString(name);
+    this.description = normalizeString(description);
 
-    constructor(keyword: string, name: string, description: string, language = "en") {
-        super();
+    this.elements = [];
+    this.tags = [];
 
-        this.language = language;
+    this.preceedingComment = null;
+    this.tagComment = null;
+    this.descriptionComment = null;
+  }
 
-        this.keyword = normalizeString(keyword);
-        this.name = normalizeString(name);
-        this.description = normalizeString(description);
+  public clone(): Feature {
+    const feature: Feature = new Feature(
+      this.keyword, this.name,
+      this.description, this.language,
+    );
 
-        this.elements = [];
-        this.tags = [];
+    feature.tags = cloneArray<Tag>(this.tags);
+    feature.elements = cloneArray<Element | Rule>(this.elements);
 
-        this.precedingComment = null;
-        this.tagComment = null;
-        this.descriptionComment = null;
-    }
+    feature.preceedingComment = this.preceedingComment ? this.preceedingComment.clone() : null;
+    feature.tagComment = this.tagComment ? this.tagComment.clone() : null;
+    feature.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
 
-    public clone(): Feature {
-        const feature: Feature = new Feature(
-            this.keyword, this.name,
-            this.description, this.language,
-        );
+    return feature;
+  }
 
-        feature.tags = cloneArray<Tag>(this.tags);
-        feature.elements = cloneArray<Element | Rule>(this.elements);
+  public replace(key: RegExp | string, value: string): void {
+    this.name = replaceAll(this.name, key, value);
+    this.description = replaceAll(this.description, key, value);
 
-        feature.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
-        feature.tagComment = this.tagComment ? this.tagComment.clone() : null;
-        feature.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
+    replaceArray<Tag>(this.tags, key, value);
+    replaceArray<Element | Rule>(this.elements, key, value);
 
-        return feature;
-    }
-
-    public replace(key: RegExp | string, value: string): void {
-        this.name = replaceAll(this.name, key, value);
-        this.description = replaceAll(this.description, key, value);
-
-        replaceArray<Tag>(this.tags, key, value);
-        replaceArray<Element | Rule>(this.elements, key, value);
-
-        this.precedingComment && this.precedingComment.replace(key, value);
-        this.tagComment && this.tagComment.replace(key, value);
-        this.descriptionComment && this.descriptionComment.replace(key, value);
-    }
+    this.preceedingComment && this.preceedingComment.replace(key, value);
+    this.tagComment && this.tagComment.replace(key, value);
+    this.descriptionComment && this.descriptionComment.replace(key, value);
+  }
 }
