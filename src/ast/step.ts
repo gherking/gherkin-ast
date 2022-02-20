@@ -1,3 +1,4 @@
+import { GherkinLocation } from "..";
 import { normalizeString, replaceAll, GherkinCommentHandler } from "../common";
 import { GherkinStep } from "../gherkinObject";
 import { Comment } from "./comment";
@@ -11,30 +12,39 @@ export type Argument = DataTable | DocString;
  * Model for Step
  */
 export class Step extends UniqueObject {
-  public static parse(obj: GherkinStep, comments?: GherkinCommentHandler): Step {
+  public static parse(obj: GherkinStep, comments?: GherkinCommentHandler, prevStepLocation?: GherkinLocation): Step {
     if (!obj || !obj.text) {
       throw new Error("The given object is not a Step!");
     }
     const { keyword, text, dataTable, docString } = obj;
     const step: Step = new Step(keyword, text);
-        
+
     if (dataTable) {
       step.dataTable = DataTable.parse(dataTable, comments);
     }
     if (docString) {
       step.docString = DocString.parse(docString, comments);
     }
-        
-    step.comment = comments?.parseComment(obj.location);
-        
+
+    if (prevStepLocation) {
+      step.comment = comments?.parseCommentBetween(prevStepLocation, obj.location);
+    } else {
+      step.comment = comments?.parseComment(obj.location);
+    }
+
     return step;
   }
 
-  public static parseAll(obj: GherkinStep[], comments?:   GherkinCommentHandler): Step[] {
+  public static parseAll(obj: GherkinStep[], comments?: GherkinCommentHandler): Step[] {
     if (!Array.isArray(obj)) {
       return [];
     }
-    return obj.map(o => this.parse(o, comments));
+    let prevStepLocation: GherkinLocation = null;
+    return obj.map(o => {
+      const step = this.parse(o, comments, prevStepLocation);
+      prevStepLocation = o.location;
+      return step;
+    });
   }
 
   /** Keyword of the Step */
