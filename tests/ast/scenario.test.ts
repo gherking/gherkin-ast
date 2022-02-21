@@ -1,4 +1,4 @@
-import { Element, Scenario, Step, Tag } from "../../src";
+import { Comment, Element, GherkinCommentHandler, Scenario, Step, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinScenario, GherkinStep, GherkinTag } from "../../src/gherkinObject";
 import { pruneID } from "../../src/utils";
@@ -33,7 +33,11 @@ describe("Scenario", () => {
   describe("replace", () => {
     beforeEach(() => {
       jest.spyOn(common, "replaceArray").mockReturnValue();
+      jest.spyOn(common, "replaceAll");
       scenario.tags = [{ name: "T1" } as Tag];
+      scenario.tagComment = new Comment("# tag");
+      scenario.descriptionComment = new Comment("# description");
+      scenario.preceedingComment = new Comment("# preceeding");
       scenario.replace("e", "X");
     });
 
@@ -46,6 +50,11 @@ describe("Scenario", () => {
       expect(common.replaceArray).toHaveBeenCalledWith([{ name: "T1" }], "e", "X");
     });
 
+    test("should replace in comments", () => {
+      expect(common.replaceAll).toHaveBeenCalledWith("# tag", "e", "X");
+      expect(common.replaceAll).toHaveBeenCalledWith("# description", "e", "X");
+      expect(common.replaceAll).toHaveBeenCalledWith("# preceeding", "e", "X");
+    });
   });
 
   describe("clone", () => {
@@ -55,6 +64,9 @@ describe("Scenario", () => {
       jest.spyOn(common, "cloneArray");
       scenario.tags = [new Tag("T1")];
       scenario.steps = [new Step("K", "T")];
+      scenario.tagComment = new Comment("# tag");
+      scenario.descriptionComment = new Comment("# description");
+      scenario.preceedingComment = new Comment("# preceeding");
       clonedScenario = scenario.clone();
       pruneID(scenario);
       pruneID(clonedScenario);
@@ -78,6 +90,17 @@ describe("Scenario", () => {
       expect(common.cloneArray).toHaveBeenCalledWith(scenario.steps);
       expect(clonedScenario.steps).toEqual(scenario.steps);
       expect(clonedScenario.steps).not.toBe(scenario.steps);
+    });
+
+    test("should clone comments", () => {
+      expect(clonedScenario.tagComment.text).toEqual(scenario.tagComment.text);
+      expect(clonedScenario.tagComment).not.toBe(scenario.tagComment);
+
+      expect(clonedScenario.descriptionComment.text).toEqual(scenario.descriptionComment.text);
+      expect(clonedScenario.descriptionComment).not.toBe(scenario.descriptionComment);
+
+      expect(clonedScenario.preceedingComment.text).toEqual(scenario.preceedingComment.text);
+      expect(clonedScenario.preceedingComment).not.toBe(scenario.preceedingComment);
     });
   });
 
@@ -132,6 +155,34 @@ describe("Scenario", () => {
       expect(pruneID(parsed)).toBeDefined();
       expect(Tag.parseAll).toHaveBeenCalledWith(obj.scenario.tags, undefined);
       expect(parsed.tags).toEqual([pruneID(new Tag("N"))]);
+    });
+
+    test("should parse comments", () => {
+      obj.scenario.steps = [{ keyword: "K", text: "T", location: { column: 1, line: 50 } }];
+      obj.scenario.location = { column: 1, line: 42 };
+      obj.scenario.tags = [
+        { name: "N", location: { column: 1, line: 40 } },
+      ];
+      const comments = new GherkinCommentHandler([
+        {
+          location: { column: 1, line: 41 },
+          text: "# preceeding",
+        },
+        {
+          location: { column: 1, line: 39 },
+          text: "# tag",
+        },
+        {
+          location: { column: 1, line: 45 },
+          text: "# description",
+        },
+      ]);
+
+      const parsed: Scenario = Scenario.parse(obj, comments);
+      expect(pruneID(parsed)).toBeDefined();
+      expect(parsed.tagComment.text).toEqual("# tag");
+      expect(parsed.descriptionComment.text).toEqual("# description");
+      expect(parsed.preceedingComment.text).toEqual("# preceeding");
     });
   });
 });

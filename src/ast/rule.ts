@@ -1,6 +1,5 @@
-import { GherkinCommentHandler, GherkinLocation, isGherkinBackground, isGherkinScenario } from "..";
-import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common";
-import { GherkinBackground, GherkinRule, GherkinScenario } from "../gherkinObject";
+import { cloneArray, normalizeString, replaceAll, replaceArray, GherkinCommentHandler } from "../common";
+import { GherkinBackground, GherkinRule, GherkinScenario, GherkinLocation, isGherkinBackground, isGherkinScenario } from "../gherkinObject";
 import { Background } from "./background";
 import { Comment } from "./comment";
 import { Element } from "./element";
@@ -8,12 +7,15 @@ import { Scenario } from "./scenario";
 import { ScenarioOutline } from "./scenarioOutline";
 import { Tag } from "./tag";
 import { UniqueObject } from "./uniqueObject";
+import { getDebugger } from "../debug";
+const debug = getDebugger("Rule");
 
 /**
  * Model for Rule
  */
 export class Rule extends UniqueObject {
   public static parse(obj: GherkinRule, comments?: GherkinCommentHandler): Rule {
+    debug("parse(obj: %o, comments: %d)", obj, comments?.comments?.length);
     if (!obj || !obj.rule || !Array.isArray(obj.rule.children)) {
       throw new TypeError("The given object is not a Rule!");
     }
@@ -46,6 +48,14 @@ export class Rule extends UniqueObject {
 
     rule.descriptionComment = comments?.parseCommentBetween(location, firstLocation);
 
+    debug(
+      "parse(this: {keyword: '%s', name: '%s', description: '%s', " +
+      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "tags: %d, elements: %d})",
+      rule.keyword, rule.name, rule.description,
+      rule.preceedingComment?.text, rule.tagComment?.text,
+      rule.descriptionComment?.text, rule.tags.length, rule.elements.length,
+    )
     return rule;
   }
 
@@ -55,7 +65,7 @@ export class Rule extends UniqueObject {
   public name: string;
   /** Descrition of the Rule */
   public description: string;
-    
+
   /** Elements of the Rule */
   public elements: Element[];
   /** Tags of the Rule */
@@ -70,6 +80,10 @@ export class Rule extends UniqueObject {
 
   constructor(keyword: string, name: string, description: string) {
     super();
+    debug(
+      "constructor(keyword: '%s', name: '%s', description: '%s')",
+      keyword, name, description,
+    );
 
     this.keyword = normalizeString(keyword);
     this.name = normalizeString(name);
@@ -81,9 +95,26 @@ export class Rule extends UniqueObject {
     this.preceedingComment = null;
     this.tagComment = null;
     this.descriptionComment = null;
+
+    debug(
+      "constructor(this: {keyword: '%s', name: '%s', description: '%s', " +
+      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "tags: %d, elements: %d})",
+      this.keyword, this.name, this.description,
+      this.preceedingComment?.text, this.tagComment?.text,
+      this.descriptionComment?.text, this.tags.length, this.elements.length,
+    )
   }
 
   public clone(): Rule {
+    debug(
+      "clone(this: {keyword: '%s', name: '%s', description: '%s', " +
+      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "tags: %d, elements: %d})",
+      this.keyword, this.name, this.description,
+      this.preceedingComment?.text, this.tagComment?.text,
+      this.descriptionComment?.text, this.tags.length, this.elements.length,
+    )
     const rule: Rule = new Rule(
       this.keyword, this.name,
       this.description,
@@ -100,6 +131,7 @@ export class Rule extends UniqueObject {
   }
 
   public replace(key: RegExp | string, value: string): void {
+    debug("replace(key: '%s', value: '%s')", key, value);
     this.name = replaceAll(this.name, key, value);
     this.description = replaceAll(this.description, key, value);
 

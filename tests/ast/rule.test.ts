@@ -1,4 +1,4 @@
-import { Background, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
+import { Background, Comment, GherkinCommentHandler, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinRule, GherkinTag } from "../../src/gherkinObject";
 import { pruneID } from "../../src/utils";
@@ -22,6 +22,11 @@ describe("Rule", () => {
     beforeEach(() => {
       jest.clearAllMocks();
       jest.spyOn(common, "cloneArray");
+
+      ruleA.descriptionComment = new Comment("# description");
+      ruleA.tagComment = new Comment("# tag");
+      ruleA.preceedingComment = new Comment("# preceeding");
+
       ruleB = ruleA.clone();
     });
 
@@ -39,6 +44,17 @@ describe("Rule", () => {
       expect(common.cloneArray).toHaveBeenCalledWith(ruleA.elements);
       expect(ruleB.elements.length).toBe(ruleA.elements.length);
     });
+
+    test("should clone comments", () => {
+      expect(ruleB.descriptionComment.text).toEqual(ruleA.descriptionComment.text);
+      expect(ruleB.descriptionComment).not.toBe(ruleA.descriptionComment);
+
+      expect(ruleB.tagComment.text).toEqual(ruleA.tagComment.text);
+      expect(ruleB.tagComment).not.toBe(ruleA.tagComment);
+
+      expect(ruleB.preceedingComment.text).toEqual(ruleA.preceedingComment.text);
+      expect(ruleB.preceedingComment).not.toBe(ruleA.preceedingComment);
+    });
   });
 
   describe("replace", () => {
@@ -47,6 +63,10 @@ describe("Rule", () => {
       jest.clearAllMocks();
       jest.spyOn(common, "replaceAll");
       jest.spyOn(common, "replaceArray");
+
+      ruleA.descriptionComment = new Comment("# description");
+      ruleA.tagComment = new Comment("# tag");
+      ruleA.preceedingComment = new Comment("# preceeding");
 
       ruleA.replace("K", "V");
     });
@@ -62,6 +82,12 @@ describe("Rule", () => {
 
     test("should replace in elements", () => {
       expect(common.replaceArray).toHaveBeenCalledWith(ruleA.elements, "K", "V");
+    });
+
+    test("should replace in comments", () => {
+      expect(common.replaceAll).toHaveBeenCalledWith("# tag", "K", "V");
+      expect(common.replaceAll).toHaveBeenCalledWith("# description", "K", "V");
+      expect(common.replaceAll).toHaveBeenCalledWith("# preceeding", "K", "V");
     });
   });
 
@@ -98,7 +124,7 @@ describe("Rule", () => {
           keyword: "R",
           name: "N",
           tags: [
-                        { name: "TAG" } as GherkinTag,
+            { name: "TAG" } as GherkinTag,
           ],
         },
       } as GherkinRule;
@@ -108,7 +134,56 @@ describe("Rule", () => {
       expect(rule._id).toBeDefined();
       expect(rule.tags).toHaveLength(1);
       expect(Tag.parseAll).toHaveBeenCalledWith(obj.rule.tags, undefined);
-    })
+    });
+
+    test("should parse comments", () => {
+      const obj: GherkinRule = {
+        rule: {
+          children: [
+            {
+              background: {
+                location: { column: 1, line: 47 },
+              }
+            }
+          ],
+          description: "D",
+          keyword: "R",
+          name: "N",
+          tags: [
+            { name: "TAG", location: { column: 1, line: 40 } },
+          ],
+          location: { column: 1, line: 42 },
+        },
+      } as GherkinRule;
+      const comments = new GherkinCommentHandler([
+        {
+          location: { column: 1, line: 41 },
+          text: "# preceeding",
+        },
+        {
+          location: { column: 1, line: 39 },
+          text: "# tag",
+        },
+        {
+          location: { column: 1, line: 45 },
+          text: "# description",
+        },
+      ]);
+
+      jest.spyOn(Tag, "parseAll");
+
+      const rule: Rule = Rule.parse(obj, comments);
+      expect(rule).toBeDefined();
+
+      expect(rule.tagComment).toBeDefined();
+      expect(rule.tagComment.text).toEqual("# tag");
+
+      expect(rule.descriptionComment).toBeDefined();
+      expect(rule.descriptionComment.text).toEqual("# description");
+
+      expect(rule.preceedingComment).toBeDefined();
+      expect(rule.preceedingComment.text).toEqual("# preceeding");
+    });
 
     test("should parse GherkinBackground children", () => {
       const obj: GherkinRule = {

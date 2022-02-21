@@ -10,7 +10,7 @@ Models for Gherkin feature files
 
 ## AST (Abstract Syntax Tree)
 
-The API provides types to be able to handle different parts of Gherkin feature files.
+The API provides types to handle different parts of Gherkin feature files.
 
 In TypeScript:
 ```typescript
@@ -25,8 +25,12 @@ feature.elements.push(new Scenario("Scenario", "Opening a document"));
 // ...
 ```
 
-For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/gherkin-ast/).
+## Other
 
-This package uses [debug](https://www.npmjs.com/package/debug) for logging.
+This package uses [debug](https://www.npmjs.com/package/debug) for logging, use `gherkin-ast` :
 
-**NOTE** `parse` functions only support AST provided by the parser of `gherkin@6`.
+```shell
+DEBUG=gherkin-ast* gherking ...
+```
+
+For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/gpc-for-loop/).

@@ -1,16 +1,18 @@
-import { GherkinCommentHandler } from "..";
-import { cloneArray, replaceArray } from "../common";
+import { cloneArray, replaceArray, GherkinCommentHandler } from "../common";
 import { GherkinScenario } from "../gherkinObject";
 import { Comment } from "./comment";
 import { Element } from "./element";
 import { Step } from "./step";
 import { Tag } from "./tag";
+import { getDebugger } from "../debug";
+const debug = getDebugger("Scenario");
 
 /**
  * Model for Scenario
  */
 export class Scenario extends Element {
   public static parse(obj: GherkinScenario, comments?: GherkinCommentHandler): Scenario {
+    debug("parse(obj: %o, comments: %d)", obj, comments?.comments?.length);
     if (!obj || !obj.scenario || obj.scenario?.examples?.length) {
       throw new TypeError("The given object is not a Scenario!");
     }
@@ -23,8 +25,17 @@ export class Scenario extends Element {
     scenario.steps = Step.parseAll(steps, comments);
     scenario.tags = Tag.parseAll(tags, comments);
 
-    scenario.descriptionComment = comments?.parseCommentBetween(location, steps[0]?.location);
+    scenario.descriptionComment = comments?.parseCommentBetween(location, steps?.[0]?.location);
 
+    debug(
+      "parse(this: {keyword: '%s', name: '%s', description: '%s', " +
+      "steps: %d, tags: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "descriptionComment: '%s'})",
+      scenario.keyword, scenario.name, scenario.description,
+      scenario.steps.length, scenario.tags.length,
+      scenario.preceedingComment?.text, scenario.tagComment?.text,
+      scenario.descriptionComment?.text,
+    );
     return scenario;
   }
 
@@ -36,14 +47,29 @@ export class Scenario extends Element {
 
   constructor(keyword: string, name: string, description: string) {
     super(keyword, name, description);
+    debug(
+      "constructor(keyword: '%s', name: '%s', description: '%s')",
+      keyword, name, description,
+    );
 
     this.tags = [];
 
     this.preceedingComment = null;
     this.tagComment = null;
+
+    debug(
+      "constructor(this: {keyword: '%s', name: '%s', description: '%s', " +
+      "steps: %d, tags: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "descriptionComment: '%s'})",
+      this.keyword, this.name, this.description,
+      this.steps.length, this.tags.length,
+      this.preceedingComment?.text, this.tagComment?.text,
+      this.descriptionComment?.text,
+    );
   }
 
   public replace(key: RegExp | string, value: string): void {
+    debug("replace(key: '%s', value: '%s')", key, value);
     super.replace(key, value);
 
     replaceArray<Tag>(this.tags, key, value);
@@ -52,6 +78,15 @@ export class Scenario extends Element {
   }
 
   public clone(): Scenario {
+    debug(
+      "clone(this: {keyword: '%s', name: '%s', description: '%s', " +
+      "steps: %d, tags: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "descriptionComment: '%s'})",
+      this.keyword, this.name, this.description,
+      this.steps.length, this.tags.length,
+      this.preceedingComment?.text, this.tagComment?.text,
+      this.descriptionComment?.text,
+    );
     const scenario: Scenario = new Scenario(
       this.keyword, this.name, this.description,
     );

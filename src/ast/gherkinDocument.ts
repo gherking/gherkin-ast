@@ -4,12 +4,15 @@ import { Comment } from "./comment";
 import { Feature } from "./feature";
 import { UniqueObject } from "./uniqueObject";
 import { dirname, basename } from "path";
+import { getDebugger } from "../debug";
+const debug = getDebugger("Document");
 
 /**
  * Model for Document
  */
 export class Document extends UniqueObject {
   public static parse(obj: GherkinDocument): Document {
+    debug("parse(obj: %o)", obj);
     if (!obj || !obj.gherkinDocument) {
       throw new TypeError("The given object is not a GherkinDocument!");
     }
@@ -21,6 +24,11 @@ export class Document extends UniqueObject {
     document.startComment = comments.parseStartingComment();
     document.endComment = comments.parseEndingComment();
 
+    debug(
+      "parse(this: {uri: '%s', feature: '%s', startComment: '%s', endComment: '%s'})",
+      document.uri, document.feature?.name, document.startComment?.text,
+      document.endComment?.text,
+    )
     return document;
   }
 
@@ -51,9 +59,26 @@ export class Document extends UniqueObject {
     this.sourceFolder = dirname(uri);
     this.targetFile = this.sourceFile;
     this.targetFolder = this.sourceFolder;
+
+    debug(
+      "constructor(this: {uri: '%s', sourceFile: '%s', sourceFolder: '%s', " +
+      "targetFile: '%s', targetFolder: '%s', " +
+      "feature: '%s', startComment: '%s', endComment: '%s'})",
+      this.uri, this.sourceFile, this.sourceFolder, this.targetFile,
+      this.targetFolder, this.feature?.name, this.startComment?.text,
+      this.endComment?.text,
+    );
   }
 
   public clone(): Document {
+    debug(
+      "clone(this: {uri: '%s', sourceFile: '%s', sourceFolder: '%s', " +
+      "targetFile: '%s', targetFolder: '%s', " +
+      "feature: '%s', startComment: '%s', endComment: '%s'})",
+      this.uri, this.sourceFile, this.sourceFolder, this.targetFile,
+      this.targetFolder, this.feature?.name, this.startComment?.text,
+      this.endComment?.text,
+    );
     const document: Document = new Document(this.uri);
 
     document.feature = this.feature ? this.feature.clone() : null;
@@ -64,6 +89,7 @@ export class Document extends UniqueObject {
   }
 
   public replace(key: RegExp | string, value: string): void {
+    debug("replace(key: '%s', value: '%s')", key, value);
     this.feature && this.feature.replace(key, value);
     this.startComment && this.startComment.replace(key, value);
     this.endComment && this.endComment.replace(key, value);

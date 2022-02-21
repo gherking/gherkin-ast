@@ -4,12 +4,15 @@ import { Comment } from "./comment";
 import { TableRow } from "./tableRow";
 import { Tag } from "./tag";
 import { UniqueObject } from "./uniqueObject";
+import { getDebugger } from "../debug";
+const debug = getDebugger("Examples");
 
 /**
  * Model for Examples table
  */
 export class Examples extends UniqueObject {
   public static parse(obj: GherkinExamples, comments?: GherkinCommentHandler): Examples {
+    debug("parse(obj: %o, comments: %d)", obj, comments?.comments?.length);
     if (!obj || !Array.isArray(obj.tableBody)) {
       throw new TypeError("The given obj is not an Examples!");
     }
@@ -25,6 +28,11 @@ export class Examples extends UniqueObject {
     }
     examples.body = TableRow.parseAll(obj.tableBody, comments);
 
+    debug(
+      "parse(this: {keyword: '%s', name: '%s', tags: %d, header: %d, body: %d, preceedingComment: '%s', tagComment: '%s'})",
+      examples.keyword, examples.name, examples.tags.length, examples.header?.cells.length,
+      examples.body.length, examples.preceedingComment?.text, examples.tagComment?.text,
+    )
     return examples;
   }
 
@@ -32,8 +40,10 @@ export class Examples extends UniqueObject {
   public keyword: "Examples" | "Scenarios" | string;
   /** Name of the examples table */
   public name: string;
+
   /** Tags of the examples table */
   public tags: Tag[];
+
   /** Header of the examples table */
   public header: TableRow;
   /** Body of the examples table */
@@ -46,6 +56,7 @@ export class Examples extends UniqueObject {
 
   constructor(keyword: string, name: string) {
     super();
+    debug("constructor(keyword: '%s', name: '%s')", keyword, name);
 
     this.keyword = normalizeString(keyword);
     this.name = normalizeString(name);
@@ -59,6 +70,11 @@ export class Examples extends UniqueObject {
   }
 
   public clone(): Examples {
+    debug(
+      "clone(this: {keyword: '%s', name: '%s', tags: %d, header: %d, body: %d, preceedingComment: '%s', tagComment: '%s'})",
+      this.keyword, this.name, this.tags.length, this.header?.cells.length,
+      this.body.length, this.preceedingComment?.text, this.tagComment?.text,
+    )
     const examples: Examples = new Examples(this.keyword, this.name);
 
     examples.header = this.header ? this.header.clone() : null;
@@ -72,6 +88,7 @@ export class Examples extends UniqueObject {
   }
 
   public replace(key: RegExp | string, value: string): void {
+    debug("replace(key: '%s', value: '%s')", key, value);
     this.name = replaceAll(this.name, key, value);
 
     this.header && this.header.replace(key, value);

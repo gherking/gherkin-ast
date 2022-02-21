@@ -1,6 +1,5 @@
-import { GherkinCommentHandler, GherkinLocation, isGherkinBackground, isGherkinRule, isGherkinScenario } from "..";
-import { cloneArray, normalizeString, replaceAll, replaceArray } from "../common";
-import { GherkinBackground, GherkinFeature, GherkinRule, GherkinScenario } from "../gherkinObject";
+import { cloneArray, normalizeString, replaceAll, replaceArray, GherkinCommentHandler } from "../common";
+import { GherkinBackground, GherkinFeature, GherkinRule, GherkinScenario, GherkinLocation, isGherkinBackground, isGherkinRule, isGherkinScenario } from "../gherkinObject";
 import { Background } from "./background";
 import { Comment } from "./comment";
 import { Element } from "./element";
@@ -9,12 +8,15 @@ import { Scenario } from "./scenario";
 import { ScenarioOutline } from "./scenarioOutline";
 import { Tag } from "./tag";
 import { UniqueObject } from "./uniqueObject";
+import { getDebugger } from "../debug";
+const debug = getDebugger("Feature");
 
 /**
  * Model for Feature
  */
 export class Feature extends UniqueObject {
   public static parse(obj: GherkinFeature, comments?: GherkinCommentHandler): Feature {
+    debug("parse(obj: %o, comments: %d)", obj, comments?.comments?.length);
     if (!obj || !Array.isArray(obj.children)) {
       throw new TypeError("The given object is not a Feature!");
     }
@@ -53,6 +55,14 @@ export class Feature extends UniqueObject {
 
     feature.descriptionComment = comments?.parseCommentBetween(location, firstLocation);
 
+    debug(
+      "parse(this: {keyword: '%s', name: '%s', description: '%s', language: '%s', " +
+      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "tags: %d, elements: %d})",
+      feature.keyword, feature.name, feature.description, feature.language,
+      feature.preceedingComment?.text, feature.tagComment?.text,
+      feature.descriptionComment?.text, feature.tags.length, feature.elements.length,
+    );
     return feature;
   }
 
@@ -64,6 +74,7 @@ export class Feature extends UniqueObject {
   public name: string;
   /** Descrition of the Feature */
   public description: string;
+
   /** Elements of the Feature */
   public elements: (Element | Rule)[];
   /** Tags of the Feature */
@@ -78,6 +89,10 @@ export class Feature extends UniqueObject {
 
   constructor(keyword: string, name: string, description: string, language = "en") {
     super();
+    debug(
+      "constructor(keyword: '%s', name: '%s', description: '%s', language: '%s')",
+      keyword, name, description, language,
+    );
 
     this.language = language;
 
@@ -91,9 +106,26 @@ export class Feature extends UniqueObject {
     this.preceedingComment = null;
     this.tagComment = null;
     this.descriptionComment = null;
+
+    debug(
+      "constructor(this: {keyword: '%s', name: '%s', description: '%s', language: '%s', " +
+      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "tags: %d, elements: %d})",
+      this.keyword, this.name, this.description, this.language,
+      this.preceedingComment?.text, this.tagComment?.text,
+      this.descriptionComment?.text, this.tags.length, this.elements.length,
+    );
   }
 
   public clone(): Feature {
+    debug(
+      "clone(this: {keyword: '%s', name: '%s', description: '%s', language: '%s', " +
+      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "tags: %d, elements: %d})",
+      this.keyword, this.name, this.description, this.language,
+      this.preceedingComment?.text, this.tagComment?.text,
+      this.descriptionComment?.text, this.tags.length, this.elements.length,
+    );
     const feature: Feature = new Feature(
       this.keyword, this.name,
       this.description, this.language,
@@ -110,6 +142,7 @@ export class Feature extends UniqueObject {
   }
 
   public replace(key: RegExp | string, value: string): void {
+    debug("replace(key: '%s', value: '%s')", key, value);
     this.name = replaceAll(this.name, key, value);
     this.description = replaceAll(this.description, key, value);
 

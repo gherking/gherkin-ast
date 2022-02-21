@@ -1,4 +1,4 @@
-import { Background, Feature, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
+import { Background, Comment, Feature, GherkinCommentHandler, Rule, Scenario, ScenarioOutline, Tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinFeature, GherkinTag } from "../../src/gherkinObject";
 import { pruneID } from "../../src/utils";
@@ -26,6 +26,11 @@ describe("Feature", () => {
     beforeEach(() => {
       jest.clearAllMocks();
       jest.spyOn(common, "cloneArray");
+
+      featureA.descriptionComment = new Comment("# description");
+      featureA.tagComment = new Comment("# tag");
+      featureA.preceedingComment = new Comment("# preceeding");
+
       featureB = featureA.clone();
     });
 
@@ -42,6 +47,17 @@ describe("Feature", () => {
     test("should clone elements", () => {
       expect(common.cloneArray).toHaveBeenCalledWith(featureA.elements);
     });
+
+    test("should clone comments", () => {
+      expect(featureB.descriptionComment.text).toEqual(featureA.descriptionComment.text);
+      expect(featureB.descriptionComment).not.toBe(featureA.descriptionComment);
+
+      expect(featureB.tagComment.text).toEqual(featureA.tagComment.text);
+      expect(featureB.tagComment).not.toBe(featureA.tagComment);
+
+      expect(featureB.preceedingComment.text).toEqual(featureA.preceedingComment.text);
+      expect(featureB.preceedingComment).not.toBe(featureA.preceedingComment);
+    });
   });
 
   describe("replace", () => {
@@ -50,6 +66,10 @@ describe("Feature", () => {
       jest.clearAllMocks();
       jest.spyOn(common, "replaceAll");
       jest.spyOn(common, "replaceArray");
+
+      featureA.descriptionComment = new Comment("# description");
+      featureA.tagComment = new Comment("# tag");
+      featureA.preceedingComment = new Comment("# preceeding");
 
       featureA.replace("K", "V");
     });
@@ -65,6 +85,12 @@ describe("Feature", () => {
 
     test("should replace in elements", () => {
       expect(common.replaceArray).toHaveBeenCalledWith(featureA.elements, "K", "V");
+    });
+
+    test("should replace in comments", () => {
+      expect(common.replaceAll).toHaveBeenCalledWith("# description", "K", "V");
+      expect(common.replaceAll).toHaveBeenCalledWith("# preceeding", "K", "V");
+      expect(common.replaceAll).toHaveBeenCalledWith("# tag", "K", "V");
     });
   });
 
@@ -101,7 +127,7 @@ describe("Feature", () => {
         name: "N",
         language: "HU",
         tags: [
-                    { name: "TAG" } as GherkinTag,
+          { name: "TAG" } as GherkinTag,
         ],
       } as GherkinFeature;
       jest.spyOn(Tag, "parseAll");
@@ -111,6 +137,54 @@ describe("Feature", () => {
       expect(feature.tags).toHaveLength(1);
       expect(Tag.parseAll).toHaveBeenCalledTimes(1);
       expect(Tag.parseAll).toHaveBeenCalledWith(obj.tags, undefined);
+    });
+
+    test("should parse comments", () => {
+      const obj: GherkinFeature = {
+        children: [
+          {
+            background: {
+              location: { column: 1, line: 47 },
+            }
+          }
+        ],
+        description: "D",
+        keyword: "F",
+        name: "N",
+        language: "HU",
+        tags: [
+          { name: "TAG", location: { column: 1, line: 40 } },
+        ],
+        location: { column: 1, line: 42 }
+      } as GherkinFeature;
+      const comments = new GherkinCommentHandler([
+        {
+          location: { column: 1, line: 41 },
+          text: "# preceeding",
+        },
+        {
+          location: { column: 1, line: 39 },
+          text: "# tag",
+        },
+        {
+          location: { column: 1, line: 45 },
+          text: "# description",
+        },
+      ]);
+
+      jest.spyOn(Tag, "parseAll");
+
+      const feature: Feature = Feature.parse(obj, comments);
+      expect(feature).toBeDefined();
+
+      expect(feature.tagComment).toBeDefined();
+      expect(feature.tagComment.text).toEqual("# tag");
+
+      expect(feature.descriptionComment).toBeDefined();
+      expect(feature.descriptionComment.text).toEqual("# description");
+
+      expect(feature.preceedingComment).toBeDefined();
+      expect(feature.preceedingComment.text).toEqual("# preceeding");
     });
 
     test("should parse GherkingRule children", () => {

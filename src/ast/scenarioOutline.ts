@@ -1,5 +1,4 @@
-import { GherkinCommentHandler } from "..";
-import { cloneArray, replaceArray } from "../common";
+import { cloneArray, replaceArray, GherkinCommentHandler } from "../common";
 import { GherkinScenario } from "../gherkinObject";
 import { Comment } from "./comment";
 import { Element } from "./element";
@@ -9,12 +8,15 @@ import { Step } from "./step";
 import { TableCell } from "./tableCell";
 import { TableRow } from "./tableRow";
 import { removeDuplicateTags, Tag, tag } from "./tag";
+import { getDebugger } from "../debug";
+const debug = getDebugger("ScenarioOutline");
 
 /**
  * Model for ScenarioOutline
  */
 export class ScenarioOutline extends Element {
   public static parse(obj: GherkinScenario, comments?: GherkinCommentHandler): ScenarioOutline {
+    debug("parse(obj: %o, comments: %d)", obj, comments?.comments?.length);
     if (!obj || !obj.scenario || !Array.isArray(obj.scenario.examples)) {
       throw new TypeError("The given object is not a Scenario Outline!");
     }
@@ -29,10 +31,19 @@ export class ScenarioOutline extends Element {
     scenarioOutline.steps = Step.parseAll(steps, comments);
     scenarioOutline.tags = Tag.parseAll(tags, comments);
 
-    scenarioOutline.descriptionComment = comments?.parseCommentBetween(location, steps[0]?.location);
+    scenarioOutline.descriptionComment = comments?.parseCommentBetween(location, steps?.[0]?.location);
 
     scenarioOutline.examples = examples.map(e => Examples.parse(e, comments));
 
+    debug(
+      "parse(this: {keyword: '%s', name: '%s', description: '%s', " +
+      "steps: %d, tags: %d, examples: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "descriptionComment: '%s'})",
+      scenarioOutline.keyword, scenarioOutline.name, scenarioOutline.description,
+      scenarioOutline.steps.length, scenarioOutline.tags.length, scenarioOutline.examples.length,
+      scenarioOutline.preceedingComment?.text, scenarioOutline.tagComment?.text,
+      scenarioOutline.descriptionComment?.text,
+    );
     return scenarioOutline;
   }
 
@@ -46,14 +57,29 @@ export class ScenarioOutline extends Element {
 
   constructor(keyword: string, name: string, description: string) {
     super(keyword, name, description);
+    debug(
+      "constructor(keyword: '%s', name: '%s', description: '%s')",
+      keyword, name, description,
+    );
 
     this.tags = [];
     this.examples = [];
 
     this.tagComment = null;
+
+    debug(
+      "constructor(this: {keyword: '%s', name: '%s', description: '%s', " +
+      "steps: %d, tags: %d, examples: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "descriptionComment: '%s'})",
+      this.keyword, this.name, this.description,
+      this.steps.length, this.tags.length, this.examples.length,
+      this.preceedingComment?.text, this.tagComment?.text,
+      this.descriptionComment?.text,
+    );
   }
 
   public replace(key: RegExp | string, value: string): void {
+    debug("replace(key: '%s', value: '%s')", key, value);
     super.replace(key, value);
 
     replaceArray<Tag>(this.tags, key, value);
@@ -63,6 +89,15 @@ export class ScenarioOutline extends Element {
   }
 
   public clone(): ScenarioOutline {
+    debug(
+      "clone(this: {keyword: '%s', name: '%s', description: '%s', " +
+      "steps: %d, tags: %d, examples: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "descriptionComment: '%s'})",
+      this.keyword, this.name, this.description,
+      this.steps.length, this.tags.length, this.examples.length,
+      this.preceedingComment?.text, this.tagComment?.text,
+      this.descriptionComment?.text,
+    );
     const scenarioOutline: ScenarioOutline = new ScenarioOutline(
       this.keyword, this.name, this.description,
     );
@@ -79,6 +114,7 @@ export class ScenarioOutline extends Element {
   }
 
   public toScenario(columnToAddAsTag = 0): Scenario[] {
+    debug("toScenario(columnToAddAsTag: %d)", columnToAddAsTag);
     const scenarios: Scenario[] = [];
     this.examples.forEach((examples: Examples): void => {
       const n: number = Math.max(0, Math.min(examples.header.cells.length - 1, columnToAddAsTag));
@@ -103,6 +139,8 @@ export class ScenarioOutline extends Element {
         scenarios.push(scenario);
       });
     });
+
+    debug("toScenario(scenarios: %d)", scenarios.length);
     return scenarios;
   }
 }

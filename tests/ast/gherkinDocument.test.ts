@@ -1,4 +1,4 @@
-import { Document } from "../../src";
+import { Comment, Document, GherkinCommentHandler } from "../../src";
 import { Feature } from "../../src/ast/feature";
 import * as common from "../../src/common";
 import { GherkinDocument, GherkinFeature } from "../../src/gherkinObject";
@@ -42,14 +42,36 @@ describe("Document", () => {
     expect(clone.feature).not.toBe(d.feature);
   });
 
-  test("should replace feature of document", () => {
+  test("should clone gherkinDocument with comments", () => {
+    // Given
     const d: Document = new Document("String1", new Feature("Keyword", "Name", "description"));
+    d.startComment = new Comment("# start");
+    d.endComment = new Comment("# end");
+    // When
+    const clone: Document = d.clone();
+    // Then
+    expect(pruneID(clone)).toEqual(pruneID(d));
+    expect(clone.feature).toEqual(d.feature);
+    expect(clone.feature).not.toBe(d.feature);
+    expect(clone.startComment).toEqual(d.startComment);
+    expect(clone.startComment).not.toBe(d.startComment);
+    expect(clone.endComment).toEqual(d.endComment);
+    expect(clone.endComment).not.toBe(d.endComment);
+  });
+
+  test("should replace in the whole document", () => {
+    const d: Document = new Document("String1", new Feature("Keyword", "Name", "description"));
+    d.startComment = new Comment("# start");
+    d.endComment = new Comment("# end");
     jest.spyOn(common, "replaceAll");
     jest.spyOn(common, "replaceArray");
     // When
     d.replace("a", "b");
     // Then
-    expect(common.replaceAll).toHaveBeenCalled();
+    expect(common.replaceAll).toHaveBeenCalledWith("Name", "a", "b");
+    expect(common.replaceAll).toHaveBeenCalledWith("description", "a", "b");
+    expect(common.replaceAll).toHaveBeenCalledWith("# start", "a", "b");
+    expect(common.replaceAll).toHaveBeenCalledWith("# end", "a", "b");
     expect(common.replaceArray).toHaveBeenCalled();
   });
 
@@ -62,17 +84,33 @@ describe("Document", () => {
 
   test("should parse GherkinDocument", () => {
     // Given
-    jest.spyOn(Feature, "parse").mockReturnValue(new Feature("S1", "S2", "S3"));
+    jest.spyOn(Feature, "parse").mockImplementation((_, comments) => {
+      comments.firstLine = 42;
+      comments.lastLine = 42;
+      return new Feature("S1", "S2", "S3");
+    });
     // When
     const d: Document = Document.parse({
       gherkinDocument: {
         uri: "features/test.feature",
         feature: {} as GherkinFeature,
+        comments: [
+          {
+            location: { column: 1, line: 32 },
+            text: "# starting",
+          },
+          {
+            location: { column: 1, line: 52 },
+            text: "# ending",
+          },
+        ]
       },
     });
     // Then
     expect(d.uri).toEqual("features/test.feature");
-    expect(Feature.parse).toHaveBeenCalledWith({}, { comments: [], firstLine: Infinity, lastLine: 0 });
+    expect(Feature.parse).toHaveBeenCalledWith({}, expect.any(GherkinCommentHandler));
     expect(pruneID(d.feature)).toEqual(pruneID(new Feature("S1", "S2", "S3")));
+    expect(d.startComment.text).toEqual("# starting");
+    expect(d.endComment.text).toEqual("# ending");
   });
 });

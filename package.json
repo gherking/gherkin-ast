@@ -60,6 +60,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "debug": "^4.3.3",
     "jsonpath-faster": "^0.0.12",
     "object-scan": "^17.0.1",
     "object-set-type": "^2.1.2",

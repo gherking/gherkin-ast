@@ -151,7 +151,7 @@ describe("Step", () => {
       expect(DocString.parse).toHaveBeenCalledWith(obj.docString, undefined);
     });
 
-    test("should parse comment", () => {
+    test("should parse comment right before the step", () => {
       const handler = new GherkinCommentHandler([
         {
           location: { column: 1, line: 41 },
@@ -170,6 +170,31 @@ describe("Step", () => {
       expect(parsed.docString).toBeNull();
       expect(parsed.comment).not.toBeNull();
       expect(parsed.comment.text).toEqual("# comment");
-    })
+    });
+
+    test("should parse comment between steps", () => {
+      const handler = new GherkinCommentHandler([
+        {
+          location: { column: 1, line: 39 },
+          text: "# comment 39",
+        },
+        {
+          location: { column: 1, line: 41 },
+          text: "# comment 41",
+        },
+      ]);
+      const obj: GherkinStep = {
+        keyword: "When",
+        text: "DO",
+        location: { column: 1, line: 42 },
+      } as GherkinStep;
+      const parsed: Step = Step.parse(obj, handler, { column: 1, line: 38 });
+      expect(parsed.keyword).toEqual("When");
+      expect(parsed.text).toEqual("DO");
+      expect(parsed.dataTable).toBeNull();
+      expect(parsed.docString).toBeNull();
+      expect(parsed.comment).not.toBeNull();
+      expect(parsed.comment.text).toEqual("# comment 39\n\n# comment 41");
+    });
   });
 });

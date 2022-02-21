@@ -1,4 +1,4 @@
-import { Examples } from "../../src";
+import { Comment, Examples, GherkinCommentHandler } from "../../src";
 import { TableCell } from "../../src";
 import { TableRow } from "../../src";
 import { Tag } from "../../src";
@@ -17,6 +17,8 @@ describe("Examples", () => {
     example.tags = [new Tag("@tag")];
     example.header = new TableRow([new TableCell("Header")]);
     example.body = [new TableRow([new TableCell("Body")])];
+    example.preceedingComment = new Comment("# preceeding");
+    example.tagComment = new Comment("# tag");
   });
   describe("constructor", () => {
     test("should create model of a Scenario example", () => {
@@ -67,11 +69,19 @@ describe("Examples", () => {
       expect(clonedExample.body).toEqual(example.body);
       expect(clonedExample.body).not.toBe(example.body);
     });
+
+    test("should clone comment", () => {
+      expect(clonedExample.preceedingComment.text).toEqual(example.preceedingComment.text);
+      expect(clonedExample.preceedingComment).not.toBe(example.preceedingComment);
+      expect(clonedExample.tagComment.text).toEqual(example.tagComment.text);
+      expect(clonedExample.tagComment).not.toBe(example.tagComment);
+    });
   });
 
   describe("replace", () => {
     beforeEach(() => {
       jest.spyOn(common, "replaceArray").mockReturnValue();
+      jest.spyOn(common, "replaceAll");
     });
 
     test("should replace based data", () => {
@@ -93,6 +103,13 @@ describe("Examples", () => {
       jest.spyOn(example.header, "replace").mockReturnValue();
       example.replace("e", "X");
       expect(example.header.replace).toHaveBeenCalledWith("e", "X");
+    });
+
+    test("should replace in comments", () => {
+      example.replace("e", "X");
+
+      expect(common.replaceAll).toHaveBeenCalledWith("# preceeding", "e", "X");
+      expect(common.replaceAll).toHaveBeenCalledWith("# tag", "e", "X");
     });
   });
 
@@ -159,6 +176,27 @@ describe("Examples", () => {
       expect(pruneID(parsed)).toBeDefined();
       expect(TableRow.parse).toHaveBeenCalledWith(obj.tableBody[0], undefined);
       expect(parsed.body).toEqual([pruneID(new TableRow([new TableCell("Cell")]))]);
+    });
+
+    test("should parse comments", () => {
+      obj.tags = [{ name: "tag", location: { column: 1, line: 40 } }];
+      obj.location = { column: 1, line: 42 };
+      const comments = new GherkinCommentHandler([
+        {
+          location: { column: 1, line: 39 },
+          text: "# tag",
+        },
+        {
+          location: { column: 1, line: 41 },
+          text: "# preceeding",
+        },
+      ]);
+      const parsed: Examples = Examples.parse(obj, comments);
+      expect(pruneID(parsed)).toBeDefined();
+      expect(parsed.preceedingComment).toBeDefined();
+      expect(parsed.preceedingComment.text).toEqual("# preceeding");
+      expect(parsed.tagComment).toBeDefined();
+      expect(parsed.tagComment.text).toEqual("# tag");
     });
   });
 });
