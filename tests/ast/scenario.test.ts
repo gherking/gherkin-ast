@@ -37,7 +37,7 @@ describe("Scenario", () => {
       scenario.tags = [{ name: "T1" } as Tag];
       scenario.tagComment = new Comment("# tag");
       scenario.descriptionComment = new Comment("# description");
-      scenario.preceedingComment = new Comment("# preceeding");
+      scenario.precedingComment = new Comment("# preceding");
       scenario.replace("e", "X");
     });
 
@@ -53,7 +53,7 @@ describe("Scenario", () => {
     test("should replace in comments", () => {
       expect(common.replaceAll).toHaveBeenCalledWith("# tag", "e", "X");
       expect(common.replaceAll).toHaveBeenCalledWith("# description", "e", "X");
-      expect(common.replaceAll).toHaveBeenCalledWith("# preceeding", "e", "X");
+      expect(common.replaceAll).toHaveBeenCalledWith("# preceding", "e", "X");
     });
   });
 
@@ -66,7 +66,7 @@ describe("Scenario", () => {
       scenario.steps = [new Step("K", "T")];
       scenario.tagComment = new Comment("# tag");
       scenario.descriptionComment = new Comment("# description");
-      scenario.preceedingComment = new Comment("# preceeding");
+      scenario.precedingComment = new Comment("# preceding");
       clonedScenario = scenario.clone();
       pruneID(scenario);
       pruneID(clonedScenario);
@@ -99,8 +99,8 @@ describe("Scenario", () => {
       expect(clonedScenario.descriptionComment.text).toEqual(scenario.descriptionComment.text);
       expect(clonedScenario.descriptionComment).not.toBe(scenario.descriptionComment);
 
-      expect(clonedScenario.preceedingComment.text).toEqual(scenario.preceedingComment.text);
-      expect(clonedScenario.preceedingComment).not.toBe(scenario.preceedingComment);
+      expect(clonedScenario.precedingComment.text).toEqual(scenario.precedingComment.text);
+      expect(clonedScenario.precedingComment).not.toBe(scenario.precedingComment);
     });
   });
 
@@ -166,7 +166,7 @@ describe("Scenario", () => {
       const comments = new GherkinCommentHandler([
         {
           location: { column: 1, line: 41 },
-          text: "# preceeding",
+          text: "# preceding",
         },
         {
           location: { column: 1, line: 39 },
@@ -182,7 +182,7 @@ describe("Scenario", () => {
       expect(pruneID(parsed)).toBeDefined();
       expect(parsed.tagComment.text).toEqual("# tag");
       expect(parsed.descriptionComment.text).toEqual("# description");
-      expect(parsed.preceedingComment.text).toEqual("# preceeding");
+      expect(parsed.precedingComment.text).toEqual("# preceding");
     });
   });
 });

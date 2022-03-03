@@ -23,7 +23,7 @@ export class Feature extends UniqueObject {
     const { keyword, language, description, children, name, tags, location } = obj;
     const feature: Feature = new Feature(keyword, name, description, language);
 
-    feature.preceedingComment = comments?.parseComment(location);
+    feature.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1].location);
     feature.tagComment = comments?.parseTagComment(tags);
 
     feature.tags = Tag.parseAll(tags, comments);
@@ -57,10 +57,10 @@ export class Feature extends UniqueObject {
 
     debug(
       "parse(this: {keyword: '%s', name: '%s', description: '%s', language: '%s', " +
-      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "precedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
       "tags: %d, elements: %d})",
       feature.keyword, feature.name, feature.description, feature.language,
-      feature.preceedingComment?.text, feature.tagComment?.text,
+      feature.precedingComment?.text, feature.tagComment?.text,
       feature.descriptionComment?.text, feature.tags.length, feature.elements.length,
     );
     return feature;
@@ -83,7 +83,7 @@ export class Feature extends UniqueObject {
   /** Comment before all tag */
   public tagComment: Comment;
   /** Comment before the Feature */
-  public preceedingComment: Comment;
+  public precedingComment: Comment;
   /** Comment below the description of the Feature */
   public descriptionComment: Comment;
 
@@ -103,16 +103,16 @@ export class Feature extends UniqueObject {
     this.elements = [];
     this.tags = [];
 
-    this.preceedingComment = null;
+    this.precedingComment = null;
     this.tagComment = null;
     this.descriptionComment = null;
 
     debug(
       "constructor(this: {keyword: '%s', name: '%s', description: '%s', language: '%s', " +
-      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "precedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
       "tags: %d, elements: %d})",
       this.keyword, this.name, this.description, this.language,
-      this.preceedingComment?.text, this.tagComment?.text,
+      this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text, this.tags.length, this.elements.length,
     );
   }
@@ -120,10 +120,10 @@ export class Feature extends UniqueObject {
   public clone(): Feature {
     debug(
       "clone(this: {keyword: '%s', name: '%s', description: '%s', language: '%s', " +
-      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "precedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
       "tags: %d, elements: %d})",
       this.keyword, this.name, this.description, this.language,
-      this.preceedingComment?.text, this.tagComment?.text,
+      this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text, this.tags.length, this.elements.length,
     );
     const feature: Feature = new Feature(
@@ -134,7 +134,7 @@ export class Feature extends UniqueObject {
     feature.tags = cloneArray<Tag>(this.tags);
     feature.elements = cloneArray<Element | Rule>(this.elements);
 
-    feature.preceedingComment = this.preceedingComment ? this.preceedingComment.clone() : null;
+    feature.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
     feature.tagComment = this.tagComment ? this.tagComment.clone() : null;
     feature.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
 
@@ -149,7 +149,7 @@ export class Feature extends UniqueObject {
     replaceArray<Tag>(this.tags, key, value);
     replaceArray<Element | Rule>(this.elements, key, value);
 
-    this.preceedingComment && this.preceedingComment.replace(key, value);
+    this.precedingComment && this.precedingComment.replace(key, value);
     this.tagComment && this.tagComment.replace(key, value);
     this.descriptionComment && this.descriptionComment.replace(key, value);
   }

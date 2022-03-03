@@ -24,7 +24,7 @@ describe("Background", () => {
     expect(backgroundB.name).toEqual(backgroundA.name);
     expect(backgroundB.description).toEqual(backgroundA.description);
     expect(backgroundB.descriptionComment).toBeNull();
-    expect(backgroundB.preceedingComment).toBeNull();
+    expect(backgroundB.precedingComment).toBeNull();
     expect(backgroundB).not.toBe(backgroundA);
   });
 
@@ -32,14 +32,14 @@ describe("Background", () => {
     // Given
     const backgroundA: Background = new Background("Bkeeyword", "Bname", "Bdesc");
     backgroundA.descriptionComment = new Comment("description");
-    backgroundA.preceedingComment = new Comment("preceeding");
+    backgroundA.precedingComment = new Comment("preceding");
     // When
     const backgroundB: Background = backgroundA.clone();
     // Then
     expect(backgroundB.descriptionComment.text).toEqual(backgroundA.descriptionComment.text);
     expect(backgroundB.descriptionComment).not.toBe(backgroundA.descriptionComment);
-    expect(backgroundB.preceedingComment.text).toEqual(backgroundA.preceedingComment.text);
-    expect(backgroundB.preceedingComment).not.toBe(backgroundA.preceedingComment);
+    expect(backgroundB.precedingComment.text).toEqual(backgroundA.precedingComment.text);
+    expect(backgroundB.precedingComment).not.toBe(backgroundA.precedingComment);
   });
 
   describe("parse", () => {

@@ -25,7 +25,7 @@ export class ScenarioOutline extends Element {
       keyword, name, description,
     );
 
-    scenarioOutline.preceedingComment = comments?.parseComment(location);
+    scenarioOutline.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1].location);
     scenarioOutline.tagComment = comments?.parseTagComment(tags);
 
     scenarioOutline.steps = Step.parseAll(steps, comments);
@@ -37,11 +37,11 @@ export class ScenarioOutline extends Element {
 
     debug(
       "parse(this: {keyword: '%s', name: '%s', description: '%s', " +
-      "steps: %d, tags: %d, examples: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "steps: %d, tags: %d, examples: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       scenarioOutline.keyword, scenarioOutline.name, scenarioOutline.description,
       scenarioOutline.steps.length, scenarioOutline.tags.length, scenarioOutline.examples.length,
-      scenarioOutline.preceedingComment?.text, scenarioOutline.tagComment?.text,
+      scenarioOutline.precedingComment?.text, scenarioOutline.tagComment?.text,
       scenarioOutline.descriptionComment?.text,
     );
     return scenarioOutline;
@@ -69,11 +69,11 @@ export class ScenarioOutline extends Element {
 
     debug(
       "constructor(this: {keyword: '%s', name: '%s', description: '%s', " +
-      "steps: %d, tags: %d, examples: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "steps: %d, tags: %d, examples: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       this.keyword, this.name, this.description,
       this.steps.length, this.tags.length, this.examples.length,
-      this.preceedingComment?.text, this.tagComment?.text,
+      this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text,
     );
   }
@@ -91,18 +91,18 @@ export class ScenarioOutline extends Element {
   public clone(): ScenarioOutline {
     debug(
       "clone(this: {keyword: '%s', name: '%s', description: '%s', " +
-      "steps: %d, tags: %d, examples: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "steps: %d, tags: %d, examples: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       this.keyword, this.name, this.description,
       this.steps.length, this.tags.length, this.examples.length,
-      this.preceedingComment?.text, this.tagComment?.text,
+      this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text,
     );
     const scenarioOutline: ScenarioOutline = new ScenarioOutline(
       this.keyword, this.name, this.description,
     );
 
-    scenarioOutline.preceedingComment = this.preceedingComment ? this.preceedingComment.clone() : null;
+    scenarioOutline.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
     scenarioOutline.tagComment = this.tagComment ? this.tagComment.clone() : null;
     scenarioOutline.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
 
@@ -127,7 +127,7 @@ export class ScenarioOutline extends Element {
           tag(examples.header.cells[n].value, row.cells[n].value),
         ]);
 
-        scenario.preceedingComment = this.preceedingComment ? this.preceedingComment.clone() : null;
+        scenario.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
         scenario.tagComment = this.tagComment ? this.tagComment.clone() : null;
         scenario.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
 

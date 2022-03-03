@@ -19,7 +19,7 @@ export class Scenario extends Element {
     const { description, keyword, name, steps, tags, location } = obj.scenario;
     const scenario: Scenario = new Scenario(keyword, name, description);
 
-    scenario.preceedingComment = comments?.parseComment(location);
+    scenario.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1].location);
     scenario.tagComment = comments?.parseTagComment(tags);
 
     scenario.steps = Step.parseAll(steps, comments);
@@ -29,11 +29,11 @@ export class Scenario extends Element {
 
     debug(
       "parse(this: {keyword: '%s', name: '%s', description: '%s', " +
-      "steps: %d, tags: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "steps: %d, tags: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       scenario.keyword, scenario.name, scenario.description,
       scenario.steps.length, scenario.tags.length,
-      scenario.preceedingComment?.text, scenario.tagComment?.text,
+      scenario.precedingComment?.text, scenario.tagComment?.text,
       scenario.descriptionComment?.text,
     );
     return scenario;
@@ -54,16 +54,16 @@ export class Scenario extends Element {
 
     this.tags = [];
 
-    this.preceedingComment = null;
+    this.precedingComment = null;
     this.tagComment = null;
 
     debug(
       "constructor(this: {keyword: '%s', name: '%s', description: '%s', " +
-      "steps: %d, tags: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "steps: %d, tags: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       this.keyword, this.name, this.description,
       this.steps.length, this.tags.length,
-      this.preceedingComment?.text, this.tagComment?.text,
+      this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text,
     );
   }
@@ -80,11 +80,11 @@ export class Scenario extends Element {
   public clone(): Scenario {
     debug(
       "clone(this: {keyword: '%s', name: '%s', description: '%s', " +
-      "steps: %d, tags: %d, preceedingComment: '%s', tagComment: '%s', " +
+      "steps: %d, tags: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       this.keyword, this.name, this.description,
       this.steps.length, this.tags.length,
-      this.preceedingComment?.text, this.tagComment?.text,
+      this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text,
     );
     const scenario: Scenario = new Scenario(
@@ -94,7 +94,7 @@ export class Scenario extends Element {
     scenario.steps = cloneArray<Step>(this.steps);
     scenario.tags = cloneArray<Tag>(this.tags);
 
-    scenario.preceedingComment = this.preceedingComment ? this.preceedingComment.clone() : null;
+    scenario.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
     scenario.tagComment = this.tagComment ? this.tagComment.clone() : null;
     scenario.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
 

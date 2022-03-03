@@ -18,31 +18,31 @@ export class Background extends Element {
     const { keyword, name, description, steps, location } = obj.background;
     const background: Background = new Background(keyword, name, description);
 
-    background.preceedingComment = comments?.parseComment(location);
+    background.precedingComment = comments?.parseComment(location);
 
     background.steps = Step.parseAll(steps, comments);
 
     background.descriptionComment = comments?.parseCommentBetween(location, steps?.[0]?.location);
 
     debug(
-      "parse(this: {keyword: '%s', name: '%s', description: '%s', step: %d, preceedingComment: '%s', descriptionComment: '%s'})",
+      "parse(this: {keyword: '%s', name: '%s', description: '%s', step: %d, precedingComment: '%s', descriptionComment: '%s'})",
       background.keyword, background.name, background.description, background.steps.length,
-      background.preceedingComment?.text, background.descriptionComment?.text,
+      background.precedingComment?.text, background.descriptionComment?.text,
     );
     return background;
   }
 
   public clone(): Background {
     debug(
-      "clone(this: {keyword: '%s', name: '%s', description: '%s', step: %d, preceedingComment: '%s', descriptionComment: '%s'})",
+      "clone(this: {keyword: '%s', name: '%s', description: '%s', step: %d, precedingComment: '%s', descriptionComment: '%s'})",
       this.keyword, this.name, this.description, this.steps.length,
-      this.preceedingComment?.text, this.descriptionComment?.text,
+      this.precedingComment?.text, this.descriptionComment?.text,
     );
     const background: Background = new Background(this.keyword, this.name, this.description);
 
     background.steps = cloneArray<Step>(this.steps);
 
-    background.preceedingComment = this.preceedingComment ? this.preceedingComment.clone() : null;
+    background.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
     background.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
 
     return background;

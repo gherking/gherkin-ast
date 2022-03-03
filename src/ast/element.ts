@@ -22,7 +22,7 @@ export class Element extends UniqueObject {
   public steps: Step[];
     
   /** Comment before the Element */
-  public preceedingComment: Comment;
+  public precedingComment: Comment;
   /** Comment after the description of the Element */
   public descriptionComment: Comment;
 
@@ -39,7 +39,7 @@ export class Element extends UniqueObject {
         
     this.steps = [];
         
-    this.preceedingComment = null;
+    this.precedingComment = null;
     this.descriptionComment = null;
   }
 
@@ -55,7 +55,7 @@ export class Element extends UniqueObject {
     
     replaceArray<Step>(this.steps, key, value);
     
-    this.preceedingComment && this.preceedingComment.replace(key, value);
+    this.precedingComment && this.precedingComment.replace(key, value);
     this.descriptionComment && this.descriptionComment.replace(key, value);
   }
 

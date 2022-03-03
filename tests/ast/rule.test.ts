@@ -25,7 +25,7 @@ describe("Rule", () => {
 
       ruleA.descriptionComment = new Comment("# description");
       ruleA.tagComment = new Comment("# tag");
-      ruleA.preceedingComment = new Comment("# preceeding");
+      ruleA.precedingComment = new Comment("# preceding");
 
       ruleB = ruleA.clone();
     });
@@ -52,8 +52,8 @@ describe("Rule", () => {
       expect(ruleB.tagComment.text).toEqual(ruleA.tagComment.text);
       expect(ruleB.tagComment).not.toBe(ruleA.tagComment);
 
-      expect(ruleB.preceedingComment.text).toEqual(ruleA.preceedingComment.text);
-      expect(ruleB.preceedingComment).not.toBe(ruleA.preceedingComment);
+      expect(ruleB.precedingComment.text).toEqual(ruleA.precedingComment.text);
+      expect(ruleB.precedingComment).not.toBe(ruleA.precedingComment);
     });
   });
 
@@ -66,7 +66,7 @@ describe("Rule", () => {
 
       ruleA.descriptionComment = new Comment("# description");
       ruleA.tagComment = new Comment("# tag");
-      ruleA.preceedingComment = new Comment("# preceeding");
+      ruleA.precedingComment = new Comment("# preceding");
 
       ruleA.replace("K", "V");
     });
@@ -87,7 +87,7 @@ describe("Rule", () => {
     test("should replace in comments", () => {
       expect(common.replaceAll).toHaveBeenCalledWith("# tag", "K", "V");
       expect(common.replaceAll).toHaveBeenCalledWith("# description", "K", "V");
-      expect(common.replaceAll).toHaveBeenCalledWith("# preceeding", "K", "V");
+      expect(common.replaceAll).toHaveBeenCalledWith("# preceding", "K", "V");
     });
   });
 
@@ -158,7 +158,7 @@ describe("Rule", () => {
       const comments = new GherkinCommentHandler([
         {
           location: { column: 1, line: 41 },
-          text: "# preceeding",
+          text: "# preceding",
         },
         {
           location: { column: 1, line: 39 },
@@ -181,8 +181,8 @@ describe("Rule", () => {
       expect(rule.descriptionComment).toBeDefined();
       expect(rule.descriptionComment.text).toEqual("# description");
 
-      expect(rule.preceedingComment).toBeDefined();
-      expect(rule.preceedingComment.text).toEqual("# preceeding");
+      expect(rule.precedingComment).toBeDefined();
+      expect(rule.precedingComment.text).toEqual("# preceding");
     });
 
     test("should parse GherkinBackground children", () => {

@@ -17,7 +17,7 @@ describe("Examples", () => {
     example.tags = [new Tag("@tag")];
     example.header = new TableRow([new TableCell("Header")]);
     example.body = [new TableRow([new TableCell("Body")])];
-    example.preceedingComment = new Comment("# preceeding");
+    example.precedingComment = new Comment("# preceding");
     example.tagComment = new Comment("# tag");
   });
   describe("constructor", () => {
@@ -71,8 +71,8 @@ describe("Examples", () => {
     });
 
     test("should clone comment", () => {
-      expect(clonedExample.preceedingComment.text).toEqual(example.preceedingComment.text);
-      expect(clonedExample.preceedingComment).not.toBe(example.preceedingComment);
+      expect(clonedExample.precedingComment.text).toEqual(example.precedingComment.text);
+      expect(clonedExample.precedingComment).not.toBe(example.precedingComment);
       expect(clonedExample.tagComment.text).toEqual(example.tagComment.text);
       expect(clonedExample.tagComment).not.toBe(example.tagComment);
     });
@@ -108,7 +108,7 @@ describe("Examples", () => {
     test("should replace in comments", () => {
       example.replace("e", "X");
 
-      expect(common.replaceAll).toHaveBeenCalledWith("# preceeding", "e", "X");
+      expect(common.replaceAll).toHaveBeenCalledWith("# preceding", "e", "X");
       expect(common.replaceAll).toHaveBeenCalledWith("# tag", "e", "X");
     });
   });
@@ -188,13 +188,13 @@ describe("Examples", () => {
         },
         {
           location: { column: 1, line: 41 },
-          text: "# preceeding",
+          text: "# preceding",
         },
       ]);
       const parsed: Examples = Examples.parse(obj, comments);
       expect(pruneID(parsed)).toBeDefined();
-      expect(parsed.preceedingComment).toBeDefined();
-      expect(parsed.preceedingComment.text).toEqual("# preceeding");
+      expect(parsed.precedingComment).toBeDefined();
+      expect(parsed.precedingComment.text).toEqual("# preceding");
       expect(parsed.tagComment).toBeDefined();
       expect(parsed.tagComment.text).toEqual("# tag");
     });

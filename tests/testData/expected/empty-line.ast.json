@@ -58,7 +58,7 @@
                 }
               }
             ],
-            "preceedingComment": {
+            "precedingComment": {
               "_id": "fa66c741-e1e3-4f66-9d1c-19a33b219ad1",
               "text": "# Comment(s) of the background"
             },
@@ -188,7 +188,7 @@
                 "comment": null
               }
             ],
-            "preceedingComment": {
+            "precedingComment": {
               "_id": "69ea6391-cd54-4702-a84c-be9910a4f3d9",
               "text": "# Comment(s) of the scenario"
             },
@@ -236,7 +236,7 @@
                 "comment": null
               }
             ],
-            "preceedingComment": {
+            "precedingComment": {
               "_id": "a2c3af54-5451-4fbc-90d2-73b74f7506e4",
               "text": "# Comment(s) of the scenario outline"
             },
@@ -278,7 +278,7 @@
                     "text": "# Comment(s) of the examples table"
                   }
                 },
-                "preceedingComment": {
+                "precedingComment": {
                   "_id": "422e321d-a696-48aa-bd72-eb1af8ab8012",
                   "text": "# Comment(s) of the examples"
                 },
@@ -351,7 +351,7 @@
             "comment": null
           }
         ],
-        "preceedingComment": {
+        "precedingComment": {
           "_id": "01a07949-f332-4230-bf9b-16a099a83dbb",
           "text": "# Comment(s) of the rule"
         },
@@ -385,7 +385,7 @@
         }
       }
     ],
-    "preceedingComment": {
+    "precedingComment": {
       "_id": "0460059c-2df6-4300-b023-15da5f0434b6",
       "text": "# Comment(s) of the feature"
     },

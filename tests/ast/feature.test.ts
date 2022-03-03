@@ -29,7 +29,7 @@ describe("Feature", () => {
 
       featureA.descriptionComment = new Comment("# description");
       featureA.tagComment = new Comment("# tag");
-      featureA.preceedingComment = new Comment("# preceeding");
+      featureA.precedingComment = new Comment("# preceding");
 
       featureB = featureA.clone();
     });
@@ -55,8 +55,8 @@ describe("Feature", () => {
       expect(featureB.tagComment.text).toEqual(featureA.tagComment.text);
       expect(featureB.tagComment).not.toBe(featureA.tagComment);
 
-      expect(featureB.preceedingComment.text).toEqual(featureA.preceedingComment.text);
-      expect(featureB.preceedingComment).not.toBe(featureA.preceedingComment);
+      expect(featureB.precedingComment.text).toEqual(featureA.precedingComment.text);
+      expect(featureB.precedingComment).not.toBe(featureA.precedingComment);
     });
   });
 
@@ -69,7 +69,7 @@ describe("Feature", () => {
 
       featureA.descriptionComment = new Comment("# description");
       featureA.tagComment = new Comment("# tag");
-      featureA.preceedingComment = new Comment("# preceeding");
+      featureA.precedingComment = new Comment("# preceding");
 
       featureA.replace("K", "V");
     });
@@ -89,7 +89,7 @@ describe("Feature", () => {
 
     test("should replace in comments", () => {
       expect(common.replaceAll).toHaveBeenCalledWith("# description", "K", "V");
-      expect(common.replaceAll).toHaveBeenCalledWith("# preceeding", "K", "V");
+      expect(common.replaceAll).toHaveBeenCalledWith("# preceding", "K", "V");
       expect(common.replaceAll).toHaveBeenCalledWith("# tag", "K", "V");
     });
   });
@@ -160,7 +160,7 @@ describe("Feature", () => {
       const comments = new GherkinCommentHandler([
         {
           location: { column: 1, line: 41 },
-          text: "# preceeding",
+          text: "# preceding",
         },
         {
           location: { column: 1, line: 39 },
@@ -183,8 +183,8 @@ describe("Feature", () => {
       expect(feature.descriptionComment).toBeDefined();
       expect(feature.descriptionComment.text).toEqual("# description");
 
-      expect(feature.preceedingComment).toBeDefined();
-      expect(feature.preceedingComment.text).toEqual("# preceeding");
+      expect(feature.precedingComment).toBeDefined();
+      expect(feature.precedingComment.text).toEqual("# preceding");
     });
 
     test("should parse GherkingRule children", () => {

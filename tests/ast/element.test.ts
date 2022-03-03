@@ -15,7 +15,7 @@ describe("Element", () => {
     expect(e.description).toEqual("String3");
     expect(e.steps).toEqual([]);
     expect(e.descriptionComment).toBeNull();
-    expect(e.preceedingComment).toBeNull();
+    expect(e.precedingComment).toBeNull();
   });
 
   test("should throw error when clone is called", () => {
@@ -30,7 +30,7 @@ describe("Element", () => {
     // Given
     const e: Element = new Element("String1", "String2", "String3");
     e.descriptionComment = new Comment("# description");
-    e.preceedingComment = new Comment("# preceeding");
+    e.precedingComment = new Comment("# preceding");
     jest.spyOn(common, "replaceAll");
     // When
     e.replace("a", "b");
@@ -38,7 +38,7 @@ describe("Element", () => {
     expect(common.replaceAll).toHaveBeenCalledWith("String2", "a", "b");
     expect(common.replaceAll).toHaveBeenCalledWith("String3", "a", "b");
     expect(common.replaceAll).toHaveBeenCalledWith("# description", "a", "b");
-    expect(common.replaceAll).toHaveBeenCalledWith("# preceeding", "a", "b");
+    expect(common.replaceAll).toHaveBeenCalledWith("# preceding", "a", "b");
   });
 
   test("should normalize step keywords", () => {

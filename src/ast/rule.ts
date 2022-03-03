@@ -22,7 +22,7 @@ export class Rule extends UniqueObject {
     const { keyword, description, children, name, tags, location } = obj.rule;
     const rule: Rule = new Rule(keyword, name, description);
 
-    rule.preceedingComment = comments?.parseComment(location);
+    rule.precedingComment = comments?.parseComment(location);
     rule.tagComment = comments?.parseTagComment(tags);
 
     rule.tags = Tag.parseAll(tags, comments);
@@ -50,10 +50,10 @@ export class Rule extends UniqueObject {
 
     debug(
       "parse(this: {keyword: '%s', name: '%s', description: '%s', " +
-      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "precedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
       "tags: %d, elements: %d})",
       rule.keyword, rule.name, rule.description,
-      rule.preceedingComment?.text, rule.tagComment?.text,
+      rule.precedingComment?.text, rule.tagComment?.text,
       rule.descriptionComment?.text, rule.tags.length, rule.elements.length,
     )
     return rule;
@@ -74,7 +74,7 @@ export class Rule extends UniqueObject {
   /** Comment before the tags */
   public tagComment: Comment;
   /** Comment before the Rule */
-  public preceedingComment: Comment;
+  public precedingComment: Comment;
   /** Comment after the description of the Rul */
   public descriptionComment: Comment;
 
@@ -92,16 +92,16 @@ export class Rule extends UniqueObject {
     this.elements = [];
     this.tags = [];
 
-    this.preceedingComment = null;
+    this.precedingComment = null;
     this.tagComment = null;
     this.descriptionComment = null;
 
     debug(
       "constructor(this: {keyword: '%s', name: '%s', description: '%s', " +
-      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "precedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
       "tags: %d, elements: %d})",
       this.keyword, this.name, this.description,
-      this.preceedingComment?.text, this.tagComment?.text,
+      this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text, this.tags.length, this.elements.length,
     )
   }
@@ -109,10 +109,10 @@ export class Rule extends UniqueObject {
   public clone(): Rule {
     debug(
       "clone(this: {keyword: '%s', name: '%s', description: '%s', " +
-      "preceedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
+      "precedingComment: '%s', tagComment: '%s', desctiptionComment: '%s', " +
       "tags: %d, elements: %d})",
       this.keyword, this.name, this.description,
-      this.preceedingComment?.text, this.tagComment?.text,
+      this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text, this.tags.length, this.elements.length,
     )
     const rule: Rule = new Rule(
@@ -120,7 +120,7 @@ export class Rule extends UniqueObject {
       this.description,
     );
 
-    rule.preceedingComment = this.preceedingComment ? this.preceedingComment.clone() : null;
+    rule.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
     rule.tagComment = this.tagComment ? this.tagComment.clone() : null;
     rule.descriptionComment = this.descriptionComment ? this.descriptionComment.clone() : null;
 
@@ -138,7 +138,7 @@ export class Rule extends UniqueObject {
     replaceArray<Tag>(this.tags, key, value);
     replaceArray<Element>(this.elements, key, value);
 
-    this.preceedingComment && this.preceedingComment.replace(key, value);
+    this.precedingComment && this.precedingComment.replace(key, value);
     this.tagComment && this.tagComment.replace(key, value);
     this.descriptionComment && this.descriptionComment.replace(key, value);
   }

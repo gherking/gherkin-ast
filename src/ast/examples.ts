@@ -18,7 +18,7 @@ export class Examples extends UniqueObject {
     }
     const examples: Examples = new Examples(obj.keyword, obj.name);
 
-    examples.preceedingComment = comments?.parseComment(obj.location);
+    examples.precedingComment = comments?.parseComment(obj.location, obj.tags?.[obj.tags.length - 1].location);
     examples.tagComment = comments?.parseTagComment(obj.tags);
 
     examples.tags = Tag.parseAll(obj.tags, comments);
@@ -29,9 +29,9 @@ export class Examples extends UniqueObject {
     examples.body = TableRow.parseAll(obj.tableBody, comments);
 
     debug(
-      "parse(this: {keyword: '%s', name: '%s', tags: %d, header: %d, body: %d, preceedingComment: '%s', tagComment: '%s'})",
+      "parse(this: {keyword: '%s', name: '%s', tags: %d, header: %d, body: %d, precedingComment: '%s', tagComment: '%s'})",
       examples.keyword, examples.name, examples.tags.length, examples.header?.cells.length,
-      examples.body.length, examples.preceedingComment?.text, examples.tagComment?.text,
+      examples.body.length, examples.precedingComment?.text, examples.tagComment?.text,
     )
     return examples;
   }
@@ -52,7 +52,7 @@ export class Examples extends UniqueObject {
   /** Comment before all tags */
   public tagComment: Comment;
   /** Comment before the Examples */
-  public preceedingComment: Comment;
+  public precedingComment: Comment;
 
   constructor(keyword: string, name: string) {
     super();
@@ -62,7 +62,7 @@ export class Examples extends UniqueObject {
     this.name = normalizeString(name);
 
     this.header = null;
-    this.preceedingComment = null;
+    this.precedingComment = null;
     this.tagComment = null;
 
     this.tags = [];
@@ -71,14 +71,14 @@ export class Examples extends UniqueObject {
 
   public clone(): Examples {
     debug(
-      "clone(this: {keyword: '%s', name: '%s', tags: %d, header: %d, body: %d, preceedingComment: '%s', tagComment: '%s'})",
+      "clone(this: {keyword: '%s', name: '%s', tags: %d, header: %d, body: %d, precedingComment: '%s', tagComment: '%s'})",
       this.keyword, this.name, this.tags.length, this.header?.cells.length,
-      this.body.length, this.preceedingComment?.text, this.tagComment?.text,
+      this.body.length, this.precedingComment?.text, this.tagComment?.text,
     )
     const examples: Examples = new Examples(this.keyword, this.name);
 
     examples.header = this.header ? this.header.clone() : null;
-    examples.preceedingComment = this.preceedingComment ? this.preceedingComment.clone() : null;
+    examples.precedingComment = this.precedingComment ? this.precedingComment.clone() : null;
     examples.tagComment = this.tagComment ? this.tagComment.clone() : null;
 
     examples.tags = cloneArray<Tag>(this.tags);
@@ -92,7 +92,7 @@ export class Examples extends UniqueObject {
     this.name = replaceAll(this.name, key, value);
 
     this.header && this.header.replace(key, value);
-    this.preceedingComment && this.preceedingComment.replace(key, value);
+    this.precedingComment && this.precedingComment.replace(key, value);
     this.tagComment && this.tagComment.replace(key, value);
 
     replaceArray<Tag>(this.tags, key, value);

@@ -114,7 +114,10 @@ export class GherkinCommentHandler {
     return comments;
   }
 
-  public parseComment(location: GherkinLocation): Comment {
+  public parseComment(location: GherkinLocation, from?: GherkinLocation): Comment {
+    if (from) {
+      return this.parseCommentBetween(from, location);
+    }
     const comments = this.popCommentsRightBefore(location);
     if (comments.length) {
       this.debug('parseComment(location: %d) => %d', location?.line, comments.length);
