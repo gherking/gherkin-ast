@@ -49,7 +49,7 @@ The following components are available to work with the Gherkin feature files in
 > Comments are only permitted at the start of a new line, anywhere in the feature file. They begin with zero or more spaces, followed by a hash sign (#) and some text.
 > (https://cucumber.io/docs/gherkin/reference/)
 
-Although comments can be written mainly in Gherkin, AST only supports **semantic comments** in the feature files because of technical limitations and integration in the whole **GherKing flow** *(parsing, AST, processing, formatting)*.
+Although comments can be written in basically any place in Gherkin, AST only supports **semantic comments** in the feature files because of technical limitations and integration in the whole **GherKing flow** *(parsing, AST, processing, formatting)*.
 
 The following semantic comments are supported:
 
