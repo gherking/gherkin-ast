@@ -18,7 +18,7 @@ export class DataTable extends UniqueObject {
 
     table.rows = TableRow.parseAll(obj.rows, comments);
 
-    debug("parse(this: {rows: %d})", table.rows.length);
+    debug("parse(this: {rows: %d})", table.rows?.length);
     return table;
   }
 
@@ -28,7 +28,7 @@ export class DataTable extends UniqueObject {
   }
 
   public clone(): DataTable {
-    debug("clone(this: {rows: %d})", this.rows.length);
+    debug("clone(this: {rows: %d})", this.rows?.length);
     return new DataTable(cloneArray<TableRow>(this.rows));
   }
 

@@ -18,7 +18,7 @@ export class Step extends UniqueObject {
     if (!obj || !obj.text) {
       throw new Error("The given object is not a Step!");
     }
-    const { keyword, text, dataTable, docString } = obj;
+    const { keyword, text, dataTable, docString, location } = obj;
     const step: Step = new Step(keyword, text);
 
     if (dataTable) {
@@ -29,21 +29,21 @@ export class Step extends UniqueObject {
     }
 
     if (prevStepLocation) {
-      step.comment = comments?.parseCommentBetween(prevStepLocation, obj.location);
+      step.comment = comments?.parseCommentBetween(prevStepLocation, location);
     } else {
-      step.comment = comments?.parseComment(obj.location);
+      step.comment = comments?.parseComment(location);
     }
 
     debug(
       "parse(this: {keyword: '%s', text: '%s', dataTable: %d, docString: %d, comment: '%s'})",
-      step.keyword, step.text, step.dataTable?.rows.length, step.docString?.content.length,
+      step.keyword, step.text, step.dataTable?.rows?.length, step.docString?.content?.length,
       step.comment?.text,
     );
     return step;
   }
 
   public static parseAll(obj: GherkinStep[], comments?: GherkinCommentHandler): Step[] {
-    debug("parseAll(obj: %d, comments: %d)", obj?.length, comments?.comments.length);
+    debug("parseAll(obj: %d, comments: %d)", obj?.length, comments?.comments?.length);
     if (!Array.isArray(obj)) {
       return [];
     }
@@ -81,7 +81,7 @@ export class Step extends UniqueObject {
 
     debug(
       "constructor(this: {keyword: '%s', text: '%s', dataTable: %d, docString: %d, comment: '%s'})",
-      this.keyword, this.text, this.dataTable?.rows.length, this.docString?.content.length,
+      this.keyword, this.text, this.dataTable?.rows?.length, this.docString?.content?.length,
       this.comment?.text,
     );
   }
@@ -89,7 +89,7 @@ export class Step extends UniqueObject {
   public clone(): Step {
     debug(
       "clone(this: {keyword: '%s', text: '%s', dataTable: %d, docString: %d, comment: '%s'})",
-      this.keyword, this.text, this.dataTable?.rows.length, this.docString?.content.length,
+      this.keyword, this.text, this.dataTable?.rows?.length, this.docString?.content?.length,
       this.comment?.text,
     );
     const step: Step = new Step(this.keyword, this.text);

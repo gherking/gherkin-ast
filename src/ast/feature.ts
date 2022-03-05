@@ -23,7 +23,7 @@ export class Feature extends UniqueObject {
     const { keyword, language, description, children, name, tags, location } = obj;
     const feature: Feature = new Feature(keyword, name, description, language);
 
-    feature.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1].location);
+    feature.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1]?.location);
     feature.tagComment = comments?.parseTagComment(tags);
 
     feature.tags = Tag.parseAll(tags, comments);
@@ -38,13 +38,13 @@ export class Feature extends UniqueObject {
       }
       if (isGherkinBackground(child)) {
         if (!firstLocation) {
-          firstLocation = child.background.location;
+          firstLocation = child.background?.location;
         }
         return Background.parse(child, comments);
       }
       if (isGherkinScenario(child)) {
         if (!firstLocation) {
-          firstLocation = child.scenario.location;
+          firstLocation = child.scenario?.location;
         }
         if (child.scenario?.examples?.length) {
           return ScenarioOutline.parse(child, comments);
@@ -61,7 +61,7 @@ export class Feature extends UniqueObject {
       "tags: %d, elements: %d})",
       feature.keyword, feature.name, feature.description, feature.language,
       feature.precedingComment?.text, feature.tagComment?.text,
-      feature.descriptionComment?.text, feature.tags.length, feature.elements.length,
+      feature.descriptionComment?.text, feature.tags?.length, feature.elements?.length,
     );
     return feature;
   }
@@ -113,7 +113,7 @@ export class Feature extends UniqueObject {
       "tags: %d, elements: %d})",
       this.keyword, this.name, this.description, this.language,
       this.precedingComment?.text, this.tagComment?.text,
-      this.descriptionComment?.text, this.tags.length, this.elements.length,
+      this.descriptionComment?.text, this.tags?.length, this.elements?.length,
     );
   }
 
@@ -124,7 +124,7 @@ export class Feature extends UniqueObject {
       "tags: %d, elements: %d})",
       this.keyword, this.name, this.description, this.language,
       this.precedingComment?.text, this.tagComment?.text,
-      this.descriptionComment?.text, this.tags.length, this.elements.length,
+      this.descriptionComment?.text, this.tags?.length, this.elements?.length,
     );
     const feature: Feature = new Feature(
       this.keyword, this.name,

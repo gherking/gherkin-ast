@@ -16,22 +16,23 @@ export class Examples extends UniqueObject {
     if (!obj || !Array.isArray(obj.tableBody)) {
       throw new TypeError("The given obj is not an Examples!");
     }
-    const examples: Examples = new Examples(obj.keyword, obj.name);
+    const { location, tags, tableHeader, tableBody, keyword, name } = obj;
+    const examples: Examples = new Examples(keyword, name);
 
-    examples.precedingComment = comments?.parseComment(obj.location, obj.tags?.[obj.tags.length - 1].location);
-    examples.tagComment = comments?.parseTagComment(obj.tags);
+    examples.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1]?.location);
+    examples.tagComment = comments?.parseTagComment(tags);
 
-    examples.tags = Tag.parseAll(obj.tags, comments);
+    examples.tags = Tag.parseAll(tags, comments);
 
-    if (obj.tableHeader) {
-      examples.header = TableRow.parse(obj.tableHeader, comments);
+    if (tableHeader) {
+      examples.header = TableRow.parse(tableHeader, comments);
     }
-    examples.body = TableRow.parseAll(obj.tableBody, comments);
+    examples.body = TableRow.parseAll(tableBody, comments);
 
     debug(
       "parse(this: {keyword: '%s', name: '%s', tags: %d, header: %d, body: %d, precedingComment: '%s', tagComment: '%s'})",
-      examples.keyword, examples.name, examples.tags.length, examples.header?.cells.length,
-      examples.body.length, examples.precedingComment?.text, examples.tagComment?.text,
+      examples.keyword, examples.name, examples.tags?.length, examples.header?.cells?.length,
+      examples.body?.length, examples.precedingComment?.text, examples.tagComment?.text,
     )
     return examples;
   }
@@ -72,8 +73,8 @@ export class Examples extends UniqueObject {
   public clone(): Examples {
     debug(
       "clone(this: {keyword: '%s', name: '%s', tags: %d, header: %d, body: %d, precedingComment: '%s', tagComment: '%s'})",
-      this.keyword, this.name, this.tags.length, this.header?.cells.length,
-      this.body.length, this.precedingComment?.text, this.tagComment?.text,
+      this.keyword, this.name, this.tags?.length, this.header?.cells?.length,
+      this.body?.length, this.precedingComment?.text, this.tagComment?.text,
     )
     const examples: Examples = new Examples(this.keyword, this.name);
 

@@ -15,15 +15,16 @@ export class TableRow extends UniqueObject {
     if (!obj || !Array.isArray(obj.cells)) {
       throw new TypeError("The given object is not a TableRow!");
     }
+    const { cells, location } = obj;
     const row: TableRow = new TableRow();
 
-    row.cells = obj.cells.map(TableCell.parse);
+    row.cells = cells?.map(TableCell.parse);
 
-    row.comment = comments?.parseComment(obj.location);
+    row.comment = comments?.parseComment(location);
 
     debug(
       "parse(this: {cells: %d, comment: '%s'})",
-      row.cells.length, row.comment?.text,
+      row.cells?.length, row.comment?.text,
     );
     return row;
   }
@@ -41,19 +42,19 @@ export class TableRow extends UniqueObject {
 
   constructor(public cells: TableCell[] = []) {
     super();
-    debug("constructor(cells: %d)", cells.length);
+    debug("constructor(cells: %d)", cells?.length);
 
     this.comment = null;
     debug(
       "constructor(this: {cells: %d, comment: '%s'})",
-      this.cells.length, this.comment?.text,
+      this.cells?.length, this.comment?.text,
     );
   }
 
   public clone(): TableRow {
     debug(
       "clone(this: {cells: %d, comment: '%s'})",
-      this.cells.length, this.comment?.text,
+      this.cells?.length, this.comment?.text,
     );
     const row = new TableRow(cloneArray<TableCell>(this.cells));
 

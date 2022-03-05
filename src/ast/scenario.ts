@@ -19,7 +19,7 @@ export class Scenario extends Element {
     const { description, keyword, name, steps, tags, location } = obj.scenario;
     const scenario: Scenario = new Scenario(keyword, name, description);
 
-    scenario.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1].location);
+    scenario.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1]?.location);
     scenario.tagComment = comments?.parseTagComment(tags);
 
     scenario.steps = Step.parseAll(steps, comments);
@@ -32,7 +32,7 @@ export class Scenario extends Element {
       "steps: %d, tags: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       scenario.keyword, scenario.name, scenario.description,
-      scenario.steps.length, scenario.tags.length,
+      scenario.steps?.length, scenario.tags?.length,
       scenario.precedingComment?.text, scenario.tagComment?.text,
       scenario.descriptionComment?.text,
     );
@@ -62,7 +62,7 @@ export class Scenario extends Element {
       "steps: %d, tags: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       this.keyword, this.name, this.description,
-      this.steps.length, this.tags.length,
+      this.steps?.length, this.tags?.length,
       this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text,
     );
@@ -83,7 +83,7 @@ export class Scenario extends Element {
       "steps: %d, tags: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       this.keyword, this.name, this.description,
-      this.steps.length, this.tags.length,
+      this.steps?.length, this.tags?.length,
       this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text,
     );

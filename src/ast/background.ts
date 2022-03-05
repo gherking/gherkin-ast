@@ -26,7 +26,7 @@ export class Background extends Element {
 
     debug(
       "parse(this: {keyword: '%s', name: '%s', description: '%s', step: %d, precedingComment: '%s', descriptionComment: '%s'})",
-      background.keyword, background.name, background.description, background.steps.length,
+      background.keyword, background.name, background.description, background.steps?.length,
       background.precedingComment?.text, background.descriptionComment?.text,
     );
     return background;
@@ -35,7 +35,7 @@ export class Background extends Element {
   public clone(): Background {
     debug(
       "clone(this: {keyword: '%s', name: '%s', description: '%s', step: %d, precedingComment: '%s', descriptionComment: '%s'})",
-      this.keyword, this.name, this.description, this.steps.length,
+      this.keyword, this.name, this.description, this.steps?.length,
       this.precedingComment?.text, this.descriptionComment?.text,
     );
     const background: Background = new Background(this.keyword, this.name, this.description);

@@ -25,7 +25,7 @@ export class ScenarioOutline extends Element {
       keyword, name, description,
     );
 
-    scenarioOutline.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1].location);
+    scenarioOutline.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1]?.location);
     scenarioOutline.tagComment = comments?.parseTagComment(tags);
 
     scenarioOutline.steps = Step.parseAll(steps, comments);
@@ -40,7 +40,7 @@ export class ScenarioOutline extends Element {
       "steps: %d, tags: %d, examples: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       scenarioOutline.keyword, scenarioOutline.name, scenarioOutline.description,
-      scenarioOutline.steps.length, scenarioOutline.tags.length, scenarioOutline.examples.length,
+      scenarioOutline.steps?.length, scenarioOutline.tags?.length, scenarioOutline.examples?.length,
       scenarioOutline.precedingComment?.text, scenarioOutline.tagComment?.text,
       scenarioOutline.descriptionComment?.text,
     );
@@ -72,7 +72,7 @@ export class ScenarioOutline extends Element {
       "steps: %d, tags: %d, examples: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       this.keyword, this.name, this.description,
-      this.steps.length, this.tags.length, this.examples.length,
+      this.steps?.length, this.tags?.length, this.examples?.length,
       this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text,
     );
@@ -94,7 +94,7 @@ export class ScenarioOutline extends Element {
       "steps: %d, tags: %d, examples: %d, precedingComment: '%s', tagComment: '%s', " +
       "descriptionComment: '%s'})",
       this.keyword, this.name, this.description,
-      this.steps.length, this.tags.length, this.examples.length,
+      this.steps?.length, this.tags?.length, this.examples?.length,
       this.precedingComment?.text, this.tagComment?.text,
       this.descriptionComment?.text,
     );

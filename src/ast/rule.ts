@@ -22,7 +22,7 @@ export class Rule extends UniqueObject {
     const { keyword, description, children, name, tags, location } = obj.rule;
     const rule: Rule = new Rule(keyword, name, description);
 
-    rule.precedingComment = comments?.parseComment(location);
+    rule.precedingComment = comments?.parseComment(location, tags?.[tags.length - 1]?.location);
     rule.tagComment = comments?.parseTagComment(tags);
 
     rule.tags = Tag.parseAll(tags, comments);
@@ -31,13 +31,13 @@ export class Rule extends UniqueObject {
     rule.elements = children.map((child: GherkinBackground | GherkinScenario): Element => {
       if (isGherkinBackground(child)) {
         if (!firstLocation) {
-          firstLocation = child.background.location;
+          firstLocation = child.background?.location;
         }
         return Background.parse(child, comments);
       }
       if (isGherkinScenario(child)) {
         if (!firstLocation) {
-          firstLocation = child.scenario.location;
+          firstLocation = child.scenario?.location;
         }
         if (child.scenario?.examples?.length) {
           return ScenarioOutline.parse(child, comments);
@@ -54,7 +54,7 @@ export class Rule extends UniqueObject {
       "tags: %d, elements: %d})",
       rule.keyword, rule.name, rule.description,
       rule.precedingComment?.text, rule.tagComment?.text,
-      rule.descriptionComment?.text, rule.tags.length, rule.elements.length,
+      rule.descriptionComment?.text, rule.tags?.length, rule.elements?.length,
     )
     return rule;
   }
@@ -102,7 +102,7 @@ export class Rule extends UniqueObject {
       "tags: %d, elements: %d})",
       this.keyword, this.name, this.description,
       this.precedingComment?.text, this.tagComment?.text,
-      this.descriptionComment?.text, this.tags.length, this.elements.length,
+      this.descriptionComment?.text, this.tags?.length, this.elements?.length,
     )
   }
 
@@ -113,7 +113,7 @@ export class Rule extends UniqueObject {
       "tags: %d, elements: %d})",
       this.keyword, this.name, this.description,
       this.precedingComment?.text, this.tagComment?.text,
-      this.descriptionComment?.text, this.tags.length, this.elements.length,
+      this.descriptionComment?.text, this.tags?.length, this.elements?.length,
     )
     const rule: Rule = new Rule(
       this.keyword, this.name,
