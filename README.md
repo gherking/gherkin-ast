@@ -181,4 +181,4 @@ This package uses [debug](https://www.npmjs.com/package/debug) for logging, use 
 DEBUG=gherkin-ast* gherking ...
 ```
 
-For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/gpc-for-loop/).
+For detailed documentation see the [TypeDocs documentation](https://gherking.github.io/gherkin-ast/).
