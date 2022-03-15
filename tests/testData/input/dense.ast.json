@@ -34,7 +34,7 @@
       "language": "en",
       "keyword": "Feature",
       "name": "Name",
-      "description": "  Feature description\n  Other fekature description",
+      "description": "  Feature description\n  Other feature description",
       "children": [
         {
           "rule": {
