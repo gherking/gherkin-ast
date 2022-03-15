@@ -1,5 +1,6 @@
 export * from "./gherkinObject";
 export * from "./ast/background";
+export * from "./ast/comment";
 export * from "./ast/dataTable";
 export * from "./ast/docString";
 export * from "./ast/element";

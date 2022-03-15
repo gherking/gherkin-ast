@@ -16,6 +16,10 @@
                 "argsIgnorePattern": "^_"
             }
         ],
-        "@typescript-eslint/ban-ts-comment": 0
+        "@typescript-eslint/ban-ts-comment": 0,
+        "indent": [
+            "error",
+            2
+        ]
     }
 }

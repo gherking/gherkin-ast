@@ -1,10 +1,10 @@
 import { v4 } from "uuid";
 
 export class UniqueObject {
-    // @ts-ignore
-    public _id: string;
+  // @ts-ignore
+  public _id: string;
 
-    constructor() {
-        this._id = v4();
-    }
+  constructor() {
+    this._id = v4();
+  }
 }

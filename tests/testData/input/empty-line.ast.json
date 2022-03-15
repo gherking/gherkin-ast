@@ -1,0 +1,693 @@
+{
+  "gherkinDocument": {
+    "feature": {
+      "tags": [
+        {
+          "location": {
+            "line": 6,
+            "column": 1
+          },
+          "name": "@tag1",
+          "id": "025c7563-074f-459a-a97c-e15072d7f928"
+        },
+        {
+          "location": {
+            "line": 6,
+            "column": 7
+          },
+          "name": "@tag2",
+          "id": "80bf68aa-f637-4d20-bfca-7c81b1ab6a7c"
+        },
+        {
+          "location": {
+            "line": 8,
+            "column": 1
+          },
+          "name": "@tag3",
+          "id": "f70c2e4a-b1e3-4399-88f7-e787a61e5c9a"
+        }
+      ],
+      "location": {
+        "line": 10,
+        "column": 1
+      },
+      "language": "en",
+      "keyword": "Feature",
+      "name": "Name",
+      "description": "  Feature description\n  Other fekature description",
+      "children": [
+        {
+          "rule": {
+            "id": "a5f7b849-573b-4ded-ba4d-1ecc4bc1e779",
+            "location": {
+              "line": 22,
+              "column": 3
+            },
+            "keyword": "Rule",
+            "name": "Name",
+            "description": "    Rule description\n    Other rule description",
+            "children": [
+              {
+                "background": {
+                  "id": "757bd0b2-0f7e-4631-a6f1-f8e377ce55b4",
+                  "location": {
+                    "line": 30,
+                    "column": 5
+                  },
+                  "keyword": "Background",
+                  "name": "Name",
+                  "description": "      Background description\n      Other background description",
+                  "steps": [
+                    {
+                      "id": "239cf886-57cd-4813-b35d-48e44d00a660",
+                      "location": {
+                        "line": 40,
+                        "column": 7
+                      },
+                      "keyword": "Given ",
+                      "text": "step"
+                    },
+                    {
+                      "id": "53467572-e123-48ea-a93f-d2603a2c62d3",
+                      "location": {
+                        "line": 42,
+                        "column": 7
+                      },
+                      "keyword": "When ",
+                      "text": "step"
+                    },
+                    {
+                      "id": "47cd8fdb-41f5-44cb-81be-608ae5746fb7",
+                      "location": {
+                        "line": 44,
+                        "column": 7
+                      },
+                      "keyword": "Then ",
+                      "text": "step"
+                    }
+                  ]
+                }
+              },
+              {
+                "scenario": {
+                  "id": "eb024c87-290b-4bc5-96ef-aa030eaf5b71",
+                  "tags": [
+                    {
+                      "location": {
+                        "line": 47,
+                        "column": 5
+                      },
+                      "name": "@tag1",
+                      "id": "301777d6-afaf-4f4b-8c97-e42d44cdfb4a"
+                    },
+                    {
+                      "location": {
+                        "line": 47,
+                        "column": 11
+                      },
+                      "name": "@tag2",
+                      "id": "d56fba4c-7155-4397-bd94-aafc459e850e"
+                    }
+                  ],
+                  "location": {
+                    "line": 49,
+                    "column": 5
+                  },
+                  "keyword": "Scenario",
+                  "name": "Name",
+                  "description": "      Scenario description\n      Other scenario description",
+                  "steps": [
+                    {
+                      "id": "63580b84-b244-48f4-b749-894bea05869c",
+                      "location": {
+                        "line": 59,
+                        "column": 7
+                      },
+                      "keyword": "Given ",
+                      "text": "step",
+                      "docString": {
+                        "location": {
+                          "line": 61,
+                          "column": 9
+                        },
+                        "content": "docstring\nother docstring",
+                        "delimiter": "\"\"\""
+                      }
+                    },
+                    {
+                      "id": "cc8c8d71-375d-4e3b-a98f-2f952275c251",
+                      "location": {
+                        "line": 66,
+                        "column": 7
+                      },
+                      "keyword": "When ",
+                      "text": "step",
+                      "dataTable": {
+                        "location": {
+                          "line": 68,
+                          "column": 9
+                        },
+                        "rows": [
+                          {
+                            "id": "7207ed2d-14ec-4e10-827a-4fa319ae2826",
+                            "location": {
+                              "line": 68,
+                              "column": 9
+                            },
+                            "cells": [
+                              {
+                                "location": {
+                                  "line": 68,
+                                  "column": 11
+                                },
+                                "value": "data"
+                              },
+                              {
+                                "location": {
+                                  "line": 68,
+                                  "column": 19
+                                },
+                                "value": "table"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "bac32039-2162-48a9-b6fc-2c2af15ffe39",
+                            "location": {
+                              "line": 70,
+                              "column": 9
+                            },
+                            "cells": [
+                              {
+                                "location": {
+                                  "line": 70,
+                                  "column": 11
+                                },
+                                "value": "value"
+                              },
+                              {
+                                "location": {
+                                  "line": 70,
+                                  "column": 19
+                                },
+                                "value": "value"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "8520b491-d1ee-4e64-8a78-09f26bbf61ae",
+                            "location": {
+                              "line": 71,
+                              "column": 9
+                            },
+                            "cells": [
+                              {
+                                "location": {
+                                  "line": 71,
+                                  "column": 11
+                                },
+                                "value": "value"
+                              },
+                              {
+                                "location": {
+                                  "line": 71,
+                                  "column": 19
+                                },
+                                "value": "value"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "id": "051087af-914b-4d02-8b4e-a4a1417dfa6d",
+                      "location": {
+                        "line": 73,
+                        "column": 7
+                      },
+                      "keyword": "Then ",
+                      "text": "step",
+                      "docString": {
+                        "location": {
+                          "line": 74,
+                          "column": 9
+                        },
+                        "content": "title\n=====\ndocstring with content type",
+                        "delimiter": "\"\"\"",
+                        "mediaType": "markdown"
+                      }
+                    },
+                    {
+                      "id": "250c68ed-52a0-461e-9795-18633d287521",
+                      "location": {
+                        "line": 79,
+                        "column": 7
+                      },
+                      "keyword": "And ",
+                      "text": "step",
+                      "docString": {
+                        "location": {
+                          "line": 80,
+                          "column": 5
+                        },
+                        "content": "docstring with backtick and content type",
+                        "delimiter": "```",
+                        "mediaType": "markdown"
+                      }
+                    }
+                  ],
+                  "examples": []
+                }
+              },
+              {
+                "scenario": {
+                  "id": "c9bec817-90b6-40f1-8bb9-c461892c8d43",
+                  "tags": [
+                    {
+                      "location": {
+                        "line": 85,
+                        "column": 5
+                      },
+                      "name": "@tag1",
+                      "id": "569af618-60a4-4d9e-8569-05ed073106ca"
+                    },
+                    {
+                      "location": {
+                        "line": 85,
+                        "column": 11
+                      },
+                      "name": "@tag2",
+                      "id": "e487a282-a074-4558-af63-a521baeb79e7"
+                    }
+                  ],
+                  "location": {
+                    "line": 87,
+                    "column": 5
+                  },
+                  "keyword": "Scenario Outline",
+                  "name": "Name",
+                  "description": "      Scenario outline description\n      Other scenario outline description",
+                  "steps": [
+                    {
+                      "id": "4523354b-09fe-4cbc-bae1-819856d37280",
+                      "location": {
+                        "line": 96,
+                        "column": 7
+                      },
+                      "keyword": "Given ",
+                      "text": "step <v>"
+                    },
+                    {
+                      "id": "175f0e2b-f01a-4746-a1d1-8783550fc77e",
+                      "location": {
+                        "line": 97,
+                        "column": 7
+                      },
+                      "keyword": "When ",
+                      "text": "step <w>"
+                    }
+                  ],
+                  "examples": [
+                    {
+                      "id": "a2bc7dac-7dcf-4d8f-959b-859c14169bba",
+                      "tags": [
+                        {
+                          "location": {
+                            "line": 100,
+                            "column": 7
+                          },
+                          "name": "@tag1",
+                          "id": "89b2389c-8f2a-4671-a163-5d46f693c9f2"
+                        },
+                        {
+                          "location": {
+                            "line": 100,
+                            "column": 13
+                          },
+                          "name": "@tag2",
+                          "id": "a70a3ca1-6e20-4604-b38f-9ad8d3582d87"
+                        }
+                      ],
+                      "location": {
+                        "line": 102,
+                        "column": 7
+                      },
+                      "keyword": "Examples",
+                      "name": "Name",
+                      "description": "",
+                      "tableHeader": {
+                        "id": "57cb9ff3-ef30-4d2c-b533-d63343c70521",
+                        "location": {
+                          "line": 104,
+                          "column": 9
+                        },
+                        "cells": [
+                          {
+                            "location": {
+                              "line": 104,
+                              "column": 11
+                            },
+                            "value": "v"
+                          },
+                          {
+                            "location": {
+                              "line": 104,
+                              "column": 15
+                            },
+                            "value": "w"
+                          }
+                        ]
+                      },
+                      "tableBody": [
+                        {
+                          "id": "922067a2-0305-4698-aeda-2f4b7810dbc6",
+                          "location": {
+                            "line": 106,
+                            "column": 9
+                          },
+                          "cells": [
+                            {
+                              "location": {
+                                "line": 106,
+                                "column": 11
+                              },
+                              "value": "1"
+                            },
+                            {
+                              "location": {
+                                "line": 106,
+                                "column": 15
+                              },
+                              "value": "2"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "344b69a3-022a-4912-9291-32e358853af0",
+                          "location": {
+                            "line": 107,
+                            "column": 9
+                          },
+                          "cells": [
+                            {
+                              "location": {
+                                "line": 107,
+                                "column": 11
+                              },
+                              "value": "2"
+                            },
+                            {
+                              "location": {
+                                "line": 107,
+                                "column": 15
+                              },
+                              "value": "3"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "tags": [
+              {
+                "location": {
+                  "line": 20,
+                  "column": 3
+                },
+                "name": "@tag1",
+                "id": "c06a4250-cd3d-4061-9e90-62b6bc9b28ce"
+              },
+              {
+                "location": {
+                  "line": 20,
+                  "column": 9
+                },
+                "name": "@tag2",
+                "id": "6194e91e-c075-4cef-8f8a-51e8f6fed82b"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "comments": [
+      {
+        "location": {
+          "line": 1,
+          "column": 1
+        },
+        "text": "# Comment(s) at the beginning of the file"
+      },
+      {
+        "location": {
+          "line": 3,
+          "column": 1
+        },
+        "text": "# Another comment at the beginning of the file"
+      },
+      {
+        "location": {
+          "line": 5,
+          "column": 1
+        },
+        "text": "# Comment(s) of all tags"
+      },
+      {
+        "location": {
+          "line": 7,
+          "column": 1
+        },
+        "text": "# Comment(s) of @tag3"
+      },
+      {
+        "location": {
+          "line": 9,
+          "column": 1
+        },
+        "text": "# Comment(s) of the feature"
+      },
+      {
+        "location": {
+          "line": 15,
+          "column": 1
+        },
+        "text": "  # Additional comment(s) of the feature"
+      },
+      {
+        "location": {
+          "line": 17,
+          "column": 1
+        },
+        "text": "  # With multiple lines"
+      },
+      {
+        "location": {
+          "line": 19,
+          "column": 1
+        },
+        "text": "  # Comment(s) of all tags"
+      },
+      {
+        "location": {
+          "line": 21,
+          "column": 1
+        },
+        "text": "  # Comment(s) of the rule"
+      },
+      {
+        "location": {
+          "line": 27,
+          "column": 1
+        },
+        "text": "    # Additional comment(s) of the rule"
+      },
+      {
+        "location": {
+          "line": 29,
+          "column": 1
+        },
+        "text": "    # Comment(s) of the background"
+      },
+      {
+        "location": {
+          "line": 35,
+          "column": 1
+        },
+        "text": "      # Additional comment(s) of the background"
+      },
+      {
+        "location": {
+          "line": 37,
+          "column": 1
+        },
+        "text": "      # With multiple lines"
+      },
+      {
+        "location": {
+          "line": 39,
+          "column": 1
+        },
+        "text": "      # Comment(s) of the given step"
+      },
+      {
+        "location": {
+          "line": 41,
+          "column": 1
+        },
+        "text": "      # Comment(s) of the when step"
+      },
+      {
+        "location": {
+          "line": 43,
+          "column": 1
+        },
+        "text": "      # Comment(s) of the then step"
+      },
+      {
+        "location": {
+          "line": 46,
+          "column": 1
+        },
+        "text": "    # Comment(s) of all tags"
+      },
+      {
+        "location": {
+          "line": 48,
+          "column": 1
+        },
+        "text": "    # Comment(s) of the scenario"
+      },
+      {
+        "location": {
+          "line": 54,
+          "column": 1
+        },
+        "text": "      # Additional comment(s) of the scenario"
+      },
+      {
+        "location": {
+          "line": 56,
+          "column": 1
+        },
+        "text": "      # With multiple lines"
+      },
+      {
+        "location": {
+          "line": 58,
+          "column": 1
+        },
+        "text": "      # Comment(s) of the given step"
+      },
+      {
+        "location": {
+          "line": 60,
+          "column": 1
+        },
+        "text": "        # Comment(s) of the docstirng"
+      },
+      {
+        "location": {
+          "line": 65,
+          "column": 1
+        },
+        "text": "      # Comment(s) of the when step"
+      },
+      {
+        "location": {
+          "line": 67,
+          "column": 1
+        },
+        "text": "        # Comment(s) of the data table header (row)"
+      },
+      {
+        "location": {
+          "line": 69,
+          "column": 1
+        },
+        "text": "        # Comment(s) of a data table row"
+      },
+      {
+        "location": {
+          "line": 72,
+          "column": 1
+        },
+        "text": "      # Comment(s) of the then step"
+      },
+      {
+        "location": {
+          "line": 84,
+          "column": 1
+        },
+        "text": "    # Comment(s) of all tags"
+      },
+      {
+        "location": {
+          "line": 86,
+          "column": 1
+        },
+        "text": "    # Comment(s) of the scenario outline"
+      },
+      {
+        "location": {
+          "line": 92,
+          "column": 1
+        },
+        "text": "      # Another comment(s) of the scenario outline"
+      },
+      {
+        "location": {
+          "line": 94,
+          "column": 1
+        },
+        "text": "      # With multiple lines"
+      },
+      {
+        "location": {
+          "line": 99,
+          "column": 1
+        },
+        "text": "      # Comment(s) of all tags"
+      },
+      {
+        "location": {
+          "line": 101,
+          "column": 1
+        },
+        "text": "      # Comment(s) of the examples"
+      },
+      {
+        "location": {
+          "line": 103,
+          "column": 1
+        },
+        "text": "        # Comment(s) of the examples table"
+      },
+      {
+        "location": {
+          "line": 105,
+          "column": 1
+        },
+        "text": "        # Comment(s) of an examples table row"
+      },
+      {
+        "location": {
+          "line": 109,
+          "column": 1
+        },
+        "text": "  # General comment(s)"
+      },
+      {
+        "location": {
+          "line": 111,
+          "column": 1
+        },
+        "text": "  # With multiple lines"
+      }
+    ],
+    "uri": "tests/data/comment.feature"
+  }
+}

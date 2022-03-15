@@ -1,6 +1,6 @@
 {
     "gherkinDocument": {
-      "uri": "D:\\Repos\\gherkin-ast\\test\\data\\base.feature",
+      "uri": "tests/data/base.feature",
       "feature": {
         "location": {
           "line": 2,
