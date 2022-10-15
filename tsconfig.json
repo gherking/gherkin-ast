@@ -5,6 +5,7 @@
         "es2015.promise"
       ],
       "moduleResolution": "node",
+      "esModuleInterop": true,
       "target": "es6",
       "module": "commonjs",
       "noImplicitAny": true,

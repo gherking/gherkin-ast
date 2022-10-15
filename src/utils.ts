@@ -1,5 +1,5 @@
 // @ts-ignore
-import objectScan = require("object-scan");
+import objectScan from "object-scan";
 import { UniqueObject } from "./ast/uniqueObject";
 
 export const pruneID = <T extends UniqueObject>(input: T | T[]): T | T[] => {

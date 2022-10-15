@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.1 - 2022-10-15
+
+### Fixed
+
+* Fixed comments with missing `#`
+
 ## 3.3.0 - 2022-03-04
 
 ### Added

@@ -17,6 +17,14 @@ export const normalizeString = (s = ""): string => {
   return normal;
 };
 
+export const prefixString = (s = "", prefix = "", delimiter = " "): string => {
+  const prefixed = s.split("\n")
+    .map((line: string): string => !line || line.startsWith(prefix) ? line : `${prefix}${delimiter}${line}`)
+    .join("\n");
+  debug("prefixString(s: '%s', prefix: '%s', delimiter: '%s') => '%s'", s, prefix, delimiter, prefixed);
+  return prefixed;
+}
+
 export const replaceAll = (s: string, key: RegExp | string, value: string): string => {
   if (!(key instanceof RegExp)) {
     key = new RegExp(key, "g");

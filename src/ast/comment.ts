@@ -1,4 +1,4 @@
-import { normalizeString, replaceAll } from "../common";
+import { normalizeString, prefixString, replaceAll } from "../common";
 import { GherkinComment } from "../gherkinObject";
 import { UniqueObject } from "./uniqueObject";
 import { getDebugger } from "../debug";
@@ -22,7 +22,7 @@ export class Comment extends UniqueObject {
     super();
     debug("constructor(text: '%s')", text);
 
-    this.text = normalizeString(text);
+    this.text = prefixString(normalizeString(text), "#");
   }
 
   public clone(): Comment {

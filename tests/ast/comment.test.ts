@@ -10,7 +10,7 @@ describe("Comment", () => {
     expect(c.text).toEqual("# comment");
   });
 
-  test("shoudl have toString", () => {
+  test("should have toString", () => {
     const c: Comment = new Comment("#comment");
     expect(c.toString()).toBe("#comment");
   });
@@ -28,7 +28,7 @@ describe("Comment", () => {
     const c: Comment = new Comment("comment");
     jest.spyOn(common, "replaceAll");
     c.replace("a", "e");
-    expect(common.replaceAll).toHaveBeenCalledWith("comment", "a", "e");
+    expect(common.replaceAll).toHaveBeenCalledWith("# comment", "a", "e");
   });
 
   describe("parse", () => {

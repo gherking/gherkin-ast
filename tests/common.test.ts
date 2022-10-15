@@ -134,7 +134,7 @@ describe("GherkinCommentHandler", () => {
   describe("parseCommen", () => {
     test("should parse comments right before the location", () => {
       const c = handler.parseComment({ column: 1, line: 18 });
-      expect(c.text).toEqual("comment in line 17");
+      expect(c.text).toEqual("# comment in line 17");
     });
 
     test("should handle missing comment", () => {
@@ -146,7 +146,7 @@ describe("GherkinCommentHandler", () => {
   describe("parseTagComment", () => {
     test("should parse comment before the first tag", () => {
       const c = handler.parseTagComment([{ location: { column: 1, line: 18 }, name: "tag" }]);
-      expect(c.text).toEqual("comment in line 17");
+      expect(c.text).toEqual("# comment in line 17");
     });
 
     test("should handle missing tags", () => {
@@ -158,7 +158,7 @@ describe("GherkinCommentHandler", () => {
   describe("parseCommentBetween", () => {
     test("should parse comment between lines", () => {
       const c = handler.parseCommentBetween({ column: 1, line: 13 }, { column: 1, line: 18 });
-      expect(c.text).toEqual("comment in line 14\ncomment in line 15\n\ncomment in line 17");
+      expect(c.text).toEqual("# comment in line 14\n# comment in line 15\n\n# comment in line 17");
     });
 
     test("should handle missing comments", () => {
@@ -170,7 +170,7 @@ describe("GherkinCommentHandler", () => {
     test("should parse comment before the firstLine", () => {
       handler.firstLine = 13;
       const c = handler.parseStartingComment();
-      expect(c.text).toEqual("comment in line 11\ncomment in line 12");
+      expect(c.text).toEqual("# comment in line 11\n# comment in line 12");
     });
 
     test("should handle missing comments", () => {
@@ -183,7 +183,7 @@ describe("GherkinCommentHandler", () => {
     test("should parse comment after the lastLine", () => {
       handler.lastLine = 18;
       const c = handler.parseEndingComment();
-      expect(c.text).toEqual("comment in line 19\ncomment in line 20");
+      expect(c.text).toEqual("# comment in line 19\n# comment in line 20");
     });
 
     test("should handle missing comments", () => {
