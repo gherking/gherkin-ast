@@ -28,7 +28,7 @@ describe("replaceAll", () => {
     expect(replaceAll("Hello World!", "o", "X")).toEqual("HellX WXrld!");
   });
   test("should handle dollar sign", () => {
-    expect(replaceAll("Hello <token>", "<token>", "$$World")).toEqual("Hello $$World");
+    expect(replaceAll("Hello <token>", "<token>", "$$World$$")).toEqual("Hello $$World$$");
   });
 });
 
