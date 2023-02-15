@@ -3,7 +3,7 @@ import { Comment } from "./comment";
 import { Step } from "./step";
 import { UniqueObject } from "./uniqueObject";
 import { getDebugger } from "../debug";
-const debug = getDebugger("Comment");
+const debug = getDebugger("Element");
 
 export const REPEAT_STEP_KEYWORDS: string[] = ["And", "But", "*"];
 

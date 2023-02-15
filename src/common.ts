@@ -33,7 +33,7 @@ export const replaceAll = (s: string, key: RegExp | string, value: string): stri
     debug("replaceAll(s: '%s', key: '%s', value: '%s') => '%s'", s, key, value, s);
     return s;
   }
-  const result = s.replace(key, value);
+  const result = s.replace(key, value.replace(/\$/g, "$$$$"));
   debug("replaceAll(s: '%s', key: '%s', value: '%s') => '%s'", s, key, value, result);
   return result;
 };
