@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.3.2 - 2023-02-15
+
+### Fixed
+
+* Fixed issue with `$$` ([#39](https://github.com/gherking/gherkin-ast/issues/39))
+
 ## 3.3.1 - 2022-10-15
 
 ### Fixed

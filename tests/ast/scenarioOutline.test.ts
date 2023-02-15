@@ -245,11 +245,11 @@ describe("ScenarioOutline", () => {
       outline.examples[0].body = [
         new TableRow([
           new TableCell("A1"),
-          new TableCell("B1"),
+          new TableCell("$$B1"),
         ]),
         new TableRow([
           new TableCell("A2"),
-          new TableCell("B2"),
+          new TableCell("$B2"),
         ]),
       ];
       outline.tagComment = new Comment("# tag");
@@ -280,17 +280,17 @@ describe("ScenarioOutline", () => {
     test("should clone steps", () => {
       expect(scenarios[0].steps).toEqual([
         pruneID(new Step("K", "X A1 Y")),
-        pruneID(new Step("K", "X B1 Y")),
+        pruneID(new Step("K", "X $$B1 Y")),
       ]);
       expect(scenarios[1].steps).toEqual([
         pruneID(new Step("K", "X A2 Y")),
-        pruneID(new Step("K", "X B2 Y")),
+        pruneID(new Step("K", "X $B2 Y")),
       ]);
     });
 
     test("should replace header items with actual value", () => {
-      expect(scenarios[0].name).toEqual("Name A1 B1");
-      expect(scenarios[1].name).toEqual("Name A2 B2");
+      expect(scenarios[0].name).toEqual("Name A1 $$B1");
+      expect(scenarios[1].name).toEqual("Name A2 $B2");
     });
 
     test("should clone comments", () => {
