@@ -1,11 +1,3 @@
-
-/*export const ParametrizedTagFormat  = Object.freeze({
-  FUNCTIONAL: ,
-  ASSIGNMENT: ,
-  UNDERSCORE: ,
-  PARAMETERLESS:
-});*/
-
 export enum TagFormat {
   PARAMETERLESS,
   FUNCTIONAL,
