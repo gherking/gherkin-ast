@@ -1,14 +1,77 @@
 // @ts-ignore
 import ObjectSet = require("object-set-type");
-import { replaceAll, safeString, GherkinCommentHandler } from "../common";
-import { GherkinTag } from "../gherkinObject";
-import { Comment } from "./comment";
-import { UniqueObject } from "./uniqueObject";
-import { getDebugger } from "../debug";
+import {GherkinCommentHandler, replaceAll, safeString} from "../common";
+import {GherkinTag} from "../gherkinObject";
+import {Comment} from "./comment";
+import {UniqueObject} from "./uniqueObject";
+import {getDebugger} from "../debug";
+import config, {TagFormat} from "../parseConfig";
+
 const debug = getDebugger("Tag");
 
-const TAG_W_VALUE = /^@?([^(@]+)\(([^)]+)\)$/i;
-const TAG_WO_VALUE = /^@?([^@]+)$/i;
+interface TagFormatHandler {
+  parse(s: string): Tag;
+  toString(tag: Tag): string;
+}
+
+const tagFormats: Map<TagFormat, TagFormatHandler> = new Map<TagFormat, TagFormatHandler>();
+
+tagFormats.set(TagFormat.PARAMETERLESS, {
+  parse(s: string): Tag {
+    return new Tag(s.match(/^@?(?<name>[^@]+)$/i)[1]);
+  },
+  toString(tag: Tag): string {
+    return `@${tag.name}`;
+  }
+});
+
+tagFormats.set(TagFormat.FUNCTIONAL, {
+  parse(s: string): Tag {
+    const m = s.match(/^@?(?<name>[^(@]+)\((?<value>[^)]+)\)$/i);
+    if (m) {
+      return new Tag(m[1], m[2]);
+    }
+    return tagFormats.get(TagFormat.PARAMETERLESS).parse(s);
+  },
+  toString(tag: Tag): string {
+    if (tag.value === undefined) {
+      return tagFormats.get(TagFormat.PARAMETERLESS).toString(tag);
+    }
+    return `@${tag.name}(${tag.value})`;
+  }
+});
+
+tagFormats.set(TagFormat.ASSIGNMENT, {
+  parse(s: string): Tag {
+    const m = s.match(/^@?(?<name>[^=@]+)=(?<value>.+)$/i);
+    if (m) {
+      return new Tag(m[1], m[2]);
+    }
+    return tagFormats.get(TagFormat.PARAMETERLESS).parse(s);
+  },
+  toString(tag: Tag): string {
+    if (!tag.value) {
+      return tagFormats.get(TagFormat.PARAMETERLESS).toString(tag);
+    }
+    return `@${tag.name}=${tag.value}`;
+  }
+});
+
+tagFormats.set(TagFormat.UNDERSCORE, {
+  parse(s: string): Tag {
+    const m = s.match(/^@?(?<name>[^_@]+)_(?<value>.+)$/i);
+    if (m) {
+      return new Tag(m[1], m[2]);
+    }
+    return tagFormats.get(TagFormat.PARAMETERLESS).parse(s);
+  },
+  toString(tag: Tag): string {
+    if (!tag.value) {
+      return tagFormats.get(TagFormat.PARAMETERLESS).toString(tag);
+    }
+    return `@${tag.name}_${tag.value}`;
+  }
+});
 
 /**
  * Model for Tag
@@ -43,12 +106,11 @@ export class Tag extends UniqueObject {
     if (!s || typeof s !== "string") {
       throw new TypeError("The given string is not a Gherkin Tag!");
     }
-    let m = s.match(TAG_W_VALUE);
-    if (m) {
-      return new Tag(m[1], m[2]);
+    const {tagFormat} = config.get();
+    if (!tagFormats.has(tagFormat)) {
+      throw new TypeError("The given tag format is not valid!");
     }
-    m = s.match(TAG_WO_VALUE);
-    const tag = new Tag(m[1]);
+    const tag = tagFormats.get(tagFormat).parse(s);
     debug(
       "parseString(this: {name: '%s', value: '%s', comment: '%s')",
       tag.name, tag.value, tag.comment?.text,
@@ -103,10 +165,11 @@ export class Tag extends UniqueObject {
       "toString(this: {name: '%s', value: '%s')",
       this.name, this.value,
     );
-    if (this.value) {
-      return `@${this.name}(${this.value})`;
+    const {tagFormat} = config.get();
+    if (!tagFormats.has(tagFormat)) {
+      throw new TypeError("The given tag format is not valid!");
     }
-    return `@${this.name}`;
+    return tagFormats.get(tagFormat).toString(this);
   }
 }
 

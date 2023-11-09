@@ -2,8 +2,13 @@ import { Comment, removeDuplicateTags, Tag, tag } from "../../src";
 import * as common from "../../src/common";
 import { GherkinTag } from "../../src/gherkinObject";
 import { pruneID } from "../../src/utils";
+import config, {TagFormat} from "../../src/parseConfig";
 
 describe("Tag", () => {
+  beforeEach(() => {
+    config.set();
+  });
+
   test("should create model of a tag", () => {
     const t: Tag = new Tag("name");
     expect(t).toBeDefined();
@@ -12,7 +17,7 @@ describe("Tag", () => {
     expect(t.value).toBeFalsy();
   });
 
-  test("should create model of a parametirized tag", () => {
+  test("should create model of a parametrized tag", () => {
     const t = new Tag("name", "value");
     expect(t).toBeDefined();
     expect(t._id).toBeDefined();
@@ -104,9 +109,100 @@ describe("Tag", () => {
       expect(t.value).toEqual("value");
     });
   });
+
+  describe("formats", () => {
+    test("should support functional format", () => {
+      config.set({
+        tagFormat: TagFormat.FUNCTIONAL,
+      });
+      const t: Tag = Tag.parseString("@name(value)");
+      expect(t._id).toBeDefined();
+      expect(t.name).toEqual("name");
+      expect(t.value).toEqual("value");
+      expect(t.toString()).toEqual("@name(value)");
+    });
+
+    test("should support assignment format", () => {
+      config.set({
+        tagFormat: TagFormat.ASSIGNMENT,
+      });
+      const t: Tag = Tag.parseString("@name=value");
+      expect(t._id).toBeDefined();
+      expect(t.name).toEqual("name");
+      expect(t.value).toEqual("value");
+      expect(t.toString()).toEqual("@name=value");
+    });
+
+    test("should support underscore format", () => {
+      config.set({
+        tagFormat: TagFormat.UNDERSCORE,
+      });
+      const t: Tag = Tag.parseString("@name_value");
+      expect(t._id).toBeDefined();
+      expect(t.name).toEqual("name");
+      expect(t.value).toEqual("value");
+      expect(t.toString()).toEqual("@name_value");
+    });
+
+    test("should support parameterless format if set", () => {
+      config.set({
+        tagFormat: TagFormat.PARAMETERLESS,
+      });
+      const t: Tag = Tag.parseString("@name(value)");
+      expect(t._id).toBeDefined();
+      expect(t.name).toEqual("name(value)");
+      expect(t.value).toEqual(undefined);
+    });
+
+    test("should support parameterless format as fallback from functional format", () => {
+      config.set({
+        tagFormat: TagFormat.FUNCTIONAL,
+      });
+      const t: Tag = Tag.parseString("@name");
+      expect(t._id).toBeDefined();
+      expect(t.name).toEqual("name");
+      expect(t.value).toEqual(undefined);
+      expect(t.toString()).toEqual("@name");
+    });
+
+    test("should support parameterless format as fallback from assignment format", () => {
+      config.set({
+        tagFormat: TagFormat.ASSIGNMENT,
+      });
+      const t: Tag = Tag.parseString("@name");
+      expect(t._id).toBeDefined();
+      expect(t.name).toEqual("name");
+      expect(t.value).toEqual(undefined);
+      expect(t.toString()).toEqual("@name");
+    });
+
+    test("should support parameterless format as fallback from underscore format", () => {
+      config.set({
+        tagFormat: TagFormat.UNDERSCORE,
+      });
+      const t: Tag = Tag.parseString("@name");
+      expect(t._id).toBeDefined();
+      expect(t.name).toEqual("name");
+      expect(t.value).toEqual(undefined);
+      expect(t.toString()).toEqual("@name");
+    });
+
+    test("should handle incorrect format", () => {
+      config.set({
+        // @ts-ignore
+        tagFormat: "INCORRECT"
+      });
+      expect(() => Tag.parseString("@name")).toThrow();
+      expect(() => new Tag("name").toString()).toThrow();
+    });
+  });
 });
 
 describe("tag", () => {
+  beforeEach(() => {
+    config.set();
+  });
+
   test("should create parameterized tag", () => {
     expect(tag("name", "value").toString()).toEqual("@name(value)");
   });
