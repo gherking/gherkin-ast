@@ -193,14 +193,15 @@ Tag meta information parsing supports the following parametrized tag formats:
 To set the which format should be used, use the `config(...)` function:
 
 ```javascript
-const {config, ParametrizedTagFormat, Tag} = require('gherkin-ast');
+const {config, TagFormat, Tag} = require('gherkin-ast');
 
 config({
-  parametrizedTagFormat: ParametrizedTagFormat.ASSIGNMENT,
+  tagFormat: TagFormat.ASSIGNMENT,
 });
 const tag = Tag.parseString("@name=value");
 console.log(tag.name); // name
 console.log(tag.value); // value
+console.log(tag.toString()); // @name=value
 ```
 
 ## Other
