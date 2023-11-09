@@ -50,7 +50,7 @@ tagFormats.set(TagFormat.ASSIGNMENT, {
     return tagFormats.get(TagFormat.PARAMETERLESS).parse(s);
   },
   toString(tag: Tag): string {
-    if (!tag.value) {
+    if (tag.value === undefined) {
       return tagFormats.get(TagFormat.PARAMETERLESS).toString(tag);
     }
     return `@${tag.name}=${tag.value}`;
