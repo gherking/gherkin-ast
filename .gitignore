@@ -65,3 +65,4 @@ docs
 coverage
 junit.xml
 .vscode
+.idea

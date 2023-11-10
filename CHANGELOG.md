@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.4.0 - 2023-11-09
+
+### Added
+
+* Added support for configuring the parser ([#84](https://github.com/gherking/gherking/issues/39)):
+  * Support for configuring what parametrized tag format should be used during parsing
+  * Supporting functional, assignment, underscore, and parameterless tags
+
 ## 3.3.2 - 2023-02-15
 
 ### Fixed

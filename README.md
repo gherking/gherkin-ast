@@ -3,8 +3,8 @@
 ![Downloads](https://img.shields.io/npm/dw/gherkin-ast?style=flat-square)
 ![Version@npm](https://img.shields.io/npm/v/gherkin-ast?label=version%40npm&style=flat-square)
 ![Version@git](https://img.shields.io/github/package-json/v/gherking/gherkin-ast/master?label=version%40git&style=flat-square)
-![CI](https://img.shields.io/github/workflow/status/gherking/gherkin-ast/CI/master?label=ci&style=flat-square)
-![Docs](https://img.shields.io/github/workflow/status/gherking/gherkin-ast/Docs/master?label=docs&style=flat-square)
+![CI](https://img.shields.io/github/actions/workflow/status/gherking/gherkin-ast/ci.yml?branch=master&label=ci&style=flat-square)
+![Docs](https://img.shields.io/github/actions/workflow/status/gherking/gherkin-ast/docs.yml?branch=master&label=docs&style=flat-square)
 
 Models for Gherkin feature files
 
@@ -171,6 +171,37 @@ Feature: Name
         | 2 | 3 |
 
 # End comment(s) of the Document
+```
+
+### Meta information
+
+All components support parsing them from a Gherkin Document. On top of that, certain of the components, also support parsing meta information, e.g. tags in Gherkin are simple strings, but during practical usage tags can be parametrized, thus `Tag` support having both name and value, and it is parsed.
+
+The following components have meta information parsed:
+
+#### Tags
+
+As mentioned in the example, tags in Gherkin are simple strings. However, in practical usage, we often used parametrized tags, e.g., `@suite(sanity)` where the name of the tag is `suite` and the value is `sanity`.
+
+Tag meta information parsing supports the following parametrized tag formats:
+
+1. **Functional**: `@name(value)` (default), the name is `name`, the value is `value`
+2. **Assignment**: `@name=value`, the name is `name`, the value is `value`
+3. **Underscore**: `@name_value`, the name is `name`, the value is `value`
+4. **Parameterless**: this basically means that no value will be parsed, the tag will be handled as a simple string, so in any case the name will be the whole tag, e.g., for `@name(value)` the name of the tag will be `name(value)`, the value is undefined
+
+To set the which format should be used, use the `config(...)` function:
+
+```javascript
+const {config, TagFormat, Tag} = require('gherkin-ast');
+
+config({
+  tagFormat: TagFormat.ASSIGNMENT,
+});
+const tag = Tag.parseString("@name=value");
+console.log(tag.name); // name
+console.log(tag.value); // value
+console.log(tag.toString()); // @name=value
 ```
 
 ## Other

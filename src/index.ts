@@ -1,3 +1,5 @@
+import config from "./parseConfig";
+
 export * from "./gherkinObject";
 export * from "./ast/background";
 export * from "./ast/comment";
@@ -16,3 +18,5 @@ export * from "./ast/tableRow";
 export * from "./ast/tag";
 export * from "./common";
 export * from "./utils";
+export {TagFormat, ParseConfig} from "./parseConfig";
+export {config};
