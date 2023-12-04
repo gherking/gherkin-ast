@@ -19,8 +19,7 @@ class Configuration {
 
   set(config?: Partial<ParseConfig>) {
     this.config = {
-      ...DEFAULT_CONFIG,
-      ...(config ?? {}),
+      tagFormat: config?.tagFormat ?? DEFAULT_CONFIG.tagFormat,
     };
   }
 

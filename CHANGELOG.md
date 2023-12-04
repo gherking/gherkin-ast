@@ -1,10 +1,16 @@
 # Changelog
 
+## 3.4.1 - 2023-11-24
+
+### Fixed
+
+* Fixed issue with undefined and null values ([#87](https://github.com/gherking/gherking/issues/87))
+
 ## 3.4.0 - 2023-11-09
 
 ### Added
 
-* Added support for configuring the parser ([#84](https://github.com/gherking/gherking/issues/39)):
+* Added support for configuring the parser ([#84](https://github.com/gherking/gherking/issues/84)):
   * Support for configuring what parametrized tag format should be used during parsing
   * Supporting functional, assignment, underscore, and parameterless tags
 
