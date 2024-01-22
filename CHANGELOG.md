@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.4.2 - 2024-01-22
+
+### Fixed
+
+* Fixed issue with empty DocString ([PR#46](https://github.com/gherking/gherkin-ast/pull/46))
+
 ## 3.4.1 - 2023-11-24
 
 ### Fixed
