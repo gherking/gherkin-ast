@@ -56,7 +56,7 @@ describe("DocString", () => {
 
     const validDocStrings = ["", "String"];
     validDocStrings.forEach(content => {
-      test(`should parse next docString: '${content}'`, () => {
+      test(`should parse valid docString: '${content}'`, () => {
         // Given
         const obj: GherkinDocString = {
           content: content,
