@@ -11,7 +11,7 @@ const debug = getDebugger("DocString");
 export class DocString extends UniqueObject {
   public static parse(obj: GherkinDocString, comments?: GherkinCommentHandler): DocString {
     debug("parse(obj: %o, comments: %d)", obj, comments?.comments?.length);
-    if (!obj || !obj.content) {
+    if (!obj || obj.content === undefined) {
       throw new TypeError("The given object is not a DocString!");
     }
     const docString = new DocString(obj.content, obj.delimiter, obj.mediaType);

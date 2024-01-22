@@ -54,17 +54,20 @@ describe("DocString", () => {
       expect(() => DocString.parse(obj)).toThrow();
     });
 
-    test("should parse docString", () => {
-      // Given
-      const obj: GherkinDocString = {
-        content: "String",
-      } as GherkinDocString;
-      // When
-      const s: DocString = DocString.parse(obj);
-      // Then
-      expect(s).toBeDefined();
-      expect(s._id).toBeDefined();
-      expect(s.content).toEqual("String");
+    const validDocStrings = ["", "String"];
+    validDocStrings.forEach(content => {
+      test(`should parse next docString: '${content}'`, () => {
+        // Given
+        const obj: GherkinDocString = {
+          content: content,
+        } as GherkinDocString;
+        // When
+        const s: DocString = DocString.parse(obj);
+        // Then
+        expect(s).toBeDefined();
+        expect(s._id).toBeDefined();
+        expect(s.content).toEqual(content);
+      })
     });
   });
 });
