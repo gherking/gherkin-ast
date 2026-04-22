@@ -63,7 +63,7 @@
     "debug": "^4.3.4",
     "object-scan": "^17.1.0",
     "object-set-type": "^2.2.2",
-    "uuid": "^9.0.1"
+    "uuid": "^14.0.0"
   },
   "jest": {
     "reporters": [
